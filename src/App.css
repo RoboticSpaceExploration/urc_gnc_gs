@@ -52,25 +52,6 @@
   align-content: center;
 }
 
-.sidenav a {
-  display: block;
-  background-color: #000000;
-  padding-top: 2px;
-  color: white;
-  height: auto;
-  text-align: center;
-  align-content: center;
-  text-decoration: none;
-}
-
-.sidenav a:hover {
-  background-color: #9528ac;
-}
-
-.sidenav a.active {
-  background-color: #9528ac;
-}
-
 .rose-logo {
   height: 150px;
   width: 150px;

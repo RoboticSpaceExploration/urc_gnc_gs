@@ -1,5 +1,6 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Menu, Image } from 'semantic-ui-react';
 import RoseLogo from '../rose-logo.png';
 import AutoNavLogo from '../autonav.png';
 import RoverDataLogo from '../rover-data.png';
@@ -8,21 +9,25 @@ import ArmLogo from '../arm.png';
 
 const SideNav = (props) => {
   return (
-	  <div className="sidenav">
-	    <img src={RoseLogo} className="rose-logo" alt="rose-logo" />
-	    <Link to={{pathname: '/roverdata'}}>
-	    	<img src={RoverDataLogo} className="rose-logo" alt="roverdata-logo" />
-	    </Link>
-	    <Link to={{pathname: '/autonav'}}>
-	    	<img src={AutoNavLogo} className="rose-logo" alt="autonav-logo" />
-	    </Link>
-	    <Link to={{pathname: '/payload'}}>
-	    	<img src={PayloadLogo} className="rose-logo" alt="payload-logo"/>
-	    </Link>
-	    <Link to={{pathname: '/arm'}}>
-	    	<img src={ArmLogo} className="rose-logo" alt="arm-logo"/>
-	    </Link>
-	  </div>
+    <div className="sidenav">
+      <Menu vertical inverted attached="left">
+        <Menu.Item id="navbar-rose-logo">
+          <Image src={RoseLogo} size="small"/>
+        </Menu.Item>
+        <Menu.Item id="navbar-rover-data" as={NavLink} activeClassName="active" exact to="/roverdata">
+          <Image src={RoverDataLogo}  size="small"/>
+        </Menu.Item>
+        <Menu.Item id="navbar-autonav" as={NavLink} activeClassName="active" exact to="/autonav">
+          <Image src={AutoNavLogo} size="small"/>
+        </Menu.Item>
+        <Menu.Item id="navbar-payload" as={NavLink} activeClassName="active" exact to="/payload">
+          <Image src={PayloadLogo}  size="small"/>
+        </Menu.Item>
+        <Menu.Item id="navbar-arm" as={NavLink} activeClassName="active" exact to="/arm">
+          <Image src={ArmLogo} size="small"/>
+        </Menu.Item>
+      </Menu>
+    </div>
   );
 };
 

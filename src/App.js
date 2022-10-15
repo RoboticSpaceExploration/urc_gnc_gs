@@ -10,7 +10,7 @@ import Arm from './Pages/Arm.js';
 function App() {
   return (
     <Router>
-      <SideNav name='Tester'/>
+      <SideNav/>
       <div className="main">
         <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
