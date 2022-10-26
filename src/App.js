@@ -1,6 +1,5 @@
-import RoseLogo from './rose-logo.png';
 import './App.css';
-import { HashRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import SideNav from './Components/SideNav.js';
 import AutoNav from './Pages/AutoNav.js';
 import RoverData from './Pages/RoverData.js';

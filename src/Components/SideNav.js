@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Image } from 'semantic-ui-react';
-import RoseLogo from '../rose-logo.png';
-import AutoNavLogo from '../autonav.png';
-import RoverDataLogo from '../rover-data.png';
-import PayloadLogo from '../payload.png';
-import ArmLogo from '../arm.png';
+import RoseLogo from '../Images/rose-logo.png';
+import AutoNavLogo from '../Images/autonav.png';
+import RoverDataLogo from '../Images/rover-data.png';
+import PayloadLogo from '../Images/payload.png';
+import ArmLogo from '../Images/arm.png';
 
 const SideNav = (props) => {
   return (
