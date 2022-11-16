@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Message } from 'semantic-ui-react';
+import Config from "../scripts/config";
 
 class Connection extends Component {
     state = { connected: false, ros: null};
@@ -24,17 +25,29 @@ class Connection extends Component {
             //try to reconnect every 3 seconds
             setTimeout(()=> {
                 try {
-                    this.state.ros.connect("ws://192.168.1.145:9090");
+                    this.state.ros.connect(
+                        "ws://"+
+                        Config.ROSBRIDGE_SERVER_IP+
+                        ":"+
+                        Config.ROSBRIDGE_SERVER_PORT+
+                        ""
+                    );
                 }
                 catch (error ){
                     console.log("connection problem");
                 }
-            }, 3000);
+            }, Config.RECONNECTION_TIMER);
 
         });
 
         try {
-            this.state.ros.connect("ws://192.168.1.145:9090");
+            this.state.ros.connect(
+                "ws://"+
+                Config.ROSBRIDGE_SERVER_IP+
+                ":"+
+                Config.ROSBRIDGE_SERVER_PORT+
+                ""
+            );
         }
         catch (error ){
             console.log("connection problem");

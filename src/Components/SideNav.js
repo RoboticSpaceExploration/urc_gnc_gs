@@ -11,7 +11,7 @@ const SideNav = (props) => {
   return (
     <div className="sidenav">
       <Menu vertical inverted attached="left">
-        <Menu.Item id="navbar-rose-logo">
+        <Menu.Item id="navbar-rose-logo" as={NavLink} activeClassName="active" exact to="/home">
           <Image src={RoseLogo} size="small"/>
         </Menu.Item>
         <Menu.Item id="navbar-rover-data" as={NavLink} activeClassName="active" exact to="/roverdata">

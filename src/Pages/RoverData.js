@@ -1,14 +1,13 @@
 import React from 'react';
+// import { Grid } from 'semantic-ui-react';
+import RoverDataDropdown from '../Components/RoverDataDropdown';
 
 class RoverData extends React.Component {
   render() {
           return (
-                  <div id="payload-page">
-                    <h1>THIS IS ROVERDATA</h1>
-                  </div>
+            <RoverDataDropdown></RoverDataDropdown>
         );
   };
 }
 
 export default RoverData;
-

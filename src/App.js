@@ -5,6 +5,7 @@ import AutoNav from './Pages/AutoNav.js';
 import RoverData from './Pages/RoverData.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
+import Home from './Pages/Home.js';
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
       <div className="main">
         <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
-	    <Route path="/roverdata" element={<RoverData/>} />
-	    <Route path="/payload" element={<Payload/>} />
-	    <Route path="/arm" element={<Arm/>} />
+	          <Route path="/roverdata" element={<RoverData/>} />
+	          <Route path="/payload" element={<Payload/>} />
+	          <Route path="/arm" element={<Arm/>} />
+            <Route path="/home" element={<Home/>} />
         </Routes>
       </div>
     </Router>
