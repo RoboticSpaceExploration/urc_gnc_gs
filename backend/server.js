@@ -24,7 +24,12 @@ const waypoints = [
   }
 ]
 
+//sample payload data
 const payloadData = [
+  {
+    "id": 1,
+    "data": "data",
+  }
 ]
 
 app.use((req, res, next) => {
@@ -99,8 +104,19 @@ app.delete('/waypoints/:id', (req, res) => {
 });
 
 app.get('/payload', (req, res) => {
-  res.send("payload get endpoint");
-  //res.json(payloadData);
+  //res.send("payload get endpoint");
+  res.json(payloadData);
+});
+
+app.get('/payload/:id', (req, res) => {
+  const payloadId = Number(req.params.id);
+  const getPayload = payloadData.find((payload) => payload.id === payloadId);
+
+  if (!getPayload) {
+    res.status(500).send('not found');
+  } else {
+    res.json(getPayload);
+  }
 });
 
 app.post('/payload/data_point/:id', (req, res) => {

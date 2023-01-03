@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Header, Button, Input, Feed, Icon } from 'semantic-ui-react';
+import axios from 'axios';
 import RoseLogo from '../Images/rose-logo.png';
 import AutoNavLogo from '../Images/autonav.png';
 import RoverDataLogo from '../Images/rover-data.png';
 import PayloadLogo from '../Images/payload.png';
 import ArmLogo from '../Images/arm.png';
 
-class AutoNav extends React.Component {
-  render() {
+function AutoNav() {
+  const [waypointData, setWaypointData] = useState(null);
+
+  useEffect(() => {
+    axios({
+	    method: "GET",
+	    url:"/waypoints/2",
+    }).then((response) => {
+	    const res = response.data;
+	    setWaypointData(({
+		 id: res.id,
+		 type: res.type,
+	         latitude: res.latitude,
+	         longitude: res.longitude,
+	         visited: res.visited,
+	         visible: res.visible}))
+    }).catch((error) => {
+	    if (error.response) {
+		    console.log(error.response);
+		    console.log(error.response.status);
+		    console.log(error.response.headers);
+	    }
+    })},[])
     return (
         <Grid Container id="autonav-page" centered celled columns={2}>
           <Grid.Row>
@@ -49,6 +71,15 @@ class AutoNav extends React.Component {
             </Grid.Column>
             <Grid.Column>
 	      <Header as="h1" textAlign="center">Map</Header>
+	      {waypointData && <div>
+	        <Header as="h1" textAlign="center">id: {waypointData.id}</Header>
+	        <Header as="h1" textAlign="center">type: {waypointData.type}</Header>
+	        <Header as="h1" textAlign="center">latitude: {waypointData.latitude}</Header>
+	        <Header as="h1" textAlign="center">longitude: {waypointData.longitude}</Header>
+	        <Header as="h1" textAlign="center">visited: {waypointData.visited}</Header>
+	        <Header as="h1" textAlign="center">visible: {waypointData.visible}</Header>
+	        </div>
+	      }
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -63,7 +94,6 @@ class AutoNav extends React.Component {
           </Grid.Row>
         </Grid>
     );
-  };
 }
 
 export default AutoNav;
