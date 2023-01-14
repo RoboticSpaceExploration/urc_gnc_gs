@@ -12,7 +12,7 @@ const waypoints = [
     "latitude": 0,
     "longitude": 0,
     "visited": true,
-    "visibile": false
+    "visible": false
   },
   {
     "id": 2,
@@ -88,7 +88,7 @@ app.put('/waypoints/:id', (req, res) => {
     const updated = { ...waypoint, ...body };
 
     waypoints[index] = updated;
-	
+
     res.send(updated);
   }
 });
@@ -126,6 +126,35 @@ app.post('/payload', (req, res) => {
   newDataPoint.id = payloadData.length + 1;
   payloadData.push(newDataPoint);
   res.json(payloadData);
+});
+
+app.put('/payload/:id', (req, res) => {
+  const payloadId = Number(req.params.id);
+  const body = req.body;
+  const payload = payloadData.find((payload) => payload.id === payloadId);
+  const index = payloadData.indexOf(payload);
+
+  if (!payload) {
+    res.status(500).send('waypoint not found');
+  } else {
+    const updated = { ...payload, ...body };
+
+    payloadData[index] = updated;
+
+    res.send(updated);
+  }
+});
+
+app.delete('/payload/:id', (req, res) => {
+  const payloadId = Number(req.params.id);
+  const newPayloadData = payloadData.filter((payload) => payload.id != payloadId);
+
+  if (!newPayloadData) {
+    res.status(500).send('not found');
+  } else {
+    payloadData = newPayloadData;
+    res.send(payloadData);
+  }
 });
 
 app.post('/autonav', (req, res) => {

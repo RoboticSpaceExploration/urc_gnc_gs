@@ -13,7 +13,7 @@ function AutoNav() {
   useEffect(() => {
     axios({
 	    method: "GET",
-	    url:"/waypoints/2",
+	    url:"http://localhost:9000/waypoints/2",
     }).then((response) => {
 	    const res = response.data;
 	    setWaypointData(({
