@@ -12,12 +12,10 @@ function Payload() {
   useEffect(() => {
     axios({
 	    method: "GET",
-	    url:"http://localhost:9000/payload/2",
+	    url:"http://localhost:9000/payload",
     }).then((response) => {
 	    const res = response.data;
-	    setPayloadData(({
-		 id: res.id,
-		 data: res.data}))
+	    setPayloadData(res);
     }).catch((error) => {
 	    if (error.response) {
 		    console.log(error.response);
@@ -43,16 +41,23 @@ function Payload() {
     axios.post("http://localhost:9000/payload", payData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
+      window.location.reload();
     });
   };
 
   return (
     <div id="payload-page">
       <Header as="h1">THIS IS PAYLOAD</Header>
-	  {payloadData && <div>
-	        <Header as="h2">id: {payloadData.id}</Header>
-	        <Header as="h2">data: {payloadData.data}</Header>
-	    </div>
+	  {payloadData &&
+          payloadData.map((data, index) => {
+              console.log(data);
+              return (
+                  <div>
+                      <Header as="h2">id: {data.id}</Header>
+                      <Header as="h2">data: {data.data}</Header>
+                  </div>
+              );
+          })
       }
 	  <Form onSubmit={handleSubmit}>
           <Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/>
