@@ -33,7 +33,7 @@ const payloadData = [
 ]
 
 app.use((req, res, next) => {
-  console.log('Time: ', Date.now());
+  console.log('Time at server call: ', Date.now());
   next();
 });
 
@@ -69,7 +69,7 @@ app.get('/waypoints/:id', (req, res) => {
 
 app.post('/waypoints', (req, res) => {
   const newWaypoint = req.body;
-
+  newWaypoint.id = waypoints.length + 1;
   waypoints.push(newWaypoint);
 
   res.json(waypoints);

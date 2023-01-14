@@ -12,7 +12,7 @@ function Payload() {
   useEffect(() => {
     axios({
 	    method: "GET",
-	    url:"http://localhost:9000/payload/1",
+	    url:"http://localhost:9000/payload/2",
     }).then((response) => {
 	    const res = response.data;
 	    setPayloadData(({
@@ -55,12 +55,13 @@ function Payload() {
 	    </div>
       }
 	  <Form onSubmit={handleSubmit}>
-        <Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/><br />
-        <Button type="submit">Submit</Button>
+          <Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/>
+        <Button type="submit" >Submit</Button>
       </Form>
     </div>
   );
 }
 
+//<Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/>
 export default Payload;
 
