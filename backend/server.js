@@ -28,7 +28,7 @@ const waypoints = [
 const payloadData = [
   {
     "id": 1,
-    "data": "data",
+    "data": "this"
   }
 ]
 
@@ -43,6 +43,8 @@ app.use('/request-type', (req, res, next) => {
 });
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
 app.use('/public', serveIndex('public'));
 
@@ -119,9 +121,10 @@ app.get('/payload/:id', (req, res) => {
   }
 });
 
-app.post('/payload/data_point/:id', (req, res) => {
+app.post('/payload', (req, res) => {
   const newDataPoint = req.body;
-  payloadData.push(newDatPoint);
+  newDataPoint.id = payloadData.length + 1;
+  payloadData.push(newDataPoint);
   res.json(payloadData);
 });
 
