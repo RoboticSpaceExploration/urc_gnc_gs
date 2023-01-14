@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Header, Button, Input, Feed, Icon } from 'semantic-ui-react';
+import {Grid, Header, Button, Input, Feed, Icon, Form} from 'semantic-ui-react';
 import axios from 'axios';
 import RoseLogo from '../Images/rose-logo.png';
 import AutoNavLogo from '../Images/autonav.png';
@@ -8,21 +8,19 @@ import PayloadLogo from '../Images/payload.png';
 import ArmLogo from '../Images/arm.png';
 
 function AutoNav() {
-  const [waypointData, setWaypointData] = useState(null);
+  const [ waypointData, setWaypointData] = useState(null);
+  const [ newCoord, setCoord ] = useState({
+      xCoordinate: null,
+      yCoordinate: null
+  });
 
   useEffect(() => {
     axios({
 	    method: "GET",
-	    url:"http://localhost:9000/waypoints/2",
+	    url:"http://localhost:9000/waypoints",
     }).then((response) => {
 	    const res = response.data;
-	    setWaypointData(({
-		 id: res.id,
-		 type: res.type,
-	         latitude: res.latitude,
-	         longitude: res.longitude,
-	         visited: res.visited,
-	         visible: res.visible}))
+	    setWaypointData(res);
     }).catch((error) => {
 	    if (error.response) {
 		    console.log(error.response);
@@ -30,6 +28,30 @@ function AutoNav() {
 		    console.log(error.response.headers);
 	    }
     })},[])
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setCoord({
+            ...newCoord,
+            [e.target.name]: value
+        });
+        console.log(newCoord);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const coordData = {
+            xCoordinate: newCoord.xCoordinate,
+            yCoordinate: newCoord.yCoordinate
+        };
+        console.log(coordData);
+        axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+            window.location.reload();
+        });
+    };
+
     return (
         <Grid Container id="autonav-page" centered celled columns={2}>
           <Grid.Row>
@@ -71,27 +93,30 @@ function AutoNav() {
             </Grid.Column>
             <Grid.Column>
 	      <Header as="h1" textAlign="center">Map</Header>
-	      {waypointData && <div>
-	        <Header as="h1" textAlign="center">id: {waypointData.id}</Header>
-	        <Header as="h1" textAlign="center">type: {waypointData.type}</Header>
-	        <Header as="h1" textAlign="center">latitude: {waypointData.latitude}</Header>
-	        <Header as="h1" textAlign="center">longitude: {waypointData.longitude}</Header>
-	        <Header as="h1" textAlign="center">visited: {waypointData.visited}</Header>
-	        <Header as="h1" textAlign="center">visible: {waypointData.visible}</Header>
-	        </div>
-	      }
+	      {waypointData &&
+              waypointData.map((waypoint, index) => {
+                  console.log(waypoint);
+                  return (
+                    <div>
+                      <Header as="h1" textAlign="center">id: {waypoint.id}</Header>
+                      <Header as="h1" textAlign="center">type: {waypoint.type}</Header>
+                      <Header as="h1" textAlign="center">latitude: {waypoint.latitude}</Header>
+                      <Header as="h1" textAlign="center">longitude: {waypoint.longitude}</Header>
+                      <Header as="h1" textAlign="center">visited: {waypoint.visited}</Header>
+                      <Header as="h1" textAlign="center">visible: {waypoint.visible}</Header>
+                    </div>
+                  );
+                })
+              }
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column>
-	      <Input action placeholder='X-Input' />
-	      <Button type='submit'>Enter</Button>
-            </Grid.Column>
-            <Grid.Column>
-	      <Input action placeholder='Y-Input' />
-	      <Button type='submit'>Enter</Button>
-            </Grid.Column>
           </Grid.Row>
+            <Form onSubmit={handleSubmit}>
+                <Input type="number" name="xCoordinate" placeholder="enter x-coordinate" onChange={handleChange}/>
+                <Input type="number" name="yCoordinate" placeholder="enter y-coordinate" onChange={handleChange}/>
+                <Button type="submit" >Submit</Button>
+            </Form>
         </Grid>
     );
 }

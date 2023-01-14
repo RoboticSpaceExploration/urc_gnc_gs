@@ -32,6 +32,15 @@ const payloadData = [
   }
 ]
 
+//sample queue list
+const queueList = [
+  {
+    "queue" : 1,
+    "xCoordinate": 12,
+    "yCoordinate": 14
+  }
+]
+
 app.use((req, res, next) => {
   console.log('Time at server call: ', Date.now());
   next();
@@ -157,8 +166,15 @@ app.delete('/payload/:id', (req, res) => {
   }
 });
 
+app.get('/autonav', (req, res) => {
+  res.json(queueList);
+});
+
 app.post('/autonav', (req, res) => {
-  console.log("autonav post endpoint");
+  const newCoordinates = req.body;
+  newCoordinates.queue = queueList.length + 1;
+  queueList.push(newCoordinates);
+  res.json(queueList);
 });
 
 app.listen(9000, () => console.log('app is listening to port 9000'));

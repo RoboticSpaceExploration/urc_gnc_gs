@@ -5,7 +5,6 @@ import axios from "axios";
 function Payload() {
   const [payloadData, setPayloadData] = useState(null);
   const [newData, setData] = useState({
-    id: "",
     data: ""
   });
 
@@ -60,7 +59,7 @@ function Payload() {
           })
       }
 	  <Form onSubmit={handleSubmit}>
-          <Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/>
+          <Input type="text" name="data" placeholder="enter data" onChange={handleChange}/>
         <Button type="submit" >Submit</Button>
       </Form>
     </div>
