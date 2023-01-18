@@ -36,11 +36,12 @@ const payloadData = [
 const queueList = [
   {
     "queue" : 1,
-    "xCoordinate": 12,
-    "yCoordinate": 14
+    "longitude": 12,
+    "latitude": 14
   }
 ]
 
+/*
 app.use((req, res, next) => {
   console.log('Time at server call: ', Date.now());
   next();
@@ -50,6 +51,7 @@ app.use('/request-type', (req, res, next) => {
   console.log('request type: ', req.method);
   next();
 });
+*/
 
 app.use(cors());
 app.use(express.json());

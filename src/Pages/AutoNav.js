@@ -10,8 +10,8 @@ import ArmLogo from '../Images/arm.png';
 function AutoNav() {
   const [ waypointData, setWaypointData] = useState(null);
   const [ newCoord, setCoord ] = useState({
-      xCoordinate: null,
-      yCoordinate: null
+      longitude: null,
+      latitude: null
   });
 
   useEffect(() => {
@@ -41,8 +41,8 @@ function AutoNav() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const coordData = {
-            xCoordinate: newCoord.xCoordinate,
-            yCoordinate: newCoord.yCoordinate
+            longitude: newCoord.longitude,
+            latitude: newCoord.latitude
         };
         console.log(coordData);
         axios.post("http://localhost:9000/autonav", coordData).then((response) => {
@@ -113,8 +113,8 @@ function AutoNav() {
           <Grid.Row>
           </Grid.Row>
             <Form onSubmit={handleSubmit}>
-                <Input type="number" name="xCoordinate" placeholder="enter x-coordinate" onChange={handleChange}/>
-                <Input type="number" name="yCoordinate" placeholder="enter y-coordinate" onChange={handleChange}/>
+                <Input type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange}/>
+                <Input type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange}/>
                 <Button type="submit" >Submit</Button>
             </Form>
         </Grid>

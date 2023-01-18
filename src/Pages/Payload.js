@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Header, Button, Input, Form, Label } from 'semantic-ui-react';
+import { Header, Button, Input, Form } from 'semantic-ui-react';
 import axios from "axios";
 
 function Payload() {
@@ -66,6 +66,5 @@ function Payload() {
   );
 }
 
-//<Input type="text" name="data" placeholder="enter data" value={newData.data} onChange={handleChange}/>
 export default Payload;
 
