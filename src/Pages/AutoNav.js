@@ -1,13 +1,57 @@
-import React from 'react';
-import { Grid, Header, Button, Input, Feed, Icon } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import {Grid, Header, Button, Input, Feed, Icon, Form} from 'semantic-ui-react';
+import axios from 'axios';
 import RoseLogo from '../Images/rose-logo.png';
 import AutoNavLogo from '../Images/autonav.png';
 import RoverDataLogo from '../Images/rover-data.png';
 import PayloadLogo from '../Images/payload.png';
 import ArmLogo from '../Images/arm.png';
 
-class AutoNav extends React.Component {
-  render() {
+function AutoNav() {
+  const [ waypointData, setWaypointData] = useState(null);
+  const [ newCoord, setCoord ] = useState({
+      longitude: null,
+      latitude: null
+  });
+
+  useEffect(() => {
+    axios({
+	    method: "GET",
+	    url:"http://localhost:9000/waypoints",
+    }).then((response) => {
+	    const res = response.data;
+	    setWaypointData(res);
+    }).catch((error) => {
+	    if (error.response) {
+		    console.log(error.response);
+		    console.log(error.response.status);
+		    console.log(error.response.headers);
+	    }
+    })},[])
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setCoord({
+            ...newCoord,
+            [e.target.name]: value
+        });
+        console.log(newCoord);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const coordData = {
+            longitude: newCoord.longitude,
+            latitude: newCoord.latitude
+        };
+        console.log(coordData);
+        axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+            window.location.reload();
+        });
+    };
+
     return (
         <Grid Container id="autonav-page" centered celled columns={2}>
           <Grid.Row>
@@ -49,21 +93,32 @@ class AutoNav extends React.Component {
             </Grid.Column>
             <Grid.Column>
 	      <Header as="h1" textAlign="center">Map</Header>
+	      {waypointData &&
+              waypointData.map((waypoint, index) => {
+                  console.log(waypoint);
+                  return (
+                    <div>
+                      <Header as="h1" textAlign="center">id: {waypoint.id}</Header>
+                      <Header as="h1" textAlign="center">type: {waypoint.type}</Header>
+                      <Header as="h1" textAlign="center">latitude: {waypoint.latitude}</Header>
+                      <Header as="h1" textAlign="center">longitude: {waypoint.longitude}</Header>
+                      <Header as="h1" textAlign="center">visited: {waypoint.visited}</Header>
+                      <Header as="h1" textAlign="center">visible: {waypoint.visible}</Header>
+                    </div>
+                  );
+                })
+              }
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column>
-	      <Input action placeholder='X-Input' />
-	      <Button type='submit'>Enter</Button>
-            </Grid.Column>
-            <Grid.Column>
-	      <Input action placeholder='Y-Input' />
-	      <Button type='submit'>Enter</Button>
-            </Grid.Column>
           </Grid.Row>
+            <Form onSubmit={handleSubmit}>
+                <Input type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange}/>
+                <Input type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange}/>
+                <Button type="submit" >Submit</Button>
+            </Form>
         </Grid>
     );
-  };
 }
 
 export default AutoNav;
