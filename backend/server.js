@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 //sample waypoint data
-const waypoints = [
+let waypoints = [
   {
     "id": 1,
     "type": "AR tag",
@@ -25,7 +25,7 @@ const waypoints = [
 ]
 
 //sample payload data
-const payloadData = [
+let payloadData = [
   {
     "id": 1,
     "data": "this"
@@ -33,7 +33,7 @@ const payloadData = [
 ]
 
 //sample queue list
-const queueList = [
+let queueList = [
   {
     "queue" : 1,
     "longitude": 12,
@@ -58,6 +58,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
 app.use('/public', serveIndex('public'));
+
+const { body, validationResult } = require('express-validator');
 
 app.get('/', (req, res) => {
   res.send('successful response');
@@ -106,7 +108,7 @@ app.put('/waypoints/:id', (req, res) => {
 
 app.delete('/waypoints/:id', (req, res) => {
   const waypointId = Number(req.params.id);
-  const newWaypoints = waypoints.filter((account) => account.id != accountId);
+  const newWaypoints = waypoints.filter((waypoint) => waypoint.id !== waypointId);
 
   if (!newWaypoints) {
     res.status(500).send('not found');
@@ -132,7 +134,12 @@ app.get('/payload/:id', (req, res) => {
   }
 });
 
-app.post('/payload', (req, res) => {
+app.post('/payload', body('data').notEmpty(), (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const newDataPoint = req.body;
   newDataPoint.id = payloadData.length + 1;
   payloadData.push(newDataPoint);
@@ -158,7 +165,7 @@ app.put('/payload/:id', (req, res) => {
 
 app.delete('/payload/:id', (req, res) => {
   const payloadId = Number(req.params.id);
-  const newPayloadData = payloadData.filter((payload) => payload.id != payloadId);
+  const newPayloadData = payloadData.filter((payload) => payload.id !== payloadId);
 
   if (!newPayloadData) {
     res.status(500).send('not found');
@@ -172,7 +179,12 @@ app.get('/autonav', (req, res) => {
   res.json(queueList);
 });
 
-app.post('/autonav', (req, res) => {
+app.post('/autonav', body('latitude').exists({ checkNull: true }), body('longitude').exists({ checkNull: true }), (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const newCoordinates = req.body;
   newCoordinates.queue = queueList.length + 1;
   queueList.push(newCoordinates);
