@@ -1,5 +1,7 @@
 import React from 'react'
-import { Button, Image, Modal } from 'semantic-ui-react'
+import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+import Modal from 'react-bootstrap/Modal';
 
 function ModelModal() {
   const [open, setOpen] = React.useState(false)
@@ -28,4 +30,4 @@ function ModelModal() {
   )
 }
 
-export default ModelModal
+export default ModelModal;

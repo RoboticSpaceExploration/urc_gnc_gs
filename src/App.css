@@ -39,7 +39,7 @@
 
 .sidenav {
   height: 100%;
-  width: 150px;
+  width: 20vm;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -47,18 +47,26 @@
   background-color:#000000;
   transition: .5s ease;
   display: flex;
-  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
-.rose-logo {
-  height: 150px;
-  width: 150px;
-  position: center;
+.sidenav-logos {
+  display: block;
+  flex-direction: column;
+  margin: auto;
+  width: 18vm;
+  height: 18vh;
 }
 
 .main {
-  margin-left: 150px;
+  margin-left: 10%;
+  width: 70vm;
+  display: block;
   padding: 0px 10px;
+  overflow-x: hidden;
 }
