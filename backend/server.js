@@ -41,6 +41,15 @@ let queueList = [
   }
 ]
 
+//sample temperature data
+let tempList = [
+  {
+    "id": 1,
+    "temperature": 25
+  }
+]
+
+
 /*
 app.use((req, res, next) => {
   console.log('Time at server call: ', Date.now());
@@ -173,6 +182,22 @@ app.delete('/payload/:id', (req, res) => {
     payloadData = newPayloadData;
     res.send(payloadData);
   }
+});
+
+app.get('/temp', (req, res) => {
+  res.json(tempList);
+})
+
+app.post('/temp', body('temperature').exists({ checkNull: true}), (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const newTemp = req.body;
+  newTemp.id = tempList.length + 1;
+  tempList.push(newTemp);
+  res.json(tempList);
 });
 
 app.get('/autonav', (req, res) => {
