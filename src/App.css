@@ -70,3 +70,15 @@
   padding: 0px 10px;
   overflow-x: hidden;
 }
+
+.queue-img {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--bs-border-radius)!important;
+  margin-right: 0.5rem!important;
+}
+
+.divider {
+  border-right: 0.0625rem solid #c1c0c0;
+  padding-right: 0;
+}
