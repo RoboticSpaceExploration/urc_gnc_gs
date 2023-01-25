@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Button, Input, Form } from 'semantic-ui-react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import axios from "axios";
 
 function Payload() {
@@ -46,21 +47,21 @@ function Payload() {
 
   return (
     <div id="payload-page">
-      <Header as="h1">THIS IS PAYLOAD</Header>
+      <h1>PAYLOAD</h1>
 	  {payloadData &&
           payloadData.map((data, index) => {
               console.log(data);
               return (
                   <div>
-                      <Header as="h2">id: {data.id}</Header>
-                      <Header as="h2">data: {data.data}</Header>
+                      <h2>id: {data.id}</h2>
+                      <h2>data: {data.data}</h2>
                   </div>
               );
           })
       }
 	  <Form onSubmit={handleSubmit}>
-          <Input type="text" name="data" placeholder="enter data" onChange={handleChange}/>
-        <Button type="submit" >Submit</Button>
+          <Form.Control type="text" name="data" placeholder="enter data" onChange={handleChange}/>
+        <Button type="submit" variant="secondary">Submit</Button>
       </Form>
     </div>
   );

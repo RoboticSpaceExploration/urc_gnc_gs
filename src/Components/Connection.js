@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Message } from 'semantic-ui-react';
+import Alert from 'react-bootstrap/Alert';
 import Config from "../scripts/config";
 
 class Connection extends Component {
@@ -56,9 +56,12 @@ class Connection extends Component {
 
     render() {
         return (
-            <Message className="text-center m-3"
-            variant={this.state.connected? "success": "danger"}>
-                {this.state.connected? "Robot Connected": "Robot Disconnected"}</Message>
+            <Alert className="text-center"
+            variant={this.state.connected ? 'success': 'danger'}>
+              <h5>
+                {this.state.connected ? "Robot Connected": "Robot Disconnected"}
+              </h5>
+            </Alert>
         )
     }
 }
