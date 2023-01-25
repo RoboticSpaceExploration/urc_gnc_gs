@@ -43,11 +43,15 @@ function AutoNav() {
             longitude: newCoord.longitude,
             latitude: newCoord.latitude
         };
-        axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+        if (!longitude || !latitude){
             console.log(response.status);
-            console.log(response.data.token);
-            window.location.reload();
-        });
+        } else {
+            axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+                console.log(response.status);
+                console.log(response.data.token);
+                window.location.reload();
+            });
+        }
     };
 
     return (
