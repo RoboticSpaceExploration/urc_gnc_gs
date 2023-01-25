@@ -1,30 +1,45 @@
 import React from 'react';
-import { Grid, Header } from 'semantic-ui-react';
+import { Card, Container, Row, Col } from 'react-bootstrap';
 
 class Arm extends React.Component {
+
   render() {
+    const cardStyle = { width: '50vm', height: '50vh' };
+    const containerStyle = { height: '100%' };
+    const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
+
     return (
-      <Grid Container centered id="arm-page" columns={2}>
-        <Grid.Row>
-          <Header as="h1" textAlign="center">ARM</Header>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-	    <Header as="h2" textAlign="center">Cam 1</Header>
-          </Grid.Column>
-	  <Grid.Column>
-	    <Header as="h2" textAlign="center">Cam 2</Header>
-	  </Grid.Column>
-	</Grid.Row>
-        <Grid.Row>
-	  <Grid.Column>
-	    <Header as="h2" textAlign="center">WASD 1</Header>
-	  </Grid.Column>
-	  <Grid.Column>
-	    <Header as="h2" textAlign="center">WASD 2</Header>
-	  </Grid.Column>
-	</Grid.Row>
-      </Grid>
+        <Container style={containerStyle}>
+          <Row style={rowStyle}>
+            <h1>ARM</h1>
+            <Col>
+              <Card style={cardStyle}>
+                <Card.Body>
+                  <Card.Title>Camera 1</Card.Title>
+
+                </Card.Body>
+              </Card>
+            </Col>
+
+            <Col>
+              <Card style={cardStyle}>
+                <Card.Body>
+                  <Card.Title>Camera 2</Card.Title>
+
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <Row style={rowStyle}>
+            <Col>
+              WASD
+            </Col>
+
+            <Col>
+              WASD
+            </Col>
+          </Row>
+        </Container>
     );
   };
 }
