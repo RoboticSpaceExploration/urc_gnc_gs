@@ -43,8 +43,8 @@ function AutoNav() {
             longitude: newCoord.longitude,
             latitude: newCoord.latitude
         };
-        if (!longitude || !latitude){
-            console.log(response.status);
+        if (!coordData.longitude || !coordData.latitude){
+            console.log("xd");
         } else {
             axios.post("http://localhost:9000/autonav", coordData).then((response) => {
                 console.log(response.status);

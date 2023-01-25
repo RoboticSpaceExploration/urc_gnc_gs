@@ -180,6 +180,7 @@ app.get('/autonav', (req, res) => {
 });
 
 app.post('/autonav', body('latitude').exists({ checkNull: true }), body('longitude').exists({ checkNull: true }), (req, res) => {
+  //error check; returns error status if there are any
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
