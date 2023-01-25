@@ -43,10 +43,6 @@ let queueList = [
 
 //sample temperature data
 let tempList = [
-  {
-    "id": 1,
-    "temperature": 25
-  }
 ]
 
 
@@ -69,6 +65,7 @@ app.use('/public', express.static('public'));
 app.use('/public', serveIndex('public'));
 
 const { body, validationResult } = require('express-validator');
+let start = null;
 
 app.get('/', (req, res) => {
   res.send('successful response');
@@ -195,7 +192,14 @@ app.post('/temp', body('temperature').exists({ checkNull: true}), (req, res) => 
   }
 
   const newTemp = req.body;
+
+  if (tempList.length === 0) {
+    start = (Math.floor(Date.now() / 60000));
+  }
+
+  newTemp.time = (Math.floor(Date.now() / 60000)) - start;
   newTemp.id = tempList.length + 1;
+
   tempList.push(newTemp);
   res.json(tempList);
 });
