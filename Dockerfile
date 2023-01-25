@@ -1,13 +1,26 @@
-FROM node:19-alpine3.16
+# FROM node:19-alpine3.16
 
-WORKDIR /groundStation
+# WORKDIR /groundStation
 
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN npm install
+# RUN npm install
 
-COPY . . 
+# COPY . . 
 
-EXPOSE 5000
+# EXPOSE 8080
 
-CMD [ "node", "server.js"]
+# CMD [ "node", "server.js"]
+
+FROM node:12.18.1
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install --production
+
+COPY . .
+
+CMD [ "node", "server.js" ]
