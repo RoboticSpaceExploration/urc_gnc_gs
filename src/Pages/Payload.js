@@ -8,6 +8,9 @@ function Payload() {
   const [newData, setData] = useState({
     data: ""
   });
+  const [newTemp, setTemp] = useState({
+      temperature: null
+  });
 
   useEffect(() => {
     axios({
@@ -24,7 +27,7 @@ function Payload() {
 	    }
     })},[])
 
-  const handleChange = (e) => {
+  const dataHandleChange = (e) => {
     const value = e.target.value;
     setData({
       ...newData,
@@ -32,7 +35,7 @@ function Payload() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const dataHandleSubmit = (e) => {
     e.preventDefault();
     const payData = {
       id: newData.id,
@@ -44,6 +47,27 @@ function Payload() {
       window.location.reload();
     });
   };
+
+    const tempHandleChange = (e) => {
+        const value = e.target.value;
+        setTemp({
+            ...newTemp,
+            [e.target.name]: value
+        });
+    };
+
+    const tempHandleSubmit = (e) => {
+        e.preventDefault();
+        const tempData = {
+            id: newTemp.id,
+            temperature: newTemp.temperature
+        };
+        axios.post("http://localhost:9000/temp", tempData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+            window.location.reload();
+        });
+    };
 
   return (
     <div id="payload-page">
@@ -59,9 +83,13 @@ function Payload() {
               );
           })
       }
-	  <Form onSubmit={handleSubmit}>
-          <Form.Control type="text" name="data" placeholder="enter data" onChange={handleChange}/>
+	  <Form onSubmit={dataHandleSubmit}>
+          <Form.Control type="text" name="data" placeholder="enter data" onChange={dataHandleChange}/>
         <Button type="submit" variant="secondary">Submit</Button>
+      </Form>
+      <Form onSubmit={tempHandleSubmit}>
+          <Form.Control type="number" step="0.01" name="temperature" placeholder="enter temperature" onChange={tempHandleChange}/>
+          <Button type="submit" variant="secondary">Submit</Button>
       </Form>
     </div>
   );

@@ -45,7 +45,6 @@ function AutoNav() {
             ...newCoord,
             [e.target.name]: value
         });
-        console.log(newCoord);
     };
 
     const handleSubmit = (e) => {
@@ -54,12 +53,15 @@ function AutoNav() {
             longitude: newCoord.longitude,
             latitude: newCoord.latitude
         };
-        console.log(coordData);
-        axios.post("http://localhost:9000/autonav", coordData).then((response) => {
-            console.log(response.status);
-            console.log(response.data.token);
-            window.location.reload();
-        });
+        if (!coordData.longitude || !coordData.latitude){
+            console.log("xd");
+        } else {
+            axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+                console.log(response.status);
+                console.log(response.data.token);
+                window.location.reload();
+            });
+        }
     };
 
     return (
