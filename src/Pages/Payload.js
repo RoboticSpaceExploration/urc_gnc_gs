@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Button, Input, Form } from 'semantic-ui-react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import axios from "axios";
 
 function Payload() {
   const [payloadData, setPayloadData] = useState(null);
   const [newData, setData] = useState({
     data: ""
+  });
+  const [newTemp, setTemp] = useState({
+      temperature: null
   });
 
   useEffect(() => {
@@ -23,7 +27,7 @@ function Payload() {
 	    }
     })},[])
 
-  const handleChange = (e) => {
+  const dataHandleChange = (e) => {
     const value = e.target.value;
     setData({
       ...newData,
@@ -31,7 +35,7 @@ function Payload() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const dataHandleSubmit = (e) => {
     e.preventDefault();
     const payData = {
       id: newData.id,
@@ -44,23 +48,48 @@ function Payload() {
     });
   };
 
+    const tempHandleChange = (e) => {
+        const value = e.target.value;
+        setTemp({
+            ...newTemp,
+            [e.target.name]: value
+        });
+    };
+
+    const tempHandleSubmit = (e) => {
+        e.preventDefault();
+        const tempData = {
+            id: newTemp.id,
+            temperature: newTemp.temperature
+        };
+        axios.post("http://localhost:9000/temp", tempData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+            window.location.reload();
+        });
+    };
+
   return (
     <div id="payload-page">
-      <Header as="h1">THIS IS PAYLOAD</Header>
+      <h1>PAYLOAD</h1>
 	  {payloadData &&
           payloadData.map((data, index) => {
               console.log(data);
               return (
                   <div>
-                      <Header as="h2">id: {data.id}</Header>
-                      <Header as="h2">data: {data.data}</Header>
+                      <h2>id: {data.id}</h2>
+                      <h2>data: {data.data}</h2>
                   </div>
               );
           })
       }
-	  <Form onSubmit={handleSubmit}>
-          <Input type="text" name="data" placeholder="enter data" onChange={handleChange}/>
-        <Button type="submit" >Submit</Button>
+	  <Form onSubmit={dataHandleSubmit}>
+          <Form.Control type="text" name="data" placeholder="enter data" onChange={dataHandleChange}/>
+        <Button type="submit" variant="secondary">Submit</Button>
+      </Form>
+      <Form onSubmit={tempHandleSubmit}>
+          <Form.Control type="number" step="0.01" name="temperature" placeholder="enter temperature" onChange={tempHandleChange}/>
+          <Button type="submit" variant="secondary">Submit</Button>
       </Form>
     </div>
   );
