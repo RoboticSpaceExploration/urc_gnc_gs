@@ -222,16 +222,29 @@ app.post('/autonav', body('latitude').exists({ checkNull: true }), body('longitu
 });
 
 app.delete('/autonav/:queue', (req, res) => {
-  console.log("made it to delete");
+  //finds the item in queue to delete
   const queueId = Number(req.params.queue);
+
+  //creates new list without the queue
   const newQueueList = queueList.filter((queueItem) => queueItem.queue !== queueId);
 
+  //check to see if newQueueList exists
   if (!newQueueList) {
     res.status(500).send('not found');
   } else {
+    //updates the queue according to which item was deleted
     queueList = newQueueList.map((queueItem) => {
+            let newQueue = null;
+
+            //check to see how to update the queue
+            if (queueItem.queue > queueId )
+            {
+              newQueue = queueItem.queue - 1;
+            } else {
+              newQueue = queueItem.queue;
+            }
             return {
-              queue: queueItem.queue - 1,
+              queue: newQueue,
               latitude: queueItem.latitude,
               longitude: queueItem.longitude
             }
