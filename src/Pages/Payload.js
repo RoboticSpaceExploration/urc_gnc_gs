@@ -8,8 +8,9 @@ import {
   Legend,
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Card, Button, Form } from "react-bootstrap";
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
 import axios from "axios";
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -20,7 +21,7 @@ function Payload() {
     data: "",
   });
   const [newTemp, setTemp] = useState({
-      temperature: null
+    temperature: null,
   });
 
   useEffect(() => {
@@ -62,32 +63,33 @@ function Payload() {
     });
   };
 
-    const tempHandleChange = (e) => {
-        const value = e.target.value;
-        setTemp({
-            ...newTemp,
-            [e.target.name]: value
-        });
-    };
+  const tempHandleChange = (e) => {
+    const value = e.target.value;
+    setTemp({
+      ...newTemp,
+      [e.target.name]: value,
+    });
+  };
 
-    const tempHandleSubmit = (e) => {
-        e.preventDefault();
-        const tempData = {
-            id: newTemp.id,
-            temperature: newTemp.temperature
-        };
-        axios.post("http://localhost:9000/temp", tempData).then((response) => {
-            console.log(response.status);
-            console.log(response.data.token);
-            window.location.reload();
-        });
+  const tempHandleSubmit = (e) => {
+    e.preventDefault();
+    const tempData = {
+      id: newTemp.id,
+      temperature: newTemp.temperature,
     };
+    axios.post("http://localhost:9000/temp", tempData).then((response) => {
+      console.log(response.status);
+      console.log(response.data.token);
+      window.location.reload();
+    });
+  };
 
   // data for scatter plot
   const data = {
     datasets: [
       {
         label: "Scatter Dataset",
+        //x and y axis
         data: [
           {
             x: -10,
@@ -119,27 +121,44 @@ function Payload() {
     },
   };
 
+  // css
+  const cardStyle = { width: "50vm", height: "50vh" };
+
   return (
     <div id="payload-page">
       <h1>PAYLOAD</h1>
-	  {payloadData &&
-          payloadData.map((data, index) => {
-              console.log(data);
-              return (
-                  <div>
-                      <h2>id: {data.id}</h2>
-                      <h2>data: {data.data}</h2>
-                  </div>
-              );
-          })
-      }
-	  <Form onSubmit={dataHandleSubmit}>
-          <Form.Control type="text" name="data" placeholder="enter data" onChange={dataHandleChange}/>
-        <Button type="submit" variant="secondary">Submit</Button>
+      {payloadData &&
+        payloadData.map((data, index) => {
+          console.log(data);
+          return (
+            <div>
+              <h2>id: {data.id}</h2>
+              <h2>data: {data.data}</h2>
+            </div>
+          );
+        })}
+      <Form onSubmit={dataHandleSubmit}>
+        <Form.Control
+          type="text"
+          name="data"
+          placeholder="enter data"
+          onChange={dataHandleChange}
+        />
+        <Button type="submit" variant="secondary">
+          Submit
+        </Button>
       </Form>
       <Form onSubmit={tempHandleSubmit}>
-          <Form.Control type="number" step="0.01" name="temperature" placeholder="enter temperature" onChange={tempHandleChange}/>
-          <Button type="submit" variant="secondary">Submit</Button>
+        <Form.Control
+          type="number"
+          step="0.01"
+          name="temperature"
+          placeholder="enter temperature"
+          onChange={tempHandleChange}
+        />
+        <Button type="submit" variant="secondary">
+          Submit
+        </Button>
       </Form>
 
       {/* Use LAYOUT to rearrange the positions after migrating to Bootstrap */}
@@ -152,20 +171,21 @@ function Payload() {
         <Scatter options={options} data={data} />
       </div>
 
-      {/* Camera feed 1 */}
-      <div style={{ width: "30vw", height: "40vh", backgroundColor: "black" }}>
-        <p style={{ color: "white" }}>Camera Feed 1</p>
-      </div>
-
-      {/* Camera feed 2 */}
-      <div style={{ width: "30vw", height: "40vh", backgroundColor: "black" }}>
-        <p style={{ color: "white" }}>Camera Feed 2</p>
-      </div>
-
-      {/* Camera feed 3 */}
-      <div style={{ width: "30vw", height: "40vh", backgroundColor: "black" }}>
-        <p style={{ color: "white" }}>Camera Feed 3</p>
-      </div>
+      <Card style={cardStyle}>
+        <Card.Body>
+          <Card.Title>Camera 1</Card.Title>
+        </Card.Body>
+      </Card>
+      <Card style={cardStyle}>
+        <Card.Body>
+          <Card.Title>Camera 2</Card.Title>
+        </Card.Body>
+      </Card>
+      <Card style={cardStyle}>
+        <Card.Body>
+          <Card.Title>Camera 3</Card.Title>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
