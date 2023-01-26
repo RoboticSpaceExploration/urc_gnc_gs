@@ -221,4 +221,24 @@ app.post('/autonav', body('latitude').exists({ checkNull: true }), body('longitu
   res.json(queueList);
 });
 
+app.delete('/autonav/:queue', (req, res) => {
+  console.log("made it to delete");
+  const queueId = Number(req.params.queue);
+  const newQueueList = queueList.filter((queueItem) => queueItem.queue !== queueId);
+
+  if (!newQueueList) {
+    res.status(500).send('not found');
+  } else {
+    queueList = newQueueList.map((queueItem) => {
+            return {
+              queue: queueItem.queue - 1,
+              latitude: queueItem.latitude,
+              longitude: queueItem.longitude
+            }
+          }
+        );
+    res.send(queueList);
+  }
+});
+
 app.listen(9000, () => console.log('app is listening to port 9000'));
