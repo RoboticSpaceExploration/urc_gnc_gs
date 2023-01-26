@@ -159,7 +159,7 @@ app.put('/payload/:id', (req, res) => {
   const index = payloadData.indexOf(payload);
 
   if (!payload) {
-    res.status(500).send('data not found');
+    res.status(500).send('waypoint not found');
   } else {
     const updated = { ...payload, ...body };
 
