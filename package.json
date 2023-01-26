@@ -7,18 +7,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.2",
-<<<<<<< HEAD
     "chart.js": "^4.2.0",
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
-=======
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
-    "express": "^4.18.2",
-    "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
->>>>>>> main
     "react-dom": "^18.2.0",
     "react-joystick-component": "^4.1.0",
     "react-router-dom": "^6.4.2",
