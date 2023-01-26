@@ -9,8 +9,6 @@ const QueueFeed = (props) => {
 
     function handleClose(){
         setShow(false);
-        console.log("this is queue being deleted: " +   props.queue);
-        console.log(`http://localhost:9000/autonav/${props.queue}`);
         axios.delete(`http://localhost:9000/autonav/${props.queue}`).then((response) => {
             console.log(response.status);
             console.log(response.data.token);
