@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {Grid, Header, Button, Input, Feed, Icon, Form} from 'semantic-ui-react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Toast from 'react-bootstrap/Toast';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import RoseLogo from '../Images/rose-logo.png';
 import AutoNavLogo from '../Images/autonav.png';
 import RoverDataLogo from '../Images/rover-data.png';
 import PayloadLogo from '../Images/payload.png';
 import ArmLogo from '../Images/arm.png';
+import Connection from '../Components/Connection';
 
 function AutoNav() {
   const [ waypointData, setWaypointData] = useState(null);
@@ -13,6 +20,9 @@ function AutoNav() {
       longitude: null,
       latitude: null
   });
+
+  const cardStyle = { height: '70vh' };
+  const titleStyle = { textAlign: 'center', marginBottom: '10px' };
 
   useEffect(() => {
     axios({
@@ -35,7 +45,6 @@ function AutoNav() {
             ...newCoord,
             [e.target.name]: value
         });
-        console.log(newCoord);
     };
 
     const handleSubmit = (e) => {
@@ -44,80 +53,91 @@ function AutoNav() {
             longitude: newCoord.longitude,
             latitude: newCoord.latitude
         };
-        console.log(coordData);
-        axios.post("http://localhost:9000/autonav", coordData).then((response) => {
-            console.log(response.status);
-            console.log(response.data.token);
-            window.location.reload();
-        });
+        if (!coordData.longitude || !coordData.latitude){
+            console.log("xd");
+        } else {
+            axios.post("http://localhost:9000/autonav", coordData).then((response) => {
+                console.log(response.status);
+                console.log(response.data.token);
+                window.location.reload();
+            });
+        }
     };
 
     return (
-        <Grid Container id="autonav-page" centered celled columns={2}>
-          <Grid.Row>
-            <Grid.Column>
-	      <Header as="h1" textAlign="center">AutoNav</Header>
-            </Grid.Column>
-            <Grid.Column>
-	      <Header as="h1" textAlign="center">
-	        <Icon name="circle" size="huge" color="purple"/>
-	        Indicator
-	      </Header>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={5}>
-	      <Header as="h1" textAlign="center">Queue List</Header>
-	      <Feed>
-                <Feed.Event
-                  image={RoseLogo}
-                  content='The Rover did thing 1'
-                />
-                <Feed.Event>
-                  <Feed.Label image={AutoNavLogo} />
-                  <Feed.Content content='The Rover did thing 2' />
-                </Feed.Event>
-                <Feed.Event>
-                  <Feed.Label image={RoverDataLogo} />
-                  <Feed.Content content='The Rover did thing 3' />
-                </Feed.Event>
-                <Feed.Event>
-                  <Feed.Label image={ArmLogo} />
-                  <Feed.Content content='The Rover did thing 4' />
-                </Feed.Event>
-                <Feed.Event>
-                  <Feed.Label image={PayloadLogo} />
-                  <Feed.Content content='The Rover did thing 5' />
-                </Feed.Event>
-              </Feed>
-            </Grid.Column>
-            <Grid.Column>
-	      <Header as="h1" textAlign="center">Map</Header>
-	      {waypointData &&
-              waypointData.map((waypoint, index) => {
-                  console.log(waypoint);
-                  return (
-                    <div>
-                      <Header as="h1" textAlign="center">id: {waypoint.id}</Header>
-                      <Header as="h1" textAlign="center">type: {waypoint.type}</Header>
-                      <Header as="h1" textAlign="center">latitude: {waypoint.latitude}</Header>
-                      <Header as="h1" textAlign="center">longitude: {waypoint.longitude}</Header>
-                      <Header as="h1" textAlign="center">visited: {waypoint.visited}</Header>
-                      <Header as="h1" textAlign="center">visible: {waypoint.visible}</Header>
-                    </div>
-                  );
-                })
-              }
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-          </Grid.Row>
-            <Form onSubmit={handleSubmit}>
-                <Input type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange}/>
-                <Input type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange}/>
-                <Button type="submit" >Submit</Button>
-            </Form>
-        </Grid>
+        <Container style={{ marginTop: '10px' }}>
+          <Row style={{ textAlign: 'center', display: 'flex', flexWrap: 'wrap' }}>
+            <Col style={{ alignSelf: 'center' }} xs={10}>
+              <h1>AutoNav</h1>
+            </Col>
+
+            <Col style={{ alignSelf: 'center' }} xs={2}>
+              <Connection />
+            </Col>
+          </Row>
+
+          <Card style={cardStyle}>
+            <div>
+              <Row style={{ display: 'flex' }}>
+                <Col style={cardStyle} className="divider" xs={4}>
+                  <h3 style={{ textAlign: 'center' }}>Queue List</h3>
+                  <div>
+                    <Toast>
+                      <Toast.Header closeButton={false}>
+                        <img
+                            src={RoseLogo}
+                            className="queue-img"
+                            alt=""
+                        />
+                        <strong className="me-auto">1</strong>
+                        <small className="text-muted">just now</small>
+                      </Toast.Header>
+                      <Toast.Body>Rover did thing 1</Toast.Body>
+                    </Toast>
+                    <Toast>
+                      <Toast.Header closeButton={false}>
+                        <img
+                            src={AutoNavLogo}
+                            className="queue-img"
+                            alt=""
+                        />
+                        <strong className="me-auto">2</strong>
+                        <small className="text-muted">just now</small>
+                      </Toast.Header>
+                      <Toast.Body>Rover did thing 2</Toast.Body>
+                    </Toast>
+                  </div>
+
+                </Col>
+
+                <Col style={{ height: '60vh' }} >
+                  <h3 style={{ textAlign: 'center' }}>Map</h3>
+                  {waypointData &&
+                      waypointData.map((waypoint, index) => {
+                        console.log(waypoint);
+                        return (
+                            <div>
+                              <h1 style={{ textAlign: "center" }}>id: {waypoint.id}</h1>
+                              <h1 style={{ textAlign: "center" }}>type: {waypoint.type}</h1>
+                              <h1 style={{ textAlign: "center" }}>latitude: {waypoint.latitude}</h1>
+                              <h1 style={{ textAlign: "center" }}>longitude: {waypoint.longitude}</h1>
+                              <h1 style={{ textAlign: "center" }}>visited: {waypoint.visited}</h1>
+                              <h1 style={{ textAlign: "center" }}>visible: {waypoint.visible}</h1>
+                            </div>
+                        );
+                      })
+                  }
+                  <Form onSubmit={handleSubmit}>
+                    <Form.Control type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange}/>
+                    <Form.Control type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange}/>
+                    <Button type="submit" >Submit</Button>
+                  </Form>
+                </Col>
+              </Row>
+            </div>
+            </Card>
+        </Container>
+
     );
 }
 
