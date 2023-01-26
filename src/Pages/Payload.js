@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import axios from "axios";
 
 function Payload() {
+  const [ payloadValidated, setPayloadValidated ] = useState(false);
+  const [ tempValidated, setTempValidated ] = useState(false);
   const [payloadData, setPayloadData] = useState(null);
   const [newData, setData] = useState({
     data: ""
@@ -36,16 +38,25 @@ function Payload() {
   };
 
   const dataHandleSubmit = (e) => {
+    const form = e.currentTarget;
     e.preventDefault();
+    if (form.checkValidity() === false) {
+        e.stopPropagation();
+    }
+
+    setPayloadValidated(true);
     const payData = {
       id: newData.id,
       data: newData.data
     };
-    axios.post("http://localhost:9000/payload", payData).then((response) => {
-      console.log(response.status);
-      console.log(response.data.token);
-      window.location.reload();
-    });
+    if (payData.data){
+        axios.post("http://localhost:9000/payload", payData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+            window.location.reload();
+        });
+    }
+
   };
 
     const tempHandleChange = (e) => {
@@ -57,16 +68,23 @@ function Payload() {
     };
 
     const tempHandleSubmit = (e) => {
+        const form = e.currentTarget;
         e.preventDefault();
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setTempValidated(true);
         const tempData = {
-            id: newTemp.id,
             temperature: newTemp.temperature
         };
-        axios.post("http://localhost:9000/temp", tempData).then((response) => {
-            console.log(response.status);
-            console.log(response.data.token);
-            window.location.reload();
-        });
+        if (tempData.temperature) {
+            axios.post("http://localhost:9000/temp", tempData).then((response) => {
+                console.log(response.status);
+                console.log(response.data.token);
+                window.location.reload();
+            });
+        }
     };
 
   return (
@@ -83,12 +101,18 @@ function Payload() {
               );
           })
       }
-	  <Form onSubmit={dataHandleSubmit}>
-          <Form.Control type="text" name="data" placeholder="enter data" onChange={dataHandleChange}/>
+	  <Form noValidate validated={payloadValidated} onSubmit={dataHandleSubmit}>
+          <Form.Control type="text" name="data" placeholder="enter data" onChange={dataHandleChange} required/>
+          <Form.Control.Feedback type="invalid">
+              Please provide data.
+          </Form.Control.Feedback>
         <Button type="submit" variant="secondary">Submit</Button>
       </Form>
-      <Form onSubmit={tempHandleSubmit}>
-          <Form.Control type="number" step="0.01" name="temperature" placeholder="enter temperature" onChange={tempHandleChange}/>
+      <Form noValidate validated={tempValidated} onSubmit={tempHandleSubmit}>
+          <Form.Control type="number" step="0.01" name="temperature" placeholder="enter temperature" onChange={tempHandleChange} required/>
+          <Form.Control.Feedback type="invalid">
+              Please valid input.
+          </Form.Control.Feedback>
           <Button type="submit" variant="secondary">Submit</Button>
       </Form>
     </div>

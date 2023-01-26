@@ -15,6 +15,7 @@ import ArmLogo from '../Images/arm.png';
 import Connection from '../Components/Connection';
 
 function AutoNav() {
+  const [ coordValidated, setCoordValidated ] = useState(false);
   const [ waypointData, setWaypointData] = useState(null);
   const [ newCoord, setCoord ] = useState({
       longitude: null,
@@ -48,14 +49,18 @@ function AutoNav() {
     };
 
     const handleSubmit = (e) => {
+        const form = e.currentTarget;
         e.preventDefault();
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setCoordValidated(true);
         const coordData = {
             longitude: newCoord.longitude,
             latitude: newCoord.latitude
         };
-        if (!coordData.longitude || !coordData.latitude){
-            console.log("xd");
-        } else {
+        if (coordData.longitude && coordData.latitude) {
             axios.post("http://localhost:9000/autonav", coordData).then((response) => {
                 console.log(response.status);
                 console.log(response.data.token);
@@ -127,9 +132,15 @@ function AutoNav() {
                         );
                       })
                   }
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Control type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange}/>
-                    <Form.Control type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange}/>
+                  <Form noValidate validated={coordValidated} onSubmit={handleSubmit}>
+                    <Form.Control type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange} required/>
+                    <Form.Control.Feedback type="invalid">
+                        Please valid input.
+                    </Form.Control.Feedback>
+                    <Form.Control type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange} required/>
+                    <Form.Control.Feedback type="invalid">
+                        Please valid input.
+                    </Form.Control.Feedback>
                     <Button type="submit" >Submit</Button>
                   </Form>
                 </Col>
