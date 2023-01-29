@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Config from "../scripts/config";
-import ROSLIB, {ros} from 'roslib'; 
+import { Button } from "react-bootstrap";
 
 class CameraFeedOne extends Component {
     state = {ros: null };
@@ -9,7 +9,7 @@ class CameraFeedOne extends Component {
         super();
         this.init_connection();
 
-        // this.listen = this.listen.bind(this);
+        this.listen = this.listen.bind(this);
     }
     
     init_connection(){
@@ -58,32 +58,34 @@ class CameraFeedOne extends Component {
     }
 
     listen(event) {
-        // var cam_listener = new window.ROSLIB.Topic({
-        //     ros: this.state.ros,
-        //     name: Config.CMD_CAM_TOPIC,
-        //     messageType: "sensor_msgs/Image",
-        // });
+        console.log("listen");
+        var cam_listener = new window.ROSLIB.Topic({
+            ros: this.state.ros,
+            name: Config.CMD_CAM_TOPIC,
+            messageType: "sensor_msgs/Image",
+        });
     
-        // cam_listener.subscribe(function(m) {
-        //     document.getElementById("msg").innerHTML = m.data;
-        //   });
+        cam_listener.subscribe(function(m) {
+            // document.getElementById("msg").innerHTML = m.data;
+            console.log(m.data);
+          });
 
-        var txt_listener = new ROSLIB.Topic({
-            ros : ros,
-            name : '/txt_msg',
-            messageType : 'std_msgs/String'
-          });
+        // var listener = new window.ROSLIB.Topic({
+        //     ros : this.state.ros,
+        //     name : '/txt_msg',
+        //     messageType : 'std_msgs/String'
+        //   });
         
-          txt_listener.subscribe(function(m) {
-            document.getElementById("msg").innerHTML = m.data;
-          });
+        //   listener.subscribe(function(message) {
+        //     // document.getElementById("msg").innerHTML = message.data;
+        //     console.log('Received message on ' + listener.name + ': ' + message.data); 
+        //   });
     }
 
     render() {
-        return ( <div>
-            <h1>
-                Test message: <span id="msg"></span>
-            </h1>
+        return ( 
+            <div>
+                <Button onClick={this.listen}>Camera On</Button>
             </div>
         )
     }
