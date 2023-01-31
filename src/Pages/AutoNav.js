@@ -13,10 +13,12 @@ import RoverDataLogo from '../Images/rover-data.png';
 import PayloadLogo from '../Images/payload.png';
 import ArmLogo from '../Images/arm.png';
 import Connection from '../Components/Connection';
+import QueueFeed from '../Components/QueueFeed';
 
 function AutoNav() {
     const [ coordValidated, setCoordValidated ] = useState(false);
     const [ waypointData, setWaypointData] = useState(null);
+    const [ queueData, setQueueData ] = useState(null);
     const [ newCoord, setCoord ] = useState({
         longitude: null,
         latitude: null
@@ -38,7 +40,21 @@ function AutoNav() {
                 console.log(error.response.status);
                 console.log(error.response.headers);
             }
-        })},[])
+        })
+        axios({
+            method: "GET",
+            url:"http://localhost:9000/autonav",
+        }).then((response) => {
+            const res = response.data;
+            setQueueData(res);
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+        })
+    },[])
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -87,7 +103,24 @@ function AutoNav() {
                         <Col style={cardStyle} className="divider" xs={4}>
                             <h3 style={{ textAlign: 'center' }}>Queue List</h3>
                             <div>
-                                
+                                {queueData &&
+                                    queueData.map((queue) => {
+                                        return (
+                                            <QueueFeed queue={queue.queue} latitude={queue.latitude} longitude={queue.longitude}/>
+                                        );
+                                    })
+                                }
+                                <Form noValidate validated={coordValidated} onSubmit={handleSubmit}>
+                                    <Form.Control type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange} required/>
+                                    <Form.Control.Feedback type="invalid">
+                                        Please give valid input.
+                                    </Form.Control.Feedback>
+                                    <Form.Control type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange} required/>
+                                    <Form.Control.Feedback type="invalid">
+                                        Please give valid input.
+                                    </Form.Control.Feedback>
+                                    <Button type="submit" >Submit</Button>
+                                </Form>
                             </div>
 
                         </Col>
@@ -109,17 +142,7 @@ function AutoNav() {
                                     );
                                 })
                             }
-                            <Form noValidate validated={coordValidated} onSubmit={handleSubmit}>
-                                <Form.Control type="number" step="0.01" name="longitude" placeholder="enter longitude" onChange={handleChange} required/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please valid input.
-                                </Form.Control.Feedback>
-                                <Form.Control type="number" step="0.01" name="latitude" placeholder="enter latitude" onChange={handleChange} required/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please valid input.
-                                </Form.Control.Feedback>
-                                <Button type="submit" >Submit</Button>
-                            </Form>
+
                         </Col>
                     </Row>
                 </div>
