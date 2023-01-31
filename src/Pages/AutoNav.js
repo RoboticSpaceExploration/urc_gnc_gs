@@ -4,14 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Toast from 'react-bootstrap/Toast';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import RoseLogo from '../Images/rose-logo.png';
-import AutoNavLogo from '../Images/autonav.png';
-import RoverDataLogo from '../Images/rover-data.png';
-import PayloadLogo from '../Images/payload.png';
-import ArmLogo from '../Images/arm.png';
 import Connection from '../Components/Connection';
 import QueueFeed from '../Components/QueueFeed';
 
@@ -91,12 +85,10 @@ function AutoNav() {
                 <Col style={{ alignSelf: 'center' }} xs={10}>
                     <h1>AutoNav</h1>
                 </Col>
-
                 <Col style={{ alignSelf: 'center' }} xs={2}>
                     <Connection />
                 </Col>
             </Row>
-
             <Card style={cardStyle}>
                 <div>
                     <Row style={{ display: 'flex' }}>
@@ -122,9 +114,7 @@ function AutoNav() {
                                     <Button type="submit" >Submit</Button>
                                 </Form>
                             </div>
-
                         </Col>
-
                         <Col style={{ height: '60vh' }} >
                             <h3 style={{ textAlign: 'center' }}>Map</h3>
                             {waypointData &&
@@ -142,7 +132,6 @@ function AutoNav() {
                                     );
                                 })
                             }
-
                         </Col>
                     </Row>
                 </div>
