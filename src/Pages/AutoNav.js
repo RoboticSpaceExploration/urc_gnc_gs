@@ -87,30 +87,7 @@ function AutoNav() {
                         <Col style={cardStyle} className="divider" xs={4}>
                             <h3 style={{ textAlign: 'center' }}>Queue List</h3>
                             <div>
-                                <Toast>
-                                    <Toast.Header closeButton={false}>
-                                        <img
-                                            src={RoseLogo}
-                                            className="queue-img"
-                                            alt=""
-                                        />
-                                        <strong className="me-auto">1</strong>
-                                        <small className="text-muted">just now</small>
-                                    </Toast.Header>
-                                    <Toast.Body>Rover did thing 1</Toast.Body>
-                                </Toast>
-                                <Toast>
-                                    <Toast.Header closeButton={false}>
-                                        <img
-                                            src={AutoNavLogo}
-                                            className="queue-img"
-                                            alt=""
-                                        />
-                                        <strong className="me-auto">2</strong>
-                                        <small className="text-muted">just now</small>
-                                    </Toast.Header>
-                                    <Toast.Body>Rover did thing 2</Toast.Body>
-                                </Toast>
+                                
                             </div>
 
                         </Col>
