@@ -29,7 +29,7 @@ function Payload() {
     })
       .then((response) => {
         const res = response.data;
-        setPayloadData(res);
+        setRowData(res);
       })
       .catch((error) => {
         if (error.response) {
@@ -51,12 +51,12 @@ function Payload() {
   };
 
   const dataHandleSubmit = (e) => {
-    e.preventDefault();
-    const payData = {
-      id: newData.id,
-      data: newData.data,
-    };
-    axios.post("http://localhost:9000/payload", payData).then((response) => {
+    // ?e.preventDefault();
+    // const payData = {
+    //   id: newData.id,
+    //   data: newData.data,
+    // };
+    axios.post("http://localhost:9000/payload", rowData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
       window.location.reload();
@@ -238,16 +238,6 @@ function Payload() {
   return (
     <div id="payload-page">
       <h1>PAYLOAD</h1>
-      {payloadData &&
-        payloadData.map((data, index) => {
-          console.log(data);
-          return (
-            <div key={data.id}>
-              <h2>id: {data.id}</h2>
-              <h2>data: {data.data}</h2>
-            </div>
-          );
-        })}
       <Form onSubmit={dataHandleSubmit}>
         <Form.Control
           type="text"
@@ -313,7 +303,7 @@ function Payload() {
             defaultColDef={gridOptions.defaultColDef}
             rowData={gridOptions.rowData}
             onCellValueChanged={onCellValueChanged.bind(this)}
-            onCellEditingStopped={refreshData}
+            onCellEditingStopped={dataHandleSubmit}
             singleClickEdit={true}
 
           />
