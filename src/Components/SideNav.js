@@ -15,22 +15,22 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const popover = (
-    <Popover id="popover-basic">
-      {/*<Popover.Header as="h3">Popover right</Popover.Header>*/}
-      <Popover.Body>
-        <ListGroup variant="flush">
-          <ListGroup.Item as={'button'} action onclick="window.open('http://localhost:3000/#');">Camera Feed on Chassis</ListGroup.Item>
-          <ListGroup.Item action >Camera Feed on Arm</ListGroup.Item>
-          <ListGroup.Item action>Current GPS Coordinates</ListGroup.Item>
-          <ListGroup.Item action>Orientation</ListGroup.Item>
-          <ListGroup.Item action>Speedometer</ListGroup.Item>
-        </ListGroup>
-      </Popover.Body>
-    </Popover>
-);
-
 const SideNav = (props) => {
+  const popover = (
+      <Popover id="popover-basic">
+        {/*<Popover.Header as="h3">Popover right</Popover.Header>*/}
+        <Popover.Body>
+          <ListGroup variant="flush">
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Camera Feed on Chassis</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Camera Feed on Arm</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Current GPS Coordinates</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Orientation</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Speedometer</ListGroup.Item>
+          </ListGroup>
+        </Popover.Body>
+      </Popover>
+  );
+
   return (
       <div className="sidenav">
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
