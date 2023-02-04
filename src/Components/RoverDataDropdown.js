@@ -3,6 +3,8 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
+import GPSCoordinates from './GPSCoordinates';
+import Speedometer from './Speedometer';
 
 const RoverDataDropdown = () => {
   const [camera, cameraCheck] = useState(false);
@@ -74,6 +76,9 @@ const RoverDataDropdown = () => {
 
         <Button className="mb-2" as="input" type="reset" variant={"danger"} value="Reset" onClick={() => resetSelection()}/>
       </ButtonGroup>
+
+      <GPSCoordinates />
+      <Speedometer />
     </Container>
   ); 
 };
