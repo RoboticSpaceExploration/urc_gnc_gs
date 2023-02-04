@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Config from "../scripts/config";
-import { Button } from "react-bootstrap";
+// import { Image } from "react-bootstrap";
 
 class CameraFeedOne extends Component {
     state = {ros: null };
@@ -57,7 +57,13 @@ class CameraFeedOne extends Component {
         }
     }
 
-    listen(event) {
+    componentDidMount() {
+        setTimeout(() => {
+            this.listen();
+          }, 50000);
+    }x
+
+    listen() {
         console.log("listen");
         var cam_listener = new window.ROSLIB.Topic({
             ros: this.state.ros,
@@ -67,8 +73,16 @@ class CameraFeedOne extends Component {
     
         cam_listener.subscribe(function(m) {
             // document.getElementById("msg").innerHTML = m.data;
-            console.log(m.data);
+            // console.log(m.data);
+            console.log('Hi')
+            // document.getElementById('my_image').src = "data:image/jpg;base64," + m.data;
+            cam_listener.unsubscribe();
           });
+
+        // cam_listener.subscribe(function(message) {
+        //     document.write("<p>Received message on ${listener.name}: ${message.data}</p>"); 
+        // });
+
 
         // var listener = new window.ROSLIB.Topic({
         //     ros : this.state.ros,
@@ -85,7 +99,8 @@ class CameraFeedOne extends Component {
     render() {
         return ( 
             <div>
-                <Button onClick={this.listen}>Camera On</Button>
+                {/* <img id="my_image" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png"></img> */}
+                <h1>Hi</h1>
             </div>
         )
     }
