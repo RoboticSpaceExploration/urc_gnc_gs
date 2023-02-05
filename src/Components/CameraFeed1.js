@@ -102,7 +102,7 @@ class CameraFeedOne extends Component {
     render() {
         return ( 
             <div>
-                <img id="my_image" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">{ this.image }</img>
+                {/* <img id="my_image" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">{ this.image }</img> */}
                 <h1>Hi</h1>
             </div>
         )

@@ -5,7 +5,7 @@ const Config = {
     RECONNECTION_TIMER: 3000,
     CMD_VEL_TOPIC: "/turtle1/cmd_vel",
     // CMD_CAM_TOPIC: "/d435i/color/image_raw/compressed",
-    CMD_CAM_TOPIC: "/camera/color/image_raw"
+    CMD_CAM_TOPIC: "/camera/color/"
 };
 
 export default Config;
