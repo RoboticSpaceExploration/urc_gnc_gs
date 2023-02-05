@@ -1,19 +1,19 @@
 import React, {Component} from "react";
 import Config from "../scripts/config";
-import MJPEGCANVAS from "../scripts/m"
+import MJPEGCANVAS from "../scripts/mjpegcanvas.min";
 
 class Camera extends Component {
     state = {
-        ros: null, 
+        ros: null,
         rosbridge_address: "ws://"+ Config.ROSBRIDGE_SERVER_IP+ ":"+ Config.ROSBRIDGE_SERVER_PORT+"",
     };
 
     constructor() {
         super();
         this.init_connection();
-        this.setCamera();
+        //this.setCamera();
     }
-    
+
     init_connection(){
         this.state.ros = new window.ROSLIB.Ros();
         console.log(this.state.ros);
@@ -21,7 +21,8 @@ class Camera extends Component {
         this.state.ros.on("connection", ()=> {
             console.log("connection established in Camera Feed Component");
             console.log(this.state.ros);
-            this.setState({connected: true }); 
+            this.setState({connected: true });
+            this.setCamera();
         });
 
         this.state.ros.on("close", ()=> {
@@ -42,7 +43,7 @@ class Camera extends Component {
                     console.log("connection problem");
                 }
             }, Config.RECONNECTION_TIMER);
-
+            document.getElementById('divCamera').innerHTML = '';
         });
 
         try {
@@ -60,11 +61,12 @@ class Camera extends Component {
     }
 
     setCamera() {
-        let without_ws = this.rosbridge_address.split('ws://')[1]
-            console.log(without_ws)
-            let domain = without_ws.split('/')[0] + '/' + without_ws.split('/')[1]
-            console.log(domain)
-            let host = domain + '/cameras'
+        let without_ws = this.state.rosbridge_address.split('ws://')[1]
+            console.log("without_ws: " + without_ws);
+            let domain = without_ws.split('/')[0] + '/' + without_ws.split('/')[1];
+            console.log("domain: " + domain);
+            let host = domain + '/cameras';
+            console.log("host: " + host);
             let viewer = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
                 host: host,
@@ -73,13 +75,13 @@ class Camera extends Component {
                 // topic: '/camera/rgb/image_raw',
                 topic: Config.CMD_CAM_TOPIC,
                 ssl: true,
-            })
+            });
     }
 
     render() {
-        return ( 
-            <div>
-                <img id = 'divCamera'></img>
+        return (
+            <div className="col-md-12 col-sm-6 text-center">
+                <div id="divCamera"></div>
             </div>
         )
     }
@@ -97,7 +99,7 @@ export default Camera
 //         topic: null,
 //         message: null,
 //         rosbridge_address: 'ws://0.0.0.0:9090',
-      
+
 //     },
 //     // helper methods to connect to ROS
 //     methods: {
