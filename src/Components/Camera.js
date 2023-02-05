@@ -4,25 +4,30 @@ import MJPEGCANVAS from "../scripts/mjpegcanvas.min";
 
 class Camera extends Component {
     state = {
+        connected: false,
         ros: null,
         rosbridge_address: "ws://"+ Config.ROSBRIDGE_SERVER_IP+ ":"+ Config.ROSBRIDGE_SERVER_PORT+"",
     };
 
     constructor() {
         super();
+        // this.init_connection();
+        // this.setCamera();
+    }
+    componentDidMount() {
         this.init_connection();
-        //this.setCamera();
+        this.setCamera();
     }
 
     init_connection(){
         this.state.ros = new window.ROSLIB.Ros();
         console.log(this.state.ros);
 
-        this.state.ros.on("connection", ()=> {
+        this.state.ros.on("connection", () => {
             console.log("connection established in Camera Feed Component");
             console.log(this.state.ros);
             this.setState({connected: true });
-            this.setCamera();
+            // this.setCamera();
         });
 
         this.state.ros.on("close", ()=> {
@@ -43,7 +48,7 @@ class Camera extends Component {
                     console.log("connection problem");
                 }
             }, Config.RECONNECTION_TIMER);
-            document.getElementById('divCamera').innerHTML = '';
+            // document.getElementById('divCamera').innerHTML = '';
         });
 
         try {
@@ -61,17 +66,13 @@ class Camera extends Component {
     }
 
     setCamera() {
-        let without_ws = this.state.rosbridge_address.split('ws://')[1]
-            console.log("without_ws: " + without_ws);
-            let domain = without_ws.split('/')[0] + '/' + without_ws.split('/')[1];
-            console.log("domain: " + domain);
-            let host = domain + '/cameras';
-            console.log("host: " + host);
+            let host = "localhost";
+            console.log(this.state.ros);
             let viewer = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
                 host: host,
-                width: 320,
-                height: 240,
+                width: 200,
+                height: 200,
                 // topic: '/camera/rgb/image_raw',
                 topic: Config.CMD_CAM_TOPIC,
                 ssl: true,
@@ -80,9 +81,7 @@ class Camera extends Component {
 
     render() {
         return (
-            <div className="col-md-12 col-sm-6 text-center">
                 <div id="divCamera"></div>
-            </div>
         )
     }
 }

@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import axios from "axios";
 import Camera from "../Components/Camera";
+import CameraFeed1 from "../Components/CameraFeed1";
 
 
 
