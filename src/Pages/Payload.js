@@ -4,6 +4,8 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import axios from "axios";
+import Camera from "../Components/Camera";
+
 
 
 function Payload() {
@@ -277,6 +279,7 @@ function Payload() {
           <Card style={cardStyle}>
             <Card.Body>
               <Card.Title>Camera 1</Card.Title>
+              <Camera/>
 
             </Card.Body>
           </Card>
