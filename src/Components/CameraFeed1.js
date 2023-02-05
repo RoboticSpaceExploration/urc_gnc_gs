@@ -3,13 +3,15 @@ import Config from "../scripts/config";
 // import { Image } from "react-bootstrap";
 
 class CameraFeedOne extends Component {
-    state = {ros: null };
+    state = {
+        ros: null 
+    };
 
     constructor() {
         super();
         this.init_connection();
-
-        this.listen = this.listen.bind(this);
+        this.state.image = { src: ""};
+        // this.listen = this.listen.bind(this);
     }
     
     init_connection(){
@@ -60,7 +62,7 @@ class CameraFeedOne extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.listen();
-          }, 50000);
+          }, 1000);
     }x
 
     listen() {
@@ -71,11 +73,12 @@ class CameraFeedOne extends Component {
             messageType: "sensor_msgs/Image",
         });
     
+
         cam_listener.subscribe(function(m) {
             // document.getElementById("msg").innerHTML = m.data;
-            // console.log(m.data);
-            console.log('Hi')
-            // document.getElementById('my_image').src = "data:image/jpg;base64," + m.data;
+            console.log(m.data);
+            // console.log('Hi')
+            this.state.image.src = "data:image/jpg;base64," + m.data;
             cam_listener.unsubscribe();
           });
 
@@ -99,7 +102,7 @@ class CameraFeedOne extends Component {
     render() {
         return ( 
             <div>
-                {/* <img id="my_image" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png"></img> */}
+                <img id="my_image" style='height: 100%; width: 100%; object-fit: contain' src="assets/img/placeholder.png">{ this.image }</img>
                 <h1>Hi</h1>
             </div>
         )
