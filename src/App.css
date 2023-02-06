@@ -124,7 +124,7 @@
   left: 49%;
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease-out;
-  background: url('/src/Images/Compass.png') center
+  background: url('/src/Images/compass.png') center
   no-repeat;
   background-size: contain;
 }
