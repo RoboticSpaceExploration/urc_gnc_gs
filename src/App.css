@@ -82,3 +82,49 @@
   border-right: 0.0625rem solid #c1c0c0;
   padding-right: 0;
 }
+
+.compass {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background-color: black;
+  border: 10px solid #ab2c94;
+  margin: auto;
+}
+
+.compass > .arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 40px 30px 0 30px;
+  border-color: grey transparent transparent;
+  z-index: 1;
+}
+
+.compass-border > .compass > .arrow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  background-color: black;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.compass > .compass-circle,
+.compass > .my-point {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  background: url('/src/Images/Compass.png') center
+  no-repeat;
+  background-size: contain;
+}
