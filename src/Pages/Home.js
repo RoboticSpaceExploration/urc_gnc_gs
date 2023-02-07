@@ -10,8 +10,8 @@ class Home extends Component {
             <main>
                 <h1 className = 'text-center mt-3'> Robot Control Page</h1>
 
-                <Connection />
-                <Teleoperation/>
+                {/* <Connection /> */}
+                {/* <Teleoperation/> */}
             </main>
         );
     }
