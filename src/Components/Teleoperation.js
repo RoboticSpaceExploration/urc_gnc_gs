@@ -109,7 +109,7 @@ class Teleoperation extends Component {
             angular: {
                 x:0,
                 y:0,
-                z:0,
+                z:1,
             },
         });
         //Need to publish message on the cmd_vel topic
