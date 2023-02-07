@@ -13,7 +13,9 @@ class Camera extends Component {
         this.init_connection();
         //this.setCamera();
     }
-
+    componentDidUpdate(){
+      this.setCamera();
+    }
     init_connection(){
         this.state.ros = new window.ROSLIB.Ros();
         console.log(this.state.ros);
@@ -74,16 +76,16 @@ class Camera extends Component {
                 width: 320, 
                 height: 240,
                 // topic: '/camera/rgb/image_raw',
-                topic: Config.CMD_CAM_TOPIC,
+                topic: this.props.topic,
                 ssl: true,
             });
     }
 
     render() {
         return (
-            <div className="col-md-12 col-sm-6 text-center">
+        //   <div className="col-md-12 col-sm-6 text-center">
                 <div id="divCamera"></div>
-            </div>
+        //   </div>
         )
     }
 }
