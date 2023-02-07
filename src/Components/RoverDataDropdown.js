@@ -74,6 +74,7 @@ const RoverDataDropdown = () => {
 
         <Button className="mb-2" as="input" type="reset" variant={"danger"} value="Reset" onClick={() => resetSelection()}/>
       </ButtonGroup>
+
     </Container>
   ); 
 };

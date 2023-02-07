@@ -101,7 +101,7 @@ class Teleoperation extends Component {
         //Need to create a twist message to be sent to rosbridge
         var twist = new window.ROSLIB.Message({
             linear: {
-                x:20,
+                x:0,
                 y:0,
                 z:0,
             },
