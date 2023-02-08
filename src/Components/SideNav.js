@@ -41,7 +41,7 @@ const SideNav = (props) => {
                     as={NavLink}
                     className="active"
                     exact="true"
-                    to="/home"
+                    to="/"
                 >
                   <Image src={RoseLogo} className="sidenav-logos" />
                 </Nav.Item>
@@ -51,7 +51,6 @@ const SideNav = (props) => {
                     as={NavLink}
                     className="active"
                     exact="true"
-                    to="/home"
                 >
                   <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                     {/*<Button variant="link" >*/}

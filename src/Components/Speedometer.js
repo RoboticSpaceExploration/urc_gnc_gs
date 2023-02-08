@@ -5,7 +5,6 @@ import SideNav from './SideNav';
 const Speedometer = (props) => {
   return(
       <div style={{ backgroundColor: '#282c34' }}>
-        <SideNav/>
         <GaugeChart
             id="speedometer-gauge"
             nrOfLevels={20}
