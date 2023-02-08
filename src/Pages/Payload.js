@@ -3,13 +3,14 @@ import { Button, Col, Row, Container } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { Rnd } from "react-rnd";
 import axios from "axios";
 import Camera from "../Components/Camera";
 import Config from '../scripts/config';
 
 
 function Payload() {
-  const cardStyle = { height: "40vh", width: "20vw" };
+  const cardStyle = { height: "40vh", width: "20vw"};
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
 
   const [payloadData, setPayloadData] = useState(null);
@@ -256,28 +257,28 @@ function Payload() {
 
         </Row>
       </Container>
-        <Container>
-          <Button onClick={addRow}>Add Entry</Button>
-          <Button onClick={removeRow}>Remove Previous Entry</Button>
-          <Row style={rowStyle}>
-            <div className="ag-theme-alpine"
-              style={{ height: "40vh", width: "75vw", float: "right" }}>
-              <AgGridReact
-                columnDefs={gridOptions.columnDefs}
-                defaultColDef={gridOptions.defaultColDef}
-                rowData={gridOptions.rowData}
-                onCellValueChanged={onCellValueChanged.bind(this)}
-                onCellEditingStopped={dataHandleSubmit}
-                singleClickEdit={true}
+      <Container>
+        <Button onClick={addRow}>Add Entry</Button>
+        <Button onClick={removeRow}>Remove Previous Entry</Button>
+        <Row style={rowStyle}>
+          <div className="ag-theme-alpine"
+               style={{ height: "40vh", width: "75vw", float: "right" }}>
+            <AgGridReact
+              columnDefs={gridOptions.columnDefs}
+              defaultColDef={gridOptions.defaultColDef}
+              rowData={gridOptions.rowData}
+              onCellValueChanged={onCellValueChanged.bind(this)}
+              onCellEditingStopped={dataHandleSubmit}
+              singleClickEdit={true}
 
-              />
+            />
 
-            </div>
+          </div>
 
-          </Row>
-        </Container>
+        </Row>
+      </Container>
     </div>
-);
+  );
 }
 
 
