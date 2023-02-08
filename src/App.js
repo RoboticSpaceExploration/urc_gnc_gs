@@ -9,13 +9,11 @@ import React from 'react';
 import GPSCoordinates from './Components/GPSCoordinates';
 import Speedometer from './Components/Speedometer';
 import Compass from './Components/Compass';
-import SideNav from "./Components/SideNav";
 
 function App() {
   return (
     <Router>
       <div className="main">
-          <SideNav/>
         <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
             <Route path="/payload" element={<Payload/>} />
