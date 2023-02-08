@@ -10,70 +10,21 @@ import AutoNavLogo from "../Images/autonav.png";
 import RoverDataLogo from "../Images/rover-data.png";
 import PayloadLogo from "../Images/payload.png";
 import ArmLogo from "../Images/arm.png";
-import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Camera from './Camera';
-import CameraFeed1 from './CameraFeed1';
-import GPSCoordinates from './GPSCoordinates';
-import Compass from './Compass';
-import Speedometer from './Speedometer';
 
 const SideNav = (props) => {
   const popover = (
       <Popover id="popover-basic">
         <Popover.Body>
-          {/*<ListGroup variant="flush">*/}
-          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','cameraChassis', 'popup')}>Camera Feed on Chassis</ListGroup.Item>*/}
-          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','cameraArm', 'popup')}>Camera Feed on Arm</ListGroup.Item>*/}
-          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','gps', 'popup')}>Current GPS Coordinates</ListGroup.Item>*/}
-          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','orientation', 'popup')}>Orientation</ListGroup.Item>*/}
-          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','speedometer', 'popup')}>Speedometer</ListGroup.Item>*/}
-          {/*</ListGroup>*/}
-          <BrowserRouter>
-            <Routes>
-              <Route exact path='/' element={<ul>
-                <br />
-                <li>
-                  <Link to='roverdata/chassiscam' target='_blank'>
-                    Camera Feed on Chassis
-                  </Link>
-                </li>
-                <br />
-                <li>
-                  <Link to='roverdata/armcam' target='_blank'>
-                    Camera Feed on Arm
-                  </Link>
-                </li>
-                <br />
-                <li>
-                  <Link to='roverdata/gps' target='_blank'>
-                    Current GPS Coordinates
-                  </Link>
-                </li>
-                <br />
-                <li>
-                  <Link to='roverdata/orientation' target='_blank'>
-                    Orientation
-                  </Link>
-                </li>
-                <br />
-                <li>
-                  <Link to='roverdata/speedometer' target='_blank'>
-                    Speedometer
-                  </Link>
-                </li>
-              </ul>}>
-              </Route>
-              <Route exact path='/roverdata/chassiscam' element={<Camera />}></Route>
-              <Route exact path='/roverdata/armcam' element={<CameraFeed1 />}></Route>
-              <Route exact path='/roverdata/gps' element={<GPSCoordinates/>}></Route>
-              <Route exact path='/roverdata/orientation' element={<Compass />}></Route>
-              <Route exact path='/roverdata/speedometer' element={<Speedometer />}></Route>
-            </Routes>
-          </BrowserRouter>
+          <ListGroup variant="flush">
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/chassiscam','cameraChassis', 'popup')}>Camera Feed on Chassis</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/armcam','cameraArm', 'popup')}>Camera Feed on Arm</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/gps','gps', 'popup')}>Current GPS Coordinates</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/orientation','orientation', 'popup')}>Orientation</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/speedometer','speedometer', 'popup')}>Speedometer</ListGroup.Item>
+          </ListGroup>
         </Popover.Body>
       </Popover>
   );
@@ -97,9 +48,15 @@ const SideNav = (props) => {
                 <Nav.Item
                     key="second"
                     id="navbar-rover-data"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    to="/home"
                 >
                   <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                  <Image src={RoverDataLogo} className="sidenav-logos" />
+                    {/*<Button variant="link" >*/}
+                      <Image src={RoverDataLogo} className="sidenav-logos" />
+                    {/*</Button>*/}
                   </OverlayTrigger>
                 </Nav.Item>
                 <Nav.Item

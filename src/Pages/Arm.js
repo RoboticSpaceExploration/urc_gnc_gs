@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
+import SideNav from '../Components/SideNav';
 
 class Arm extends React.Component {
 
@@ -10,6 +11,7 @@ class Arm extends React.Component {
 
     return (
         <Container style={containerStyle}>
+          <SideNav/>
           <Row style={rowStyle}>
             <h1>ARM</h1>
             <Col>
