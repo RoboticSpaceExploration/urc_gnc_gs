@@ -7,6 +7,7 @@ import RoverData from './Pages/RoverData.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
+import React from 'react';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div className="main">
         <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
-	          <Route path="/roverdata" element={<RoverData/>} />
+	          {/*<Route path="/roverdata" element={<RoverData/>} />*/}
 	          <Route path="/payload" element={<Payload/>} />
 	          <Route path="/arm" element={<Arm/>} />
             <Route path="/home" element={<Home/>} />

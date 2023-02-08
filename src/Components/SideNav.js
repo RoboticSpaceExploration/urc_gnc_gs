@@ -14,19 +14,66 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Camera from './Camera';
+import CameraFeed1 from './CameraFeed1';
+import GPSCoordinates from './GPSCoordinates';
+import Compass from './Compass';
+import Speedometer from './Speedometer';
 
 const SideNav = (props) => {
   const popover = (
       <Popover id="popover-basic">
-        {/*<Popover.Header as="h3">Popover right</Popover.Header>*/}
         <Popover.Body>
-          <ListGroup variant="flush">
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Camera Feed on Chassis</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Camera Feed on Arm</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Current GPS Coordinates</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Orientation</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','roverData', 'popup')}>Speedometer</ListGroup.Item>
-          </ListGroup>
+          {/*<ListGroup variant="flush">*/}
+          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','cameraChassis', 'popup')}>Camera Feed on Chassis</ListGroup.Item>*/}
+          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','cameraArm', 'popup')}>Camera Feed on Arm</ListGroup.Item>*/}
+          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','gps', 'popup')}>Current GPS Coordinates</ListGroup.Item>*/}
+          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','orientation', 'popup')}>Orientation</ListGroup.Item>*/}
+          {/*  <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata','speedometer', 'popup')}>Speedometer</ListGroup.Item>*/}
+          {/*</ListGroup>*/}
+          <BrowserRouter>
+            <Routes>
+              <Route exact path='/' element={<ul>
+                <br />
+                <li>
+                  <Link to='roverdata/chassiscam' target='_blank'>
+                    Camera Feed on Chassis
+                  </Link>
+                </li>
+                <br />
+                <li>
+                  <Link to='roverdata/armcam' target='_blank'>
+                    Camera Feed on Arm
+                  </Link>
+                </li>
+                <br />
+                <li>
+                  <Link to='roverdata/gps' target='_blank'>
+                    Current GPS Coordinates
+                  </Link>
+                </li>
+                <br />
+                <li>
+                  <Link to='roverdata/orientation' target='_blank'>
+                    Orientation
+                  </Link>
+                </li>
+                <br />
+                <li>
+                  <Link to='roverdata/speedometer' target='_blank'>
+                    Speedometer
+                  </Link>
+                </li>
+              </ul>}>
+              </Route>
+              <Route exact path='/roverdata/chassiscam' element={<Camera />}></Route>
+              <Route exact path='/roverdata/armcam' element={<CameraFeed1 />}></Route>
+              <Route exact path='/roverdata/gps' element={<GPSCoordinates/>}></Route>
+              <Route exact path='/roverdata/orientation' element={<Compass />}></Route>
+              <Route exact path='/roverdata/speedometer' element={<Speedometer />}></Route>
+            </Routes>
+          </BrowserRouter>
         </Popover.Body>
       </Popover>
   );
@@ -49,6 +96,14 @@ const SideNav = (props) => {
                 </Nav.Item>
                 <Nav.Item
                     key="second"
+                    id="navbar-rover-data"
+                >
+                  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                  <Image src={RoverDataLogo} className="sidenav-logos" />
+                  </OverlayTrigger>
+                </Nav.Item>
+                <Nav.Item
+                    key="third"
                     id="navbar-autonav"
                     as={NavLink}
                     className="active"
@@ -58,7 +113,7 @@ const SideNav = (props) => {
                   <Image src={AutoNavLogo} className="sidenav-logos" />
                 </Nav.Item>
                 <Nav.Item
-                    key="third"
+                    key="fourth"
                     id="navbar-payload"
                     as={NavLink}
                     className="active"
@@ -68,7 +123,7 @@ const SideNav = (props) => {
                   <Image src={PayloadLogo} className="sidenav-logos" />
                 </Nav.Item>
                 <Nav.Item
-                    key="fourth"
+                    key="fifth"
                     id="navbar-arm"
                     as={NavLink}
                     className="active"
@@ -76,21 +131,6 @@ const SideNav = (props) => {
                     to="/arm"
                 >
                   <Image src={ArmLogo} className="sidenav-logos" />
-                </Nav.Item>
-                <Nav.Item
-                    key="fifth"
-                    id="navbar-rover-data"
-                    as={NavLink}
-                    className="active"
-                    exact="true"
-                    to="/roverdata"
-                >
-
-                  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                    <Button variant="link" >
-                      <Image src={RoverDataLogo} className="sidenav-logos rounded-circle" />
-                    </Button>
-                  </OverlayTrigger>
                 </Nav.Item>
               </Nav>
             </Col>
