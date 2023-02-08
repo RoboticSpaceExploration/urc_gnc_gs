@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
+import Camera from "../Components/Camera";
+import Config from '../scripts/config';
 
 class Arm extends React.Component {
 
@@ -16,7 +18,7 @@ class Arm extends React.Component {
               <Card style={cardStyle}>
                 <Card.Body>
                   <Card.Title>Camera 1</Card.Title>
-
+                  <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
                 </Card.Body>
               </Card>
             </Col>
@@ -25,7 +27,7 @@ class Arm extends React.Component {
               <Card style={cardStyle}>
                 <Card.Body>
                   <Card.Title>Camera 2</Card.Title>
-
+                  <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
                 </Card.Body>
               </Card>
             </Col>
