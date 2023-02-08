@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Col, Row, Container } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { Rnd } from "react-rnd";
 import axios from "axios";
 import Camera from "../Components/Camera";
-
+import Config from '../scripts/config';
 
 
 function Payload() {
-  const cardStyle = { height: "40vh", width: "20vw" };
-  const titleStyle = { textAlign: "center", marginBottom: "10px" };
+  const cardStyle = { height: "40vh", width: "20vw"};
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
 
   const [payloadData, setPayloadData] = useState(null);
@@ -31,7 +31,7 @@ function Payload() {
     })
       .then((response) => {
         const res = response.data;
-        setPayloadData(res);
+        setRowData(res);
       })
       .catch((error) => {
         if (error.response) {
@@ -43,7 +43,6 @@ function Payload() {
   }, []);
 
 
-
   const dataHandleChange = (e) => {
     const value = e.target.value;
     setData({
@@ -53,12 +52,12 @@ function Payload() {
   };
 
   const dataHandleSubmit = (e) => {
-    e.preventDefault();
-    const payData = {
-      id: newData.id,
-      data: newData.data,
-    };
-    axios.post("http://localhost:9000/payload", payData).then((response) => {
+    // ?e.preventDefault();
+    // const payData = {
+    //   id: newData.id,
+    //   data: newData.data,
+    // };
+    axios.post("http://localhost:9000/payload", rowData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
       window.location.reload();
@@ -222,7 +221,16 @@ function Payload() {
   const addRow = () => {
     setRowData([
       ...rowData,
-      { sample_number: "--enter value--", mineral_detection_time: "--enter value--", metal_detection: "--enter value--", eth: "--enter value--", coo: "--enter value--", conclusion: "--enter value--", high_value_sample: "--enter value--", notes: "--enter value--" }
+      {
+        sample_number: "--enter value--",
+        mineral_detection_time: "--enter value--",
+        metal_detection: "--enter value--",
+        eth: "--enter value--",
+        coo: "--enter value--",
+        conclusion: "--enter value--",
+        high_value_sample: "--enter value--",
+        notes: "--enter value--"
+      }
     ])
   }
 
@@ -232,105 +240,43 @@ function Payload() {
       ...rowData]);
   }
 
-  const refreshData = () => {
-    setRowData([
-      ...rowData]);
-  }
-
   return (
     <div id="payload-page">
       <h1>PAYLOAD</h1>
-      {payloadData &&
-        payloadData.map((data, index) => {
-          console.log(data);
-          return (
-            <div key={data.id}>
-              <h2>id: {data.id}</h2>
-              <h2>data: {data.data}</h2>
-            </div>
-          );
-        })}
-      <Form onSubmit={dataHandleSubmit}>
-        <Form.Control
-          type="text"
-          name="data"
-          placeholder="enter data"
-          onChange={dataHandleChange}
-        />
-        <Button type="submit" variant="secondary">
-          Submit
-        </Button>
-      </Form>
-      <Form onSubmit={tempHandleSubmit}>
-        <Form.Control
-          type="number"
-          step="0.01"
-          name="temperature"
-          placeholder="enter temperature"
-          onChange={tempHandleChange}
-        />
-        <Button type="submit" variant="secondary">
-          Submit
-        </Button>
-      </Form>
-      <br />
-      <Row style={rowStyle}>
-        <Col>
-          <Card style={cardStyle}>
-            <Card.Body>
-              <Card.Title>Camera 1</Card.Title>
-              <Camera/>
+      <Container>
+        <Row style={rowStyle} xs="auto">
+          <Col>
+            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+          </Col>
+          <Col>
+            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+          </Col>
+          <Col>
+            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+          </Col>
 
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card style={cardStyle}>
-            <Card.Body>
-              <Card.Title>Camera 2</Card.Title>
+        </Row>
+      </Container>
+      <Container>
+        <Button onClick={addRow}>Add Entry</Button>
+        <Button onClick={removeRow}>Remove Previous Entry</Button>
+        <Row style={rowStyle}>
+          <div className="ag-theme-alpine"
+               style={{ height: "40vh", width: "75vw", float: "right" }}>
+            <AgGridReact
+              columnDefs={gridOptions.columnDefs}
+              defaultColDef={gridOptions.defaultColDef}
+              rowData={gridOptions.rowData}
+              onCellValueChanged={onCellValueChanged.bind(this)}
+              onCellEditingStopped={dataHandleSubmit}
+              singleClickEdit={true}
 
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card style={cardStyle}>
-            <Card.Body>
-              <Card.Title>Camera 3</Card.Title>
+            />
 
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+          </div>
 
-      <Button onClick={addRow}>Add Entry</Button>
-      <Button onClick={removeRow}>Remove Previous Entry</Button>
-      <Row style={rowStyle}>
-        <div
-          className="ag-theme-alpine"
-          style={{ height: "40vh", width: "75vw", float: "right" }}
-        >
-
-
-          <AgGridReact
-            columnDefs={gridOptions.columnDefs}
-            defaultColDef={gridOptions.defaultColDef}
-            rowData={gridOptions.rowData}
-            onCellValueChanged={onCellValueChanged.bind(this)}
-            onCellEditingStopped={refreshData}
-            singleClickEdit={true}
-
-          />
-
-        </div>
-        {rowData &&
-          rowData.map((data, index) => {
-            return (
-              <div key={index}>
-                <p>Added Sample {data.sample_number}</p>
-              </div>
-            );
-          })}
-      </Row>
+        </Row>
+      </Container>
     </div>
   );
 }
