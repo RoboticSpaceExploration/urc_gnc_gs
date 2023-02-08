@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Config from "../scripts/config";
 import MJPEGCANVAS from "../scripts/mjpegcanvas.min";
+import { Rnd } from "react-rnd";
 
 class Camera extends Component {
     state = {
@@ -13,7 +14,10 @@ class Camera extends Component {
         this.init_connection();
         //this.setCamera();
     }
-
+    //used to display camera feed
+    componentDidUpdate(){
+      this.setCamera();
+    }
     init_connection(){
         this.state.ros = new window.ROSLIB.Ros();
         console.log(this.state.ros);
@@ -71,19 +75,18 @@ class Camera extends Component {
             let viewer = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
                 host: host,
-                width: 320, 
+                width: 320,
                 height: 240,
                 // topic: '/camera/rgb/image_raw',
-                topic: Config.CMD_CAM_TOPIC,
+                topic: this.props.topic,
                 ssl: true,
             });
     }
 
     render() {
         return (
-            <div className="col-md-12 col-sm-6 text-center">
-                <div id="divCamera"></div>
-            </div>
+            <div id="divCamera"></div>
+
         )
     }
 }
