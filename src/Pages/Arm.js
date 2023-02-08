@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
-import SideNav from '../Components/SideNav';
+import Camera from "../Components/Camera";
+import Config from '../scripts/config';
 
 class Arm extends React.Component {
 
@@ -11,26 +12,10 @@ class Arm extends React.Component {
 
     return (
         <Container style={containerStyle}>
-          <SideNav/>
           <Row style={rowStyle}>
             <h1>ARM</h1>
-            <Col>
-              <Card style={cardStyle}>
-                <Card.Body>
-                  <Card.Title>Camera 1</Card.Title>
-
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col>
-              <Card style={cardStyle}>
-                <Card.Body>
-                  <Card.Title>Camera 2</Card.Title>
-
-                </Card.Body>
-              </Card>
-            </Col>
+              <Camera topic={Config.CMD_CAM_TOPIC}/>
+              <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
           </Row>
           <Row style={rowStyle}>
             <Col>
