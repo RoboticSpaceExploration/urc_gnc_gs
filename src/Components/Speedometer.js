@@ -1,5 +1,6 @@
 import React from "react";
 import GaugeChart from 'react-gauge-chart';
+import SideNav from './SideNav';
 
 const Speedometer = (props) => {
   return(

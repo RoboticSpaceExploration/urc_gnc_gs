@@ -7,6 +7,7 @@ import { Rnd } from "react-rnd";
 import axios from "axios";
 import Camera from "../Components/Camera";
 import Config from '../scripts/config';
+import SideNav from '../Components/SideNav';
 
 
 function Payload() {
@@ -244,6 +245,7 @@ function Payload() {
     <div id="payload-page">
       <h1>PAYLOAD</h1>
       <Container>
+        <SideNav/>
         <Row style={rowStyle} xs="auto">
           <Col>
             <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
