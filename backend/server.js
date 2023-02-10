@@ -165,10 +165,11 @@ app.put("/payload/:id", (req, res) => {
   }
 });
 
-app.delete("/payload/:id", (req, res) => {
-  const payloadId = Number(req.params.id);
+app.delete("/payload/:sample_number", (req, res) => {
+  const rowId = req.params.sample_number;
+  console.log(rowId);
   const newPayloadData = payloadData.filter(
-      (payload) => payload.id !== payloadId
+      (payload) => payload.sample_number !== rowId
   );
 
   if (!newPayloadData) {

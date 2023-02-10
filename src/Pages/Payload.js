@@ -236,9 +236,15 @@ function Payload() {
   }
 
   const removeRow = () => {
-    rowData.pop();
+    let deletedRow = rowData.pop();
+    console.log(deletedRow);
     setRowData([
       ...rowData]);
+    axios.delete(`http://localhost:9000/payload/${deletedRow.sample_number}`).then((response) => {
+      console.log(response.status);
+      console.log(response.data.token);
+      // window.location.reload();
+    });
   }
 
   return (
