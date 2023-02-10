@@ -26,10 +26,6 @@ let waypoints = [
 
 //sample payload data
 let payloadData = [
-  {
-    id: 1,
-    data: "this",
-  },
 ];
 
 //sample queue list
@@ -139,15 +135,16 @@ app.get("/payload/:id", (req, res) => {
   }
 });
 
-app.post("/payload", body("data").notEmpty(), (req, res) => {
+app.post("/payload", (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
   const newDataPoint = req.body;
-  newDataPoint.id = payloadData.length + 1;
-  payloadData.push(newDataPoint);
+  console.log(newDataPoint);
+  // newDataPoint.id = payloadData.length + 1;
+  payloadData = newDataPoint;
   res.json(payloadData);
 });
 
