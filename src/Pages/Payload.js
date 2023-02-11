@@ -236,15 +236,17 @@ function Payload() {
   }
 
   const removeRow = () => {
-    let deletedRow = rowData.pop();
-    console.log(deletedRow);
-    setRowData([
-      ...rowData]);
-    axios.delete(`http://localhost:9000/payload/${deletedRow.sample_number}`).then((response) => {
-      console.log(response.status);
-      console.log(response.data.token);
-      // window.location.reload();
-    });
+    if (rowData.length > 0) {
+      let deletedRow = rowData.pop();
+      console.log(deletedRow);
+      setRowData([
+        ...rowData]);
+      axios.delete(`http://localhost:9000/payload/${deletedRow.sample_number}`).then((response) => {
+        console.log(response.status);
+        console.log(response.data.token);
+        // window.location.reload();
+      });
+    }
   }
 
   return (
