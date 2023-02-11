@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
+import SideNav from '../Components/SideNav';
 
 function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
@@ -82,6 +83,7 @@ function AutoNav() {
 
   return (
     <Container style={{ marginTop: "10px" }}>
+      <SideNav/>
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
