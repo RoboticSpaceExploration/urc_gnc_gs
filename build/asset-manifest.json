@@ -1,21 +1,22 @@
 {
-  "files": {
-    "main.css": "/static/css/main.1d48a6ad.css",
-    "main.js": "/static/js/main.64b3acba.js",
-    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
-    "static/media/rose-logo.png": "/static/media/rose-logo.af9962a5cca1cdf774f9.png",
-    "static/media/payload.png": "/static/media/payload.ecc1631b452d8881e670.png",
-    "static/media/autonav.png": "/static/media/autonav.0f7e53ef29a23ec9c541.png",
-    "static/media/compass.png": "/static/media/compass.c2f593bdd0d228c5ea71.png",
-    "static/media/arm.png": "/static/media/arm.6b7e9343f23059c32e31.png",
-    "static/media/rover-data.png": "/static/media/rover-data.c832f3af6a7d486d4f0c.png",
-    "index.html": "/index.html",
-    "main.1d48a6ad.css.map": "/static/css/main.1d48a6ad.css.map",
-    "main.64b3acba.js.map": "/static/js/main.64b3acba.js.map",
-    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.1d48a6ad.css",
-    "static/js/main.64b3acba.js"
-  ]
+  "main.css": "/static/css/main.bb8a98df.chunk.css",
+  "main.js": "/static/js/main.11d2318a.chunk.js",
+  "main.js.map": "/static/js/main.11d2318a.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.789632c9.js",
+  "runtime~main.js.map": "/static/js/runtime~main.789632c9.js.map",
+  "static/css/2.38438801.chunk.css": "/static/css/2.38438801.chunk.css",
+  "static/js/2.3d092f88.chunk.js": "/static/js/2.3d092f88.chunk.js",
+  "static/js/2.3d092f88.chunk.js.map": "/static/js/2.3d092f88.chunk.js.map",
+  "static/js/3.ec39fc1c.chunk.js": "/static/js/3.ec39fc1c.chunk.js",
+  "static/js/3.ec39fc1c.chunk.js.map": "/static/js/3.ec39fc1c.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.32fa0e882bd2d0f4c7e57b6ab8b399e3.js": "/precache-manifest.32fa0e882bd2d0f4c7e57b6ab8b399e3.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/2.38438801.chunk.css.map": "/static/css/2.38438801.chunk.css.map",
+  "static/css/main.bb8a98df.chunk.css.map": "/static/css/main.bb8a98df.chunk.css.map",
+  "static/media/arm.png": "/static/media/arm.ceb791f4.png",
+  "static/media/autonav.png": "/static/media/autonav.7f1b7480.png",
+  "static/media/payload.png": "/static/media/payload.49729f10.png",
+  "static/media/rose-logo.png": "/static/media/rose-logo.44327bac.png",
+  "static/media/rover-data.png": "/static/media/rover-data.2c9afe53.png"
 }
