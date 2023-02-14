@@ -80,7 +80,7 @@ app.get("/waypoints/:id", (req, res) => {
   }
 });
 
-app.post("/waypoints", (req, res) => {
+app.post("/waypoints", body("longitude").exists({ checkNull: true }), body("lattitude").exists({ checkNull: true}),(req, res) => {
   const newWaypoint = req.body;
   newWaypoint.id = waypoints.length + 1;
   waypoints.push(newWaypoint);
