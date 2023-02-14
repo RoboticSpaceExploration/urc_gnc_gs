@@ -142,36 +142,27 @@ app.post("/payload", (req, res) => {
   }
 
   const newDataPoint = req.body;
-  console.log(newDataPoint);
-  // newDataPoint.id = payloadData.length + 1;
-  payloadData = newDataPoint;
+  payloadData.push(newDataPoint);
   res.json(payloadData);
 });
 
-app.put("/payload/:id", (req, res) => {
-  const payloadId = Number(req.params.id);
-  const body = req.body;
-  const payload = payloadData.find((payload) => payload.id === payloadId);
-  const index = payloadData.indexOf(payload);
-
-  if (!payload) {
-    res.status(500).send("waypoint not found");
-  } else {
-    const updated = { ...payload, ...body };
-
-    payloadData[index] = updated;
-
-    res.send(updated);
+app.put("/payload/", (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const newPayloadData = req.body;
+  console.log(newPayloadData);
+  payloadData = newPayloadData;
+  res.json(payloadData);
 });
 
 app.delete("/payload/:sample_number", (req, res) => {
-  const rowId = req.params.sample_number;
-  console.log(rowId);
+  const rowId = Number(req.params.sample_number);
   const newPayloadData = payloadData.filter(
       (payload) => payload.sample_number !== rowId
   );
-
   if (!newPayloadData) {
     res.status(500).send("not found");
   } else {

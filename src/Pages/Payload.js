@@ -53,15 +53,10 @@ function Payload() {
   };
 
   const dataHandleSubmit = (e) => {
-    // ?e.preventDefault();
-    // const payData = {
-    //   id: newData.id,
-    //   data: newData.data,
-    // };
-    axios.post("http://localhost:9000/payload", rowData).then((response) => {
+    axios.put(`http://localhost:9000/payload/`, rowData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
-      window.location.reload();
+      // window.location.reload();
     });
   };
 
@@ -203,6 +198,7 @@ function Payload() {
       },
 
 
+
     ],
     defaultColDef: {
       flex: 1,
@@ -219,23 +215,28 @@ function Payload() {
     console.log('Current data holds ', rowData);
   };
 
-  const addRow = () => {
+  function addRow() {
+    const payData = {
+      sample_number: rowData.length + 1,
+      mineral_detection_time: "--enter value--",
+      metal_detection: "--enter value--",
+      eth: "--enter value--",
+      coo: "--enter value--",
+      conclusion: "--enter value--",
+      high_value_sample: "--enter value--",
+      notes: "--enter value--"
+    };
     setRowData([
-      ...rowData,
-      {
-        sample_number: "--enter value--",
-        mineral_detection_time: "--enter value--",
-        metal_detection: "--enter value--",
-        eth: "--enter value--",
-        coo: "--enter value--",
-        conclusion: "--enter value--",
-        high_value_sample: "--enter value--",
-        notes: "--enter value--"
-      }
-    ])
+        ...rowData,
+        payData]);
+    axios.post("http://localhost:9000/payload", payData).then((response) => {
+      console.log(response.status);
+      console.log(response.data.token);
+      // window.location.reload();
+    });
   }
 
-  const removeRow = () => {
+  function removeRow() {
     if (rowData.length > 0) {
       let deletedRow = rowData.pop();
       console.log(deletedRow);
@@ -248,7 +249,6 @@ function Payload() {
       });
     }
   }
-
   return (
     <div id="payload-page">
       <h1>PAYLOAD</h1>
@@ -280,7 +280,6 @@ function Payload() {
               onCellValueChanged={onCellValueChanged.bind(this)}
               onCellEditingStopped={dataHandleSubmit}
               singleClickEdit={true}
-
             />
 
           </div>
