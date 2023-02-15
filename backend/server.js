@@ -46,7 +46,6 @@ app.use((req, res, next) => {
   console.log('Time at server call: ', Date.now());
   next();
 });
-
 app.use('/request-type', (req, res, next) => {
   console.log('request type: ', req.method);
   next();
@@ -81,7 +80,7 @@ app.get("/waypoints/:id", (req, res) => {
   }
 });
 
-app.post("/waypoints", (req, res) => {
+app.post("/waypoints", body("longitude").exists({ checkNull: true }), body("lattitude").exists({ checkNull: true}),(req, res) => {
   const newWaypoint = req.body;
   newWaypoint.id = waypoints.length + 1;
   waypoints.push(newWaypoint);
@@ -109,7 +108,7 @@ app.put("/waypoints/:id", (req, res) => {
 app.delete("/waypoints/:id", (req, res) => {
   const waypointId = Number(req.params.id);
   const newWaypoints = waypoints.filter(
-    (waypoint) => waypoint.id !== waypointId
+      (waypoint) => waypoint.id !== waypointId
   );
 
   if (!newWaypoints) {
@@ -143,35 +142,27 @@ app.post("/payload", (req, res) => {
   }
 
   const newDataPoint = req.body;
-  console.log(newDataPoint);
-  // newDataPoint.id = payloadData.length + 1;
-  payloadData = newDataPoint;
+  payloadData.push(newDataPoint);
   res.json(payloadData);
 });
 
-app.put("/payload/:id", (req, res) => {
-  const payloadId = Number(req.params.id);
-  const body = req.body;
-  const payload = payloadData.find((payload) => payload.id === payloadId);
-  const index = payloadData.indexOf(payload);
-
-  if (!payload) {
-    res.status(500).send("waypoint not found");
-  } else {
-    const updated = { ...payload, ...body };
-
-    payloadData[index] = updated;
-
-    res.send(updated);
+app.put("/payload/", (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const newPayloadData = req.body;
+  console.log(newPayloadData);
+  payloadData = newPayloadData;
+  res.json(payloadData);
 });
 
-app.delete("/payload/:id", (req, res) => {
-  const payloadId = Number(req.params.id);
+app.delete("/payload/:sample_number", (req, res) => {
+  const rowId = Number(req.params.sample_number);
   const newPayloadData = payloadData.filter(
-    (payload) => payload.id !== payloadId
+      (payload) => payload.sample_number !== rowId
   );
-
   if (!newPayloadData) {
     res.status(500).send("not found");
   } else {
@@ -185,26 +176,26 @@ app.get("/temp", (req, res) => {
 });
 
 app.post(
-  "/temp",
-  body("temperature").exists({ checkNull: true }),
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    "/temp",
+    body("temperature").exists({ checkNull: true }),
+    (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const newTemp = req.body;
+
+      if (tempList.length === 0) {
+        start = Math.floor(Date.now() / 60000);
+      }
+
+      newTemp.time = Math.floor(Date.now() / 60000) - start;
+      newTemp.id = tempList.length + 1;
+
+      tempList.push(newTemp);
+      res.json(tempList);
     }
-
-    const newTemp = req.body;
-
-    if (tempList.length === 0) {
-      start = Math.floor(Date.now() / 60000);
-    }
-
-    newTemp.time = Math.floor(Date.now() / 60000) - start;
-    newTemp.id = tempList.length + 1;
-
-    tempList.push(newTemp);
-    res.json(tempList);
-  }
 );
 
 app.get("/autonav", (req, res) => {
@@ -212,21 +203,21 @@ app.get("/autonav", (req, res) => {
 });
 
 app.post(
-  "/autonav",
-  body("latitude").exists({ checkNull: true }),
-  body("longitude").exists({ checkNull: true }),
-  (req, res) => {
-    //error check; returns error status if there are any
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    "/autonav",
+    body("latitude").exists({ checkNull: true }),
+    body("longitude").exists({ checkNull: true }),
+    (req, res) => {
+      //error check; returns error status if there are any
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-    const newCoordinates = req.body;
-    newCoordinates.queue = queueList.length + 1;
-    queueList.push(newCoordinates);
-    res.json(queueList);
-  }
+      const newCoordinates = req.body;
+      newCoordinates.queue = queueList.length + 1;
+      queueList.push(newCoordinates);
+      res.json(queueList);
+    }
 );
 
 app.delete("/autonav/:queue", (req, res) => {
@@ -235,7 +226,7 @@ app.delete("/autonav/:queue", (req, res) => {
 
   //creates new list without the queue
   const newQueueList = queueList.filter(
-    (queueItem) => queueItem.queue !== queueId
+      (queueItem) => queueItem.queue !== queueId
   );
 
   //check to see if newQueueList exists

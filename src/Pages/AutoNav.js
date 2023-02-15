@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
+import SideNav from '../Components/SideNav';
 
 function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
@@ -16,6 +17,7 @@ function AutoNav() {
     longitude: null,
     latitude: null,
   });
+  const [queueValidated, setValidated] = useState(false);
 
   const cardStyle = { height: "70vh" };
   const titleStyle = { textAlign: "center", marginBottom: "10px" };
@@ -62,7 +64,12 @@ function AutoNav() {
   };
 
   const handleSubmit = (e) => {
+    const form = e.currentTarget;
     e.preventDefault();
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+    setValidated(true);
     const coordData = {
       longitude: newCoord.longitude,
       latitude: newCoord.latitude,
@@ -82,6 +89,7 @@ function AutoNav() {
 
   return (
     <Container style={{ marginTop: "10px" }}>
+      <SideNav/>
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
@@ -108,21 +116,29 @@ function AutoNav() {
                     />
                   );
                 })}
-              <Form onSubmit={handleSubmit}>
+              <Form noValidate validated={queueValidated} onSubmit={handleSubmit}>
                 <Form.Control
                   type="number"
                   step="0.01"
                   name="longitude"
                   placeholder="enter longitude"
                   onChange={handleChange}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please give valid input.
+                </Form.Control.Feedback>
                 <Form.Control
                   type="number"
                   step="0.01"
                   name="latitude"
                   placeholder="enter latitude"
                   onChange={handleChange}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please give valid input.
+                </Form.Control.Feedback>
                 <Button type="submit">Submit</Button>
               </Form>
             </Col>

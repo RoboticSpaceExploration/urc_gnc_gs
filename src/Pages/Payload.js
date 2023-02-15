@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Container } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-alpine.css";
 import { Rnd } from "react-rnd";
 import axios from "axios";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 import Camera from "../Components/Camera";
 import Config from '../scripts/config';
+import SideNav from '../Components/SideNav';
 
 
 function Payload() {
   const cardStyle = { height: "40vh", width: "20vw"};
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
-
-  const [payloadData, setPayloadData] = useState(null);
-  const [newData, setData] = useState({
-    data: "",
-  });
-  const [newTemp, setTemp] = useState({
-    temperature: null,
-  });
 
   //stores table data
   const [rowData, setRowData] = useState([]);
@@ -42,46 +35,11 @@ function Payload() {
       });
   }, []);
 
-
-  const dataHandleChange = (e) => {
-    const value = e.target.value;
-    setData({
-      ...newData,
-      [e.target.name]: value,
-    });
-  };
-
   const dataHandleSubmit = (e) => {
-    // ?e.preventDefault();
-    // const payData = {
-    //   id: newData.id,
-    //   data: newData.data,
-    // };
-    axios.post("http://localhost:9000/payload", rowData).then((response) => {
+    axios.put(`http://localhost:9000/payload/`, rowData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
-      window.location.reload();
-    });
-  };
-
-  const tempHandleChange = (e) => {
-    const value = e.target.value;
-    setTemp({
-      ...newTemp,
-      [e.target.name]: value,
-    });
-  };
-
-  const tempHandleSubmit = (e) => {
-    e.preventDefault();
-    const tempData = {
-      id: newTemp.id,
-      temperature: newTemp.temperature,
-    };
-    axios.post("http://localhost:9000/temp", tempData).then((response) => {
-      console.log(response.status);
-      console.log(response.data.token);
-      window.location.reload();
+      // window.location.reload();
     });
   };
 
@@ -200,8 +158,6 @@ function Payload() {
           return valueChanged;
         },
       },
-
-
     ],
     defaultColDef: {
       flex: 1,
@@ -213,37 +169,50 @@ function Payload() {
     rowData: rowData,
   };
 
-
   const onCellValueChanged = (event) => {
     console.log('Current data holds ', rowData);
   };
 
-  const addRow = () => {
+  function addRow() {
+    const payData = {
+      sample_number: rowData.length + 1,
+      mineral_detection_time: "--enter value--",
+      metal_detection: "--enter value--",
+      eth: "--enter value--",
+      coo: "--enter value--",
+      conclusion: "--enter value--",
+      high_value_sample: "--enter value--",
+      notes: "--enter value--"
+    };
     setRowData([
-      ...rowData,
-      {
-        sample_number: "--enter value--",
-        mineral_detection_time: "--enter value--",
-        metal_detection: "--enter value--",
-        eth: "--enter value--",
-        coo: "--enter value--",
-        conclusion: "--enter value--",
-        high_value_sample: "--enter value--",
-        notes: "--enter value--"
-      }
-    ])
+        ...rowData,
+        payData]);
+    axios.post("http://localhost:9000/payload", payData).then((response) => {
+      console.log(response.status);
+      console.log(response.data.token);
+      // window.location.reload();
+    });
   }
 
-  const removeRow = () => {
-    rowData.pop();
-    setRowData([
-      ...rowData]);
+  function removeLatestRow() {
+    if (rowData.length > 0) {
+      let deletedRow = rowData.pop();
+      console.log(deletedRow);
+      setRowData([
+        ...rowData]);
+      axios.delete(`http://localhost:9000/payload/${deletedRow.sample_number}`).then((response) => {
+        console.log(response.status);
+        console.log(response.data.token);
+        // window.location.reload();
+      });
+    }
   }
 
   return (
     <div id="payload-page">
       <h1>PAYLOAD</h1>
       <Container>
+        <SideNav/>
         <Row style={rowStyle} xs="auto">
           <Col>
             <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
@@ -254,12 +223,11 @@ function Payload() {
           <Col>
             <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
           </Col>
-
         </Row>
       </Container>
       <Container>
         <Button onClick={addRow}>Add Entry</Button>
-        <Button onClick={removeRow}>Remove Previous Entry</Button>
+        <Button onClick={removeLatestRow}>Remove Previous Entry</Button>
         <Row style={rowStyle}>
           <div className="ag-theme-alpine"
                style={{ height: "40vh", width: "75vw", float: "right" }}>
@@ -270,17 +238,13 @@ function Payload() {
               onCellValueChanged={onCellValueChanged.bind(this)}
               onCellEditingStopped={dataHandleSubmit}
               singleClickEdit={true}
-
             />
-
           </div>
-
         </Row>
       </Container>
     </div>
   );
 }
-
 
 export default Payload;
 
