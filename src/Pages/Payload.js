@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Container } from "react-bootstrap";
+import { Button, Col, Row, Container, Card } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import { Rnd } from "react-rnd";
 import axios from "axios";
@@ -11,9 +11,11 @@ import SideNav from '../Components/SideNav';
 
 
 function Payload() {
-  const cardStyle = { height: "40vh", width: "20vw"};
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
-
+  const cardStyle = { height: "40vh", width: "25vw", justifyContent: 'center'};
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding:'0.5em' };
+  const buttonStyle = {backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em"};
+  const tableStyle = { height: "40vh", width: "80vw", float: "right" };
+  const titleStyle = {textAlign: 'center'}
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -210,27 +212,33 @@ function Payload() {
 
   return (
     <div id="payload-page">
-      <h1>PAYLOAD</h1>
-      <Container>
+
+      <Container style={titleStyle}>
+        <h1>PAYLOAD</h1>
         <SideNav/>
         <Row style={rowStyle} xs="auto">
           <Col>
-            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+            <Card style={cardStyle}>Camera Feed 1</Card>
+            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
           <Col>
-            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+            <Card style={cardStyle}>Camera Feed 2</Card>
+            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
           <Col>
-            <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+            <Card style={cardStyle}>Camera Feed 3</Card>
+            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
         </Row>
       </Container>
+      <Container style={rowStyle}>
+        <Button onClick={addRow} style={buttonStyle}>Add Entry</Button>
+        <Button onClick={removeLatestRow} style={buttonStyle}>Remove Previous Entry</Button>
+      </Container>
       <Container>
-        <Button onClick={addRow}>Add Entry</Button>
-        <Button onClick={removeLatestRow}>Remove Previous Entry</Button>
         <Row style={rowStyle}>
           <div className="ag-theme-alpine"
-               style={{ height: "40vh", width: "75vw", float: "right" }}>
+               style={tableStyle}>
             <AgGridReact
               columnDefs={gridOptions.columnDefs}
               defaultColDef={gridOptions.defaultColDef}
