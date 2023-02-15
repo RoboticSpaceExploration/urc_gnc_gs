@@ -60,21 +60,15 @@ const Controls = () => {
   }
 
   return (
-      <div style={{ textAlign: 'center', width: '80%', marginTop: '40vh' }}>
+      <div style={{ textAlign: 'center', width: '80%', marginTop: '40vh', marginLeft: 0 }}>
         <Row style={{ justifyContent: 'center' }}>
           <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>W</Alert>
         </Row>
 
-        <Row>
-          <Col style={{ display: 'flex' }}>
-            <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>A</Alert>
-          </Col>
-          <Col style={{ display: 'flex' }}>
+        <Row style={{ justifyContent: 'center', display: 'inline-flex' }}>
+            <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>A</Alert>
             <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>S</Alert>
-          </Col>
-          <Col style={{ display: 'flex' }}>
-            <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>D</Alert>
-          </Col>
+            <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>D</Alert>
         </Row>
       </div>
   );
