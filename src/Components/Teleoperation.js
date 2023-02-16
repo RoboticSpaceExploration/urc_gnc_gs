@@ -58,6 +58,61 @@ class Teleoperation extends Component {
         }
     }
 
+
+    setTopic(event) {
+        this.topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: Config.CMD_VEL_TOPIC,
+            messageType: 'geometry_msgs/Twist'
+        })
+    };
+
+    //Teleop control with keyboard
+    forward(event) {
+        this.message = new ROSLIB.Message({
+            linear: { x: 0.15, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: 0, },
+        })
+        this.setTopic()
+        this.topic.publish(this.message)
+    };
+
+    stop(event) {
+        this.message = new ROSLIB.Message({
+            linear: { x: 0, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: 0, },
+        })
+        this.setTopic()
+        this.topic.publish(this.message)
+    };
+
+    backward(event) {
+        this.message = new ROSLIB.Message({
+            linear: { x: -0.15, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: 0, },
+        })
+        this.setTopic()
+        this.topic.publish(this.message)
+    };
+
+    turnLeft(event) {
+        this.message = new ROSLIB.Message({
+            linear: { x: 0.0, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: 0.2, },
+        })
+        this.setTopic()
+        this.topic.publish(this.message)
+    }; 
+
+    turnRight(event) {
+        this.message = new ROSLIB.Message({
+            linear: { x: 0.0, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: -0.2, },
+        })
+        this.setTopic()
+        this.topic.publish(this.message)
+    };
+
     handleMove(event) {
         console.log("handle move")
 
