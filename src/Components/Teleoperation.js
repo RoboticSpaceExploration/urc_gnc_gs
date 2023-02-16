@@ -58,6 +58,14 @@ class Teleoperation extends Component {
         }
     }
 
+    setTopic(event) {
+        this.topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: Config.CMD_VEL_TOPIC,
+            messageType: 'geometry_msgs/Twist'
+        })
+    };
+
     onKeyDown(event) {
         var keyCode = event.keyCode;
         switch (keyCode) {
@@ -107,14 +115,6 @@ class Teleoperation extends Component {
         }
     };
 
-    setTopic(event) {
-        this.topic = new ROSLIB.Topic({
-            ros: this.ros,
-            name: Config.CMD_VEL_TOPIC,
-            messageType: 'geometry_msgs/Twist'
-        })
-    };
-
     //Teleop control with keyboard
     forward(event) {
         this.message = new ROSLIB.Message({
@@ -160,64 +160,6 @@ class Teleoperation extends Component {
         this.setTopic()
         this.topic.publish(this.message)
     };
-
-    handleMove(event) {
-        console.log("handle move")
-
-        //Need to create ROS publisher on topic cmd_vel 
-        var cmd_vel = new window.ROSLIB.Topic({
-            ros: this.state.ros,
-            name: Config.CMD_VEL_TOPIC,
-            messageType: "geometry_msgs/Twist",
-
-        }); 
-
-        //Need to create a twist message to be sent to rosbridge
-        var twist = new window.ROSLIB.Message({
-            linear: {
-                x:event.y / 50,
-                y:0,
-                z:0,
-            },
-
-            angular: {
-                x:0,
-                y:0,
-                z: -event.x/ 50,
-            },
-        });
-        //Need to publish message on the cmd_vel topic
-        cmd_vel.publish(twist);
-    }
-
-    handleStop(event) {
-        console.log("handle stop");
-
-        //Need to create ROS publisher on topic cmd_vel 
-        var cmd_vel = new window.ROSLIB.Topic({
-            ros: this.state.ros,
-            name: Config.CMD_VEL_TOPIC,
-            messageType: "geometry_msgs/Twist",
-
-        }); 
-
-        //Need to create a twist message to be sent to rosbridge
-        var twist = new window.ROSLIB.Message({
-            linear: {
-                x:0,
-                y:0,
-                z:0,
-            },
-
-            angular: {
-                x:0,
-                y:0,
-                z:0,
-            },
-        });
-        //Need to publish message on the cmd_vel topic
-        cmd_vel.publish(twist);
-    }
 
     render() {
         return ( <div>
