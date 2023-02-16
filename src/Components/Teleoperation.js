@@ -173,14 +173,10 @@ class Teleoperation extends Component {
 
     render() {
         return ( <div>
-            <Joystick 
-            size={100} 
-            sticky={true} 
-            baseColor="#EEEEEE" 
-            stickColor="#BBBBBB" 
-            move={this.handleMove} 
-            stop={this.handleStop}
-            ></Joystick>
+            {/* Code to be implemented
+            
+            
+            */}
         </div>)
     }
 }
