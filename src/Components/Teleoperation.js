@@ -7,10 +7,20 @@ class Teleoperation extends Component {
 
     constructor() {
         super();
+        //ROS 
         this.init_connection();
+        this.setTopic()
 
-        this.handleMove = this.handleMove.bind(this);
-        this.handleStop = this.handleStop.bind(this);
+        //Keyboard
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onKeyUp   = this.onKeyUp.bind(this); 
+
+        //Controls
+        this.backward  = this.backward(this);
+        this.forward   = this.forward(this);
+        this.turnLeft  = this.turnLeft(this);
+        this.turnRight = this.turnRight(this);
+        this.stop      = this.stop(this);
     }
     
     init_connection(){
@@ -58,7 +68,7 @@ class Teleoperation extends Component {
         }
     }
 
-    setTopic(event) {
+    setTopic() {
         this.topic = new ROSLIB.Topic({
             ros: this.ros,
             name: Config.CMD_VEL_TOPIC,
