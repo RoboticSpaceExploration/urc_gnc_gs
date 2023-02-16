@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, KeyboardEvent} from "react";
 import { Joystick } from 'react-joystick-component';
 import Config from "../scripts/config";
 
@@ -58,6 +58,54 @@ class Teleoperation extends Component {
         }
     }
 
+    onKeyDown(event) {
+        var keyCode = event.keyCode;
+        switch (keyCode) {
+            case 68: //d
+                setKeyD(true)
+                break;
+            case 83: //s
+                setKeyS(true)
+                break;
+            case 65: //a
+                setKeyA(true)
+                break;
+            case 87: //w
+                setKeyW(true)
+                break;
+            default:
+                setKeyW(false)
+                setKeyA(false)
+                setKeyS(false)
+                setKeyD(false)
+                break;
+        }
+    };
+
+    onKeyUp(event) {
+        var keyCode = event.keyCode;
+
+        switch (keyCode) {
+            case 68: //d
+                setKeyD(false)
+                break;
+            case 83: //s
+                setKeyS(false)
+                break;
+            case 65: //a
+                setKeyA(false)
+                break;
+            case 87: //w
+                setKeyW(false)
+                break;
+            default:
+                setKeyW(false)
+                setKeyA(false)
+                setKeyS(false)
+                setKeyD(false)
+                break;
+        }
+    };
 
     setTopic(event) {
         this.topic = new ROSLIB.Topic({
