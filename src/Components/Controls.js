@@ -34,16 +34,84 @@ const Controls = () => {
   };
 
   function backward() {
+
+    var cmd_vel = new window.ROSLIB.Topic({
+      ros: init_ros_connection.ros,
+      name: init_ros_connection.cmd_vel_topic,
+      messageType: "geometry_msgs/Twist",
+
+  }); 
+
     let message = new window.ROSLIB.Message({
-      linear: { x: 0.15, y: 0, z: 0, },
+      linear: { x: -0.15, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-  setMessage(newMessage);
-  //Call velocity topic from ROS connection 
-  
-  // this.topic.publish(newMessage)
-    };
+    setMessage(message);
+      console.log(newMessage);
+      //Call velocity topic from ROS connection 
+      cmd_vel.publish(newMessage);
+  };
+
+  function turnLeft() {
+
+    var cmd_vel = new window.ROSLIB.Topic({
+      ros: init_ros_connection.ros,
+      name: init_ros_connection.cmd_vel_topic,
+      messageType: "geometry_msgs/Twist",
+
+  }); 
+
+    let message = new window.ROSLIB.Message({
+      linear: { x: 0.0, y: 0, z: 0, },
+      angular: { x: 0, y: 0, z: 0.2, },
+  })
+
+    setMessage(message);
+      console.log(newMessage);
+      //Call velocity topic from ROS connection 
+      cmd_vel.publish(newMessage);
+  };
+
+  function turnRight() {
+
+    var cmd_vel = new window.ROSLIB.Topic({
+      ros: init_ros_connection.ros,
+      name: init_ros_connection.cmd_vel_topic,
+      messageType: "geometry_msgs/Twist",
+
+  }); 
+
+    let message = new window.ROSLIB.Message({
+      linear: { x: 0.0, y: 0, z: 0, },
+      angular: { x: 0, y: 0, z: -0.2, },
+  })
+
+    setMessage(message);
+      console.log(newMessage);
+      //Call velocity topic from ROS connection 
+      cmd_vel.publish(newMessage);
+  };
+
+  function stop() {
+
+    var cmd_vel = new window.ROSLIB.Topic({
+      ros: init_ros_connection.ros,
+      name: init_ros_connection.cmd_vel_topic,
+      messageType: "geometry_msgs/Twist",
+
+  }); 
+
+    let message = new window.ROSLIB.Message({
+      linear: { x: 0, y: 0, z: 0, },
+      angular: { x: 0, y: 0, z: 0, },
+  })
+
+    setMessage(message);
+      console.log(newMessage);
+      //Call velocity topic from ROS connection 
+      cmd_vel.publish(newMessage);
+  };
 
 
   function onKeyDown(event) {
@@ -51,15 +119,15 @@ const Controls = () => {
     switch (keyCode) {
       case 68: //d turn right
         setKeyD(true)
-
+        turnRight();
         break;
       case 83: //s move backward
         setKeyS(true)
-
+        backward();
         break;
       case 65: //a turn left
         setKeyA(true)
-
+        turnLeft();
         break;
       case 87: //w move forward
         setKeyW(true)
@@ -80,19 +148,15 @@ const Controls = () => {
     switch (keyCode) {
       case 68: //d
         setKeyD(false)
-
         break;
       case 83: //s
         setKeyS(false)
-
         break;
       case 65: //a
         setKeyA(false)
-
         break;
       case 87: //w
         setKeyW(false)
-
         break;
       default:
         setKeyW(false)
@@ -101,6 +165,9 @@ const Controls = () => {
         setKeyD(false)
         break;
     }
+
+    stop();
+
   }
 
   
