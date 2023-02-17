@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Container, Card } from "react-bootstrap";
+import { Button, Col, Row, Container, Card, Carousel } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import { Rnd } from "react-rnd";
 import axios from "axios";
@@ -11,11 +11,11 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "40vh", width: "25vw", justifyContent: 'center'};
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding:'0.5em' };
-  const buttonStyle = {backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em"};
+  const cardStyle = { height: "25vh", width: "20vw", justifyContent: 'center' };
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em' };
+  const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
-  const titleStyle = {textAlign: 'center'}
+  const titleStyle = { textAlign: 'center' }
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -187,8 +187,8 @@ function Payload() {
       notes: "--enter value--"
     };
     setRowData([
-        ...rowData,
-        payData]);
+      ...rowData,
+      payData]);
     axios.post("http://localhost:9000/payload", payData).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
@@ -210,12 +210,25 @@ function Payload() {
     }
   }
 
+  // control carousel slides
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
+  const images = [require('../Images/payload/test-image-1.jpeg'),
+    require('../Images/payload/test-image-2.jpeg'),
+    require('../Images/payload/test-image-3.jpeg')];
+
   return (
     <div id="payload-page">
 
       <Container style={titleStyle}>
         <h1>PAYLOAD</h1>
         <SideNav/>
+
+        {/* Camera Feeds */}
         <Row style={rowStyle} xs="auto">
           <Col>
             <Card style={cardStyle}>Camera Feed 1</Card>
@@ -225,16 +238,53 @@ function Payload() {
             <Card style={cardStyle}>Camera Feed 2</Card>
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>*/}
           </Col>
+        </Row>
+        <Row style={rowStyle} xs="auto">
           <Col>
             <Card style={cardStyle}>Camera Feed 3</Card>
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>*/}
           </Col>
+          <Col>
+            {/* Photo Gallery */}
+            <Container style={cardStyle}>
+              <Carousel activeIndex={index} onSelect={handleSelect}>
+
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[0]}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[1]}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[2]}
+                  />
+                </Carousel.Item>
+
+
+              </Carousel>
+            </Container>
+          </Col>
         </Row>
       </Container>
+
+      {/* Buttons to add/remove rows*/}
       <Container style={rowStyle}>
         <Button onClick={addRow} style={buttonStyle}>Add Entry</Button>
         <Button onClick={removeLatestRow} style={buttonStyle}>Remove Previous Entry</Button>
       </Container>
+
+      {/* Display table */}
       <Container>
         <Row style={rowStyle}>
           <div className="ag-theme-alpine"

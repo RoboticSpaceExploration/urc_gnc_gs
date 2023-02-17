@@ -31,12 +31,15 @@ const SideNav = (props) => {
       </Popover>
   );
 
+  const navbarStyle = { width: "7vw"}
+  const imageStyle = {width: "7vw", height: "15vh"}
+
   return (
-      <div className="sidenav">
+      <div className="sidenav" style={navbarStyle}>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col>
-              <Nav variant="pills" className="flex-column">
+              <Nav variant="pills" className="flex-column" >
                 <Nav.Item
                     key="first"
                     id="navbar-rose-logo"
@@ -45,7 +48,7 @@ const SideNav = (props) => {
                     exact="true"
                     to="/"
                 >
-                  <Image src={RoseLogo} className="sidenav-logos" />
+                  <Image src={RoseLogo} className="sidenav-logos" style={imageStyle}/>
                 </Nav.Item>
                 <Nav.Item
                     key="second"
@@ -56,7 +59,7 @@ const SideNav = (props) => {
                 >
                   <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                     {/*<Button variant="link" >*/}
-                      <Image src={RoverDataLogo} className="sidenav-logos" />
+                      <Image src={RoverDataLogo} className="sidenav-logos" style={imageStyle} />
                     {/*</Button>*/}
                   </OverlayTrigger>
                 </Nav.Item>
@@ -68,7 +71,7 @@ const SideNav = (props) => {
                     exact="true"
                     to="/autonav"
                 >
-                  <Image src={AutoNavLogo} className="sidenav-logos" />
+                  <Image src={AutoNavLogo} className="sidenav-logos" style={imageStyle} />
                 </Nav.Item>
                 <Nav.Item
                     key="fourth"
@@ -78,7 +81,7 @@ const SideNav = (props) => {
                     exact="true"
                     to="/payload"
                 >
-                  <Image src={PayloadLogo} className="sidenav-logos" />
+                  <Image src={PayloadLogo} className="sidenav-logos" style={imageStyle}/>
                 </Nav.Item>
                 <Nav.Item
                     key="fifth"
@@ -88,7 +91,7 @@ const SideNav = (props) => {
                     exact="true"
                     to="/arm"
                 >
-                  <Image src={ArmLogo} className="sidenav-logos" />
+                  <Image src={ArmLogo} className="sidenav-logos" style={imageStyle}/>
                 </Nav.Item>
               </Nav>
             </Col>
