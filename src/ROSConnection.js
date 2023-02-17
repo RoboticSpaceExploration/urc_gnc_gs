@@ -5,7 +5,7 @@ class ROSConnection {
         this.rosbridge_server_ip = "192.168.0.223";
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
-        this.cmd_vel_topic = "/turtle1/cmd_vel";
+        this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
             cam1: "/camera/ired1/image_raw",
