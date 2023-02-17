@@ -1,82 +1,43 @@
-import React, { useState } from "react";
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import React  from "react";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const RoverDataDropdown = () => {
-  const [camera, cameraCheck] = useState(false);
-  const [model, modelCheck] = useState(false);
-  const [speed, speedCheck] = useState(false);
-  const [spec, specCheck] = useState(false);
-
-  const containerStyle = { marginTop: '10px', textAlign: 'center' };
-  const buttonGroupStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center' };
-
-  const resetSelection = () => {
-    cameraCheck(false);
-    modelCheck(false);
-    speedCheck(false);
-    specCheck(false);
-  }
+const RoverDataDropdown = ({ dataType }) => {
 
   return (
-    <Container style={containerStyle}>
-      <h1>Rover Data</h1>
-      <ButtonGroup style={buttonGroupStyle}>
-        <ToggleButton
-            className="mb-2"
-            id="camera-check"
-            type="checkbox"
-            variant="outline-primary"
-            checked={camera}
-            value="1"
-            onChange={(e) => cameraCheck(e.currentTarget.checked)}
-        >
-          Camera
-        </ToggleButton>
-
-        <ToggleButton
-            className="mb-2"
-            id="model-check"
-            type="checkbox"
-            variant="outline-primary"
-            checked={model}
-            value="1"
-            onChange={(e) => modelCheck(e.currentTarget.checked)}
-        >
-          Model
-        </ToggleButton>
-
-        <ToggleButton
-            className="mb-2"
-            id="speed-check"
-            type="checkbox"
-            variant="outline-primary"
-            checked={speed}
-            value="1"
-            onChange={(e) => speedCheck(e.currentTarget.checked)}
-        >
-          Speed
-        </ToggleButton>
-
-        <ToggleButton
-            className="mb-2"
-            id="spec-check"
-            type="checkbox"
-            variant="outline-primary"
-            checked={spec}
-            value="1"
-            onChange={(e) => specCheck(e.currentTarget.checked)}
-        >
-          Specifications
-        </ToggleButton>
-
-        <Button className="mb-2" as="input" type="reset" variant={"danger"} value="Reset" onClick={() => resetSelection()}/>
-      </ButtonGroup>
-
-    </Container>
+      <Navbar variant="dark" bg="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand href="#">Rover Data: {dataType}</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav>
+              <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title="Camera Feeds"
+                  menuVariant="dark"
+              >
+                <NavDropdown.Item href="/#/roverdata/chassiscam">Chassis Camera</NavDropdown.Item>
+                <NavDropdown.Item href="/#/roverdata/armcam">Arm Camera</NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title="Other Data"
+                  menuVariant="dark"
+              >
+                <NavDropdown.Item href="/#/roverdata/orientation">Orientation</NavDropdown.Item>
+                <NavDropdown.Item href="/#/roverdata/speedometer">Speedometer</NavDropdown.Item>
+                <NavDropdown.Item href="/#/roverdata/gps">GPS Coordinates</NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link href="/#/roverdata/controls">Controls</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
   ); 
+};
+
+RoverDataDropdown.propTypes = {
+  dataType: PropTypes.string.isRequired
 };
 
 export default RoverDataDropdown;

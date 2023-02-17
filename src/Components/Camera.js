@@ -27,7 +27,9 @@ class Camera extends Component {
 
     render() {
         return (
-            <div id='divCamera'></div>
+            <div>
+              <div id='divCamera' />
+            </div>
         );
     }
 }
