@@ -11,7 +11,7 @@ import SideNav from '../Components/SideNav';
 
 
 function Payload() {
-  const cardStyle = { height: "40vh", width: "25vw", justifyContent: 'center' };
+  const cardStyle = { height: "25vh", width: "20vw", justifyContent: 'center' };
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
@@ -238,41 +238,44 @@ function Payload() {
             <Card style={cardStyle}>Camera Feed 2</Card>
             {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
+        </Row>
+        <Row style={rowStyle} xs="auto">
           <Col>
             <Card style={cardStyle}>Camera Feed 3</Card>
             {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
+          <Col>
+            {/* Photo Gallery */}
+            <Container style={cardStyle}>
+              <Carousel activeIndex={index} onSelect={handleSelect}>
+
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[0]}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[1]}
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    style={cardStyle}
+                    className="d-block w-100"
+                    src={images[2]}
+                  />
+                </Carousel.Item>
+
+
+              </Carousel>
+            </Container>
+          </Col>
         </Row>
-      </Container>
-
-      {/* Photo Gallery */}
-      <Container style={cardStyle}>
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-
-          <Carousel.Item>
-            <img
-              style={cardStyle}
-              className="d-block w-100"
-              src={images[0]}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              style={cardStyle}
-              className="d-block w-100"
-              src={images[1]}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              style={cardStyle}
-              className="d-block w-100"
-              src={images[2]}
-            />
-          </Carousel.Item>
-
-
-        </Carousel>
       </Container>
 
       {/* Buttons to add/remove rows*/}
