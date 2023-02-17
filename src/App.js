@@ -9,6 +9,7 @@ import React from 'react';
 import GPSCoordinates from './Components/GPSCoordinates';
 import Speedometer from './Components/Speedometer';
 import Compass from './Components/Compass';
+import Controls from './Components/Controls';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/roverdata/gps" element={<GPSCoordinates/>} />
             <Route path="/roverdata/orientation" element={<Compass/>} />
             <Route path="/roverdata/speedometer" element={<Speedometer/>} />
+            <Route path="/roverdata/controls" element={<Controls />} />
           </Routes>
         </div>
       </Router>
