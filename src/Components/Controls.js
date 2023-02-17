@@ -15,8 +15,8 @@ const Controls = () => {
   });
   let message = {};
 
-  window.addEventListener("keydown", onKeyDown, { once: true, passive: false});
-  window.addEventListener("keyup", onKeyUp, { once: true, passive: false});
+  window.addEventListener("keydown", onKeyDown, { passive: false});
+  window.addEventListener("keyup", onKeyUp, { passive: false});
 
   function forward() {
     message = new window.ROSLIB.Message({
