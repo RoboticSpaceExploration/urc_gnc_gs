@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Container, Card } from "react-bootstrap";
+import { Button, Col, Row, Container, Card, Carousel } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 import { Rnd } from "react-rnd";
 import axios from "axios";
@@ -210,6 +210,13 @@ function Payload() {
     }
   }
 
+  // control carousel slides
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
   return (
     <div id="payload-page">
 
@@ -230,6 +237,17 @@ function Payload() {
             {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
         </Row>
+      </Container>
+      <Container style={cardStyle}>
+        <Carousel activeIndex={index} onSelect={handleSelect}>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="src/Images/payload/test-image-1.jpeg"
+              alt="First slide"
+            />
+          </Carousel.Item>
+        </Carousel>
       </Container>
       <Container style={rowStyle}>
         <Button onClick={addRow} style={buttonStyle}>Add Entry</Button>
