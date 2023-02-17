@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Connection from "../Components/Connection";
 // import Teleoperation from "../Components/Teleoperation";
 import SideNav from '../Components/SideNav';
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Alert, Row, Container } from 'react-bootstrap';
-import Config from '../scripts/config';
 import { init_ros_connection } from '../ROSConnection';
 import RoverDataDropdown from './RoverDataDropdown';
 
@@ -9,12 +8,12 @@ const Controls = () => {
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
-  let message = {};
   const cmd_vel = new window.ROSLIB.Topic({
     ros: init_ros_connection.ros,
     name: init_ros_connection.cmd_vel_topic,
     messageType: "geometry_msgs/Twist",
   });
+  let message = {};
 
   window.addEventListener("keydown", onKeyDown, { once: true, passive: false});
   window.addEventListener("keyup", onKeyUp, { once: true, passive: false});
