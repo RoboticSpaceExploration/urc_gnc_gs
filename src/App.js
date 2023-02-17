@@ -20,7 +20,11 @@ function App() {
             <Route path="/payload" element={<Payload/>} />
             <Route path="/arm" element={<Arm/>} />
             <Route path="/" element={<Home/>} />
-          {/*// Todo: change path for both cameras*/}
+          </Routes>
+        </div>
+        <div>
+          <Routes>
+            {/*// Todo: change path for both cameras*/}
             <Route path="/roverdata/chassiscam" element={<GPSCoordinates/>} />
             <Route path="/roverdata/armcam" element={<GPSCoordinates/>} />
             <Route path="/roverdata/gps" element={<GPSCoordinates/>} />
