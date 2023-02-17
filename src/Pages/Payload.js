@@ -6,8 +6,8 @@ import axios from "axios";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Camera from "../Components/Camera";
-import Config from '../scripts/config';
 import SideNav from '../Components/SideNav';
+import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
@@ -223,11 +223,11 @@ function Payload() {
           </Col>
           <Col>
             <Card style={cardStyle}>Camera Feed 2</Card>
-            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
+            {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>*/}
           </Col>
           <Col>
             <Card style={cardStyle}>Camera Feed 3</Card>
-            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
+            {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>*/}
           </Col>
         </Row>
       </Container>

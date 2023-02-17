@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import Camera from "../Components/Camera";
-import Config from '../scripts/config';
+import { init_ros_connection } from '../ROSConnection';
 import SideNav from "../Components/SideNav";
 
 class Arm extends React.Component {
@@ -17,8 +17,8 @@ class Arm extends React.Component {
             <SideNav/>
           <Row style={rowStyle}>
             <h1>ARM</h1>
-              <Camera topic={Config.CMD_CAM_TOPIC}/>
-              <Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>
+              <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
+              <Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
           </Row>
           <Row style={rowStyle}>
             <Col>
