@@ -100,7 +100,7 @@
   border-radius: 50%;
   background-color: black;
   border: 10px solid #ab2c94;
-  margin: auto;
+  margin: 50px auto auto;
 }
 
 .compass > .arrow {
@@ -114,15 +114,16 @@
   border-width: 40px 30px 0 30px;
   border-color: grey transparent transparent;
   z-index: 1;
+  margin-top: 5px;
 }
 
 .compass-border > .compass > .arrow {
   position: absolute;
   width: 340px;
   height: 340px;
-  background-color: black;
   margin: auto;
   border-radius: 50%;
+  background: black url('/src/Images/compass.png') no-repeat center;
 }
 
 .compass > .compass-circle,
@@ -134,8 +135,11 @@
   left: 49%;
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease-out;
-  background: url('/src/Images/compass.png') center
-  no-repeat;
+  background: url('/src/Images/compass.png') center no-repeat;
   background-size: contain;
+}
+
+.compass-circle {
+  background: url('/src/Images/compass.png') center no-repeat;
 }
 
