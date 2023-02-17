@@ -15,6 +15,8 @@ import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 const SideNav = (props) => {
+  const controlFeatures = ' width=722, height=500, popup';
+
   const popover = (
       <Popover id="popover-basic">
         <Popover.Body>
@@ -24,6 +26,7 @@ const SideNav = (props) => {
             <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/gps','gps', 'popup')}>Current GPS Coordinates</ListGroup.Item>
             <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/orientation','orientation', 'popup')}>Orientation</ListGroup.Item>
             <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/speedometer','speedometer', 'popup')}>Speedometer</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/controls','controls', controlFeatures)}>Controls</ListGroup.Item>
           </ListGroup>
         </Popover.Body>
       </Popover>
