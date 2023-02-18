@@ -8,7 +8,7 @@ import Home from './Pages/Home.js';
 import React from 'react';
 import GPSCoordinates from './Components/GPSCoordinates';
 import Speedometer from './Components/Speedometer';
-import Compass from './Components/Compass';
+import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import Controls from './Components/Controls';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
             <Route path="/roverdata/chassiscam" element={<GPSCoordinates/>} />
             <Route path="/roverdata/armcam" element={<GPSCoordinates/>} />
             <Route path="/roverdata/gps" element={<GPSCoordinates/>} />
-            <Route path="/roverdata/orientation" element={<Compass/>} />
+            <Route path="/roverdata/orientation" element={<RoverDataOrientation/>} />
             <Route path="/roverdata/speedometer" element={<Speedometer/>} />
             <Route path="/roverdata/controls" element={<Controls />} />
           </Routes>
