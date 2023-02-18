@@ -17,6 +17,9 @@ const Controls = () => {
   window.addEventListener("keydown", onKeyDown, { passive: false});
   window.addEventListener("keyup", onKeyUp, { passive: false});
 
+  /////////////////////////
+  // Movement control
+  /////////////////////////
   function forward() {
     message = new window.ROSLIB.Message({
         linear: { x: 0.15, y: 0, z: 0, },
