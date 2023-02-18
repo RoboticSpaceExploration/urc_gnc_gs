@@ -39,7 +39,7 @@
 
 .sidenav {
   height: 100%;
-  width: 20vm;
+  width: 20vm !important;
   position: fixed;
   z-index: 1;
   top: 0;

@@ -28,7 +28,7 @@ class Camera extends Component {
     render() {
         return (
             <div>
-              <div id='divCamera' />
+              <div id='divCamera'/>
             </div>
         );
     }
