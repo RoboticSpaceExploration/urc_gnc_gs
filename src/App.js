@@ -12,6 +12,7 @@ import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
 import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
 import RoverDataArmCam from './Pages/RoverData/RoverDataArmCam';
 import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
+import RoverDataControl from './Pages/RoverData/RoverDataControl';
 import Controls from './Components/Controls';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <Route path="/roverdata/gps" element={<RoverDataGPS/>} />
             <Route path="/roverdata/orientation" element={<RoverDataOrientation/>} />
             <Route path="/roverdata/speedometer" element={<RoverDataSpeed/>} />
-            <Route path="/roverdata/controls" element={<Controls />} />
+            <Route path="/roverdata/controls" element={<RoverDataControl/>} />
           </Routes>
         </div>
       </Router>

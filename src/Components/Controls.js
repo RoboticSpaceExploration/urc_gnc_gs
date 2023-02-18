@@ -144,7 +144,6 @@ const Controls = () => {
 
   return (
       <div>
-        <RoverDataDropdown dataType="Controls"/>
         <Container style={{ textAlign: 'center', marginTop: '20vh' }}>
         <Row style={{ justifyContent: 'center', alignContent: 'center' }}>
           <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>W</Alert>
