@@ -2,10 +2,17 @@ class ROSConnection {
     constructor() {
         this.ros = null;
         this.connected = false;
-        this.rosbridge_server_ip = "192.168.0.223";
+       
+        //Simulation ip
+        //this.rosbridge_server_ip = "192.168.0.223";
+
+        //Rover ip
+        this.rosbridge_server_ip = "128.171.150.2";
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
         this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
+
+
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
             cam1: "/camera/ired1/image_raw",
