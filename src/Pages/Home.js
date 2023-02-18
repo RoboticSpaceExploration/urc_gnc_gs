@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Connection from "../Components/Connection";
 import SideNav from '../Components/SideNav';
 
 class Home extends Component {
@@ -9,9 +10,6 @@ class Home extends Component {
             <main>
               <SideNav/>
                 <h1 className = 'text-center mt-3'> Robot Control Page</h1>
-
-                {/* <Connection /> */}
-                {/* <Teleoperation/> */}
             </main>
         );
     }
