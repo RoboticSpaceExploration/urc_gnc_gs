@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Connection from "../Components/Connection";
 import SideNav from '../Components/SideNav';
 
 class Home extends Component {

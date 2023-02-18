@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Row, Container } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
-import RoverDataDropdown from './RoverDataDropdown';
 
 const Controls = () => {
   const [keyA, setKeyA] = useState(false);

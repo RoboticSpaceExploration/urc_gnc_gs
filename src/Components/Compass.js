@@ -1,5 +1,4 @@
 import React from "react";
-import RoverDataDropdown from './RoverDataDropdown';
 
 const Compass = () => {
     return (
