@@ -7,7 +7,7 @@ const RoverDataDropdown = ({ dataType }) => {
   return (
       <Navbar variant="dark" bg="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Rover Data: {dataType}</Navbar.Brand>
+          <Navbar.Brand>Rover Data: {dataType}</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
@@ -33,7 +33,7 @@ const RoverDataDropdown = ({ dataType }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-  ); 
+  );
 };
 
 RoverDataDropdown.propTypes = {

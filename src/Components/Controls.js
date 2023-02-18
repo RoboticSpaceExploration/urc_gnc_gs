@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Alert, Row, Container } from 'react-bootstrap';
-import Config from '../scripts/config';
 import { init_ros_connection } from '../ROSConnection';
 import RoverDataDropdown from './RoverDataDropdown';
 
@@ -9,109 +8,79 @@ const Controls = () => {
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
-  const [newMessage, setMessage] = useState(null);
+  const cmd_vel = new window.ROSLIB.Topic({
+    ros: init_ros_connection.ros,
+    name: init_ros_connection.cmd_vel_topic,
+    messageType: "geometry_msgs/Twist",
+  });
+  let message = {};
 
-  window.addEventListener("keydown", onKeyDown, false);
-  window.addEventListener("keyup", onKeyUp, false);
-  
+  window.addEventListener("keydown", onKeyDown, { passive: false});
+  window.addEventListener("keyup", onKeyUp, { passive: false});
+
   function forward() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
         linear: { x: 0.15, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
-    setMessage(message);
-    console.log(newMessage);
-    //Call velocity topic from ROS connection 
-    cmd_vel.publish(newMessage);
+    //setMessage(message);
+    console.log(message);
+    //Call velocity topic from ROS connection
+    cmd_vel.publish(message);
+    console.log('forward');
   };
 
   function backward() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: -0.15, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+    //setMessage(message);
+      console.log(message);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
+      console.log('back');
   };
 
   function turnLeft() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0.2, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+    //setMessage(message);
+     console.log(message);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
+      console.log("left");
   };
 
   function turnRight() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: -0.2, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+    // setMessage(message);
+      console.log(message);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
+      console.log("right");
   };
 
   function stop() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+    // setMessage(message);
+      console.log(message);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
+      console.log("stop");
   };
 
 
@@ -141,6 +110,7 @@ const Controls = () => {
         setKeyD(false)
         break;
     }
+    event.stopImmediatePropagation();
   }
 
   function onKeyUp(event) {
@@ -168,10 +138,10 @@ const Controls = () => {
     }
 
     stop();
-
+    event.stopImmediatePropagation();
   }
 
-  
+
   return (
       <div>
         <RoverDataDropdown dataType="Controls"/>
