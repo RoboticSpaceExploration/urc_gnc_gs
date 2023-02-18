@@ -15,17 +15,21 @@ import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 const SideNav = (props) => {
+  const camera1 = 'left=0, top=0, width=750, height=400';
+  const camera2 = 'left=1000, top=0, width=750, height=400';
+  const otherFeats = 'left=0, top=500, width=750, height=400';
+  const controlFeats = 'left=1000, top=500, width=750, height=400';
 
   const popover = (
       <Popover id="popover-basic">
         <Popover.Body>
           <ListGroup variant="flush">
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/chassiscam','cameraChassis', 'popup')}>Camera Feed on Chassis</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/armcam','cameraArm', 'popup')}>Camera Feed on Arm</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/gps','gps', 'popup')}>Current GPS Coordinates</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/orientation','orientation', 'popup')}>Orientation</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/speedometer','speedometer', 'popup')}>Speedometer</ListGroup.Item>
-            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/controls','controls', 'popup')}>Controls</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/chassiscam','cameraChassis', camera1)}>Camera Feed on Chassis</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/armcam','cameraArm', camera2)}>Camera Feed on Arm</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/gps','gps', otherFeats)}>Current GPS Coordinates</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/orientation','orientation', otherFeats)}>Orientation</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/speedometer','speedometer', otherFeats)}>Speedometer</ListGroup.Item>
+            <ListGroup.Item as={'button'} action onClick={()=> window.open('/#/roverdata/controls','controls', controlFeats)}>Controls</ListGroup.Item>
           </ListGroup>
         </Popover.Body>
       </Popover>
