@@ -10,6 +10,7 @@ import Speedometer from './Components/Speedometer';
 import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
 import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
+import RoverDataArmCam from './Pages/RoverData/RoverDataArmCam';
 import Controls from './Components/Controls';
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
           <Routes>
             {/*// Todo: change path for both cameras*/}
             <Route path="/roverdata/chassiscam" element={<RoverDataChassisCam/>} />
-            <Route path="/roverdata/armcam" element={<RoverDataGPS/>} />
+            <Route path="/roverdata/armcam" element={<RoverDataArmCam/>} />
             <Route path="/roverdata/gps" element={<RoverDataGPS/>} />
             <Route path="/roverdata/orientation" element={<RoverDataOrientation/>} />
             <Route path="/roverdata/speedometer" element={<Speedometer/>} />
