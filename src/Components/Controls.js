@@ -7,12 +7,18 @@ const Controls = () => {
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
+  const [keyU, setKeyU] = useState(false);
+  const [keyJ, setKeyJ] = useState(false);
+  const [keyI, setKeyI] = useState(false);
+  const [keyK, setKeyK] = useState(false);
   const cmd_vel = new window.ROSLIB.Topic({
     ros: init_ros_connection.ros,
     name: init_ros_connection.cmd_vel_topic,
     messageType: "geometry_msgs/Twist",
   });
   let message = {};
+  let linSpeed = 0.5;
+  let angSpeed = 0.5; 
 
   window.addEventListener("keydown", onKeyDown, { passive: false});
   window.addEventListener("keyup", onKeyUp, { passive: false});
@@ -22,7 +28,7 @@ const Controls = () => {
   /////////////////////////
   function forward() {
     message = new window.ROSLIB.Message({
-        linear: { x: 1, y: 0, z: 0, },
+        linear: { x: linSpeed, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
@@ -35,7 +41,7 @@ const Controls = () => {
 
   function backward() {
     message = new window.ROSLIB.Message({
-      linear: { x: -1, y: 0, z: 0, },
+      linear: { x: -linSpeed, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
@@ -49,7 +55,7 @@ const Controls = () => {
   function turnLeft() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: 1, },
+      angular: { x: 0, y: 0, z: angSpeed, },
   })
 
     //setMessage(message);
@@ -62,7 +68,7 @@ const Controls = () => {
   function turnRight() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: 1, },
+      angular: { x: 0, y: 0, z: -angSpeed, },
   })
 
     // setMessage(message);
@@ -89,17 +95,20 @@ const Controls = () => {
   // Speed control
   ///////////////////////////
   function fastLinSpeed() {
-    message = new window.ROSLIB.Message({
-      speed: {linear:1.1, angular:1.1, },
-  })
-
-    // setMessage(message);
-      console.log(message);
-      //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
-      console.log("going faster - linear");
+    linSpeed = linSpeed * 1.1;
   };
 
+  function slowLinSpeed() {
+    linSpeed = linSpeed * 0.9;
+  }; 
+
+  function fastAngSpeed() {
+    angSpeed = angSpeed * 1.1;
+  };
+
+  function slowAngSpeed() {
+    angSpeed = angSpeed * 0.9;
+  };
 
   ///////////////////////////
   // Keyboard listener
@@ -122,6 +131,22 @@ const Controls = () => {
       case 87: //w move forward
         setKeyW(true)
         forward();
+        break;
+      case 85: //u fast lin speed
+        setKeyU(true)
+        fastLinSpeed();
+        break;
+      case 74: //j slow lin speed
+        setKeyJ(true)
+        slowLinSpeed();
+        break;
+      case 73: //i fast ang speed
+        setKeyI(true)
+        fastAngSpeed();
+        break;
+      case 75: //k slow ang speed
+        setKeyK(true)
+        slowAngSpeed();
         break;
       default:
         setKeyW(false)
