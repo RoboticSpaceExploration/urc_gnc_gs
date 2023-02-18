@@ -1,10 +1,16 @@
 import React from "react";
-import RoverDataDropdown from "../Components/RoverDataDropdown";
+import RoverDataDropdown from "../../Components/RoverDataDropdown";
+import Speedometer from "../../Components/Speedometer";
 
-class RoverData extends React.Component {
+class RoverDataSpeed extends React.Component {
   render() {
-    return <RoverDataDropdown />;
+    return (
+        <div id="rover-data-speed">
+          <RoverDataDropdown dataType="Speedometer"/>
+          <Speedometer/>
+        </div>
+    )
   }
 }
 
-export default RoverData;
+export default RoverDataSpeed;

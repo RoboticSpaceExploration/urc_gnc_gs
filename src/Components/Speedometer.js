@@ -5,8 +5,6 @@ import RoverDataDropdown from './RoverDataDropdown';
 
 const Speedometer = (props) => {
   return(
-      <div>
-        <RoverDataDropdown dataType="Speedometer"/>
         <div style={{ backgroundColor: '#282c34' }}>
           <GaugeChart
               id="speedometer-gauge"
@@ -15,7 +13,6 @@ const Speedometer = (props) => {
               animDelay={0.5}
           />
         </div>
-      </div>
   );
 }
 
