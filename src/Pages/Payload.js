@@ -11,8 +11,8 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "25vh", width: "20vw", justifyContent: 'center' };
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em' };
+  const cardStyle = { height: "45vh", width: "35vw", justifyContent: 'center' };
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'space-around', alignItems: 'center', padding: '0.5em' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
   const titleStyle = { textAlign: 'center' }

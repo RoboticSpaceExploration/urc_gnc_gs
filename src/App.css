@@ -45,22 +45,20 @@
   top: 0;
   left: 0;
   background-color:#000000;
-  transition: .5s ease;
   display: flex;
   overflow-y: hidden;
   overflow-x: hidden;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
 }
 
 .sidenav-logos {
   display: block;
   flex-direction: column;
-  margin: auto;
-  width: 18vm;
-  height: 18vh;
+  width: 20px;
+  height: 20px;
+  margin: 5px 10px auto auto;
 }
 
 .main {
