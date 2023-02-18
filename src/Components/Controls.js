@@ -22,7 +22,7 @@ const Controls = () => {
   /////////////////////////
   function forward() {
     message = new window.ROSLIB.Message({
-        linear: { x: 0.15, y: 0, z: 0, },
+        linear: { x: 1, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
@@ -35,7 +35,7 @@ const Controls = () => {
 
   function backward() {
     message = new window.ROSLIB.Message({
-      linear: { x: -0.15, y: 0, z: 0, },
+      linear: { x: -1, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
@@ -49,7 +49,7 @@ const Controls = () => {
   function turnLeft() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: 0.2, },
+      angular: { x: 0, y: 0, z: 1, },
   })
 
     //setMessage(message);
@@ -62,7 +62,7 @@ const Controls = () => {
   function turnRight() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: -0.2, },
+      angular: { x: 0, y: 0, z: 1, },
   })
 
     // setMessage(message);
@@ -85,7 +85,25 @@ const Controls = () => {
       console.log("stop");
   };
 
+  ///////////////////////////
+  // Speed control
+  ///////////////////////////
+  function fastLinSpeed() {
+    message = new window.ROSLIB.Message({
+      speed: {linear:1.1, angular:1.1, },
+  })
 
+    // setMessage(message);
+      console.log(message);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
+      console.log("going faster - linear");
+  };
+
+
+  ///////////////////////////
+  // Keyboard listener
+  ///////////////////////////
   function onKeyDown(event) {
     var keyCode = event.keyCode;
     switch (keyCode) {
