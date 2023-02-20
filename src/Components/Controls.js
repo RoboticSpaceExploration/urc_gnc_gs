@@ -17,7 +17,7 @@ const Controls = () => {
     messageType: "geometry_msgs/Twist",
   });
   let message = {};
-  let linSpeed = 0.5;
+  let linSpeed = 1;
   let angSpeed = 0.5; 
 
   window.addEventListener("keydown", onKeyDown, { passive: false});
