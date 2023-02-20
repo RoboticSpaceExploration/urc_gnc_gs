@@ -15,7 +15,8 @@ class ROSConnection {
 
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
-            cam1: "/camera/ired1/image_raw",
+            //cam1: "/camera/ired1/image_raw",
+            cam1: "d435i/color/image_raw",
             cam2: "/camera/color/image_raw",
             cam3: "/camera/ired2/image_raw",
             cam4: "/camera_z/color/image_raw",
