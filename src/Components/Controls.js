@@ -94,19 +94,19 @@ const Controls = () => {
   ///////////////////////////
   // Speed control
   ///////////////////////////
-  function fastLinSpeed() {
+  function incLinSpeed() {
     linSpeed = linSpeed * 1.1;
   };
 
-  function slowLinSpeed() {
+  function decLinSpeed() {
     linSpeed = linSpeed * 0.9;
   }; 
 
-  function fastAngSpeed() {
+  function incAngSpeed() {
     angSpeed = angSpeed * 1.1;
   };
 
-  function slowAngSpeed() {
+  function decAngSpeed() {
     angSpeed = angSpeed * 0.9;
   };
 
@@ -134,19 +134,19 @@ const Controls = () => {
         break;
       case 85: //u fast lin speed
         setKeyU(true)
-        fastLinSpeed();
+        incLinSpeed();
         break;
       case 74: //j slow lin speed
         setKeyJ(true)
-        slowLinSpeed();
+        decLinSpeed();
         break;
       case 73: //i fast ang speed
         setKeyI(true)
-        fastAngSpeed();
+        incAngSpeed();
         break;
       case 75: //k slow ang speed
         setKeyK(true)
-        slowAngSpeed();
+        decAngSpeed();
         break;
       default:
         setKeyW(false)
