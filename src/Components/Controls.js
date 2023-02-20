@@ -96,18 +96,22 @@ const Controls = () => {
   ///////////////////////////
   function incLinSpeed() {
     linSpeed = linSpeed * 1.1;
+    console.log(linSpeed);
   };
 
   function decLinSpeed() {
     linSpeed = linSpeed * 0.9;
+    console.log(linSpeed);
   }; 
 
   function incAngSpeed() {
     angSpeed = angSpeed * 1.1;
+    console.log(angSpeed);
   };
 
   function decAngSpeed() {
     angSpeed = angSpeed * 0.9;
+    console.log(angSpeed);
   };
 
   ///////////////////////////
