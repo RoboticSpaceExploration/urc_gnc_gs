@@ -7,19 +7,28 @@ const Controls = () => {
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
+  const [keyU, setKeyU] = useState(false);
+  const [keyJ, setKeyJ] = useState(false);
+  const [keyI, setKeyI] = useState(false);
+  const [keyK, setKeyK] = useState(false);
   const cmd_vel = new window.ROSLIB.Topic({
     ros: init_ros_connection.ros,
     name: init_ros_connection.cmd_vel_topic,
     messageType: "geometry_msgs/Twist",
   });
   let message = {};
+  let linSpeed = 1;
+  let angSpeed = 0.5; 
 
   window.addEventListener("keydown", onKeyDown, { passive: false});
   window.addEventListener("keyup", onKeyUp, { passive: false});
 
+  /////////////////////////
+  // Movement control
+  /////////////////////////
   function forward() {
     message = new window.ROSLIB.Message({
-        linear: { x: 0.15, y: 0, z: 0, },
+        linear: { x: linSpeed, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
@@ -32,7 +41,7 @@ const Controls = () => {
 
   function backward() {
     message = new window.ROSLIB.Message({
-      linear: { x: -0.15, y: 0, z: 0, },
+      linear: { x: -linSpeed, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
@@ -46,7 +55,7 @@ const Controls = () => {
   function turnLeft() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: 0.2, },
+      angular: { x: 0, y: 0, z: angSpeed, },
   })
 
     //setMessage(message);
@@ -59,7 +68,7 @@ const Controls = () => {
   function turnRight() {
     message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: -0.2, },
+      angular: { x: 0, y: 0, z: -angSpeed, },
   })
 
     // setMessage(message);
@@ -82,7 +91,32 @@ const Controls = () => {
       console.log("stop");
   };
 
+  ///////////////////////////
+  // Speed control
+  ///////////////////////////
+  function incLinSpeed() {
+    linSpeed = linSpeed * 1.1;
+    console.log(linSpeed);
+  };
 
+  function decLinSpeed() {
+    linSpeed = linSpeed * 0.9;
+    console.log(linSpeed);
+  }; 
+
+  function incAngSpeed() {
+    angSpeed = angSpeed * 1.1;
+    console.log(angSpeed);
+  };
+
+  function decAngSpeed() {
+    angSpeed = angSpeed * 0.9;
+    console.log(angSpeed);
+  };
+
+  ///////////////////////////
+  // Keyboard listener
+  ///////////////////////////
   function onKeyDown(event) {
     var keyCode = event.keyCode;
     switch (keyCode) {
@@ -101,6 +135,22 @@ const Controls = () => {
       case 87: //w move forward
         setKeyW(true)
         forward();
+        break;
+      case 85: //u fast lin speed
+        setKeyU(true)
+        incLinSpeed();
+        break;
+      case 74: //j slow lin speed
+        setKeyJ(true)
+        decLinSpeed();
+        break;
+      case 73: //i fast ang speed
+        setKeyI(true)
+        incAngSpeed();
+        break;
+      case 75: //k slow ang speed
+        setKeyK(true)
+        decAngSpeed();
         break;
       default:
         setKeyW(false)
