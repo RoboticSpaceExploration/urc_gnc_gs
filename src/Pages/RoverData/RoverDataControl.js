@@ -6,7 +6,7 @@ class RoverDataControl extends React.Component {
   render() {
     return (
         <div id="rover-data-controls">
-          <RoverDataDropdown/>
+          <RoverDataDropdown dataType="Controls"/>
           <Controls/>
         </div>
     );
