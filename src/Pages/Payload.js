@@ -11,12 +11,11 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "45vh", width: "35vw", justifyContent: 'center', alignItems: 'center' };
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'space-around', alignItems: 'center', padding: '0.5em' };
+  const cardStyle = { height: "45vh", justifyContent: 'center', alignItems: 'center', minWidth: '35vw', alignContent: 'center' };
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em', flexWrap: 'wrap', flexDirection: 'row' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
-  const colStyle = { display: 'flex' }
-  const titleStyle = { textAlign: 'center' }
+  const titleStyle = { textAlign: 'center' };
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -231,21 +230,21 @@ function Payload() {
 
         {/* Camera Feeds */}
         <Row style={rowStyle}>
-          <Col style={colStyle}>
+          <Col>
             <Card style={cardStyle}>Camera Feed 1</Card>
             {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
           </Col>
-          <Col style={colStyle}>
+          <Col>
             <Card style={cardStyle}>Camera Feed 2</Card>
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>*/}
           </Col>
         </Row>
         <Row style={rowStyle}>
-          <Col style={colStyle}>
+          <Col>
             <Card style={cardStyle}>Camera Feed 3</Card>
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>*/}
           </Col>
-          <Col style={colStyle}>
+          <Col>
             {/* Photo Gallery */}
             <Container style={cardStyle}>
               <Carousel stye={cardStyle} activeIndex={index} onSelect={handleSelect}>
