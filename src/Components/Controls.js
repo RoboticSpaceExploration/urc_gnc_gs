@@ -9,6 +9,10 @@ const Controls = () => {
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
+  const [keyI, setKeyI] = useState(false);
+  const [keyU, setKeyU] = useState(false);
+  const [keyJ, setKeyJ] = useState(false);
+  const [keyK, setKeyK] = useState(false);
   const [newMessage, setMessage] = useState(null);
 
   window.addEventListener("keydown", onKeyDown, false);
@@ -134,11 +138,27 @@ const Controls = () => {
         setKeyW(true)
         forward();
         break;
+      case 73:
+        setKeyI(true);
+        break;
+      case 74:
+        setKeyJ(true);
+        break;
+      case 75:
+        setKeyK(true);
+        break;
+      case 85:
+        setKeyU(true);
+        break;
       default:
         setKeyW(false)
         setKeyA(false)
         setKeyS(false)
         setKeyD(false)
+        setKeyI(false)
+        setKeyU(false)
+        setKeyK(false)
+        setKeyJ(false)
         break;
     }
   }
@@ -158,6 +178,18 @@ const Controls = () => {
         break;
       case 87: //w
         setKeyW(false)
+        break;
+      case 73:
+        setKeyI(false);
+        break;
+      case 74:
+        setKeyJ(false);
+        break;
+      case 75:
+        setKeyK(false);
+        break;
+      case 85:
+        setKeyU(false);
         break;
       default:
         setKeyW(false)
@@ -181,9 +213,16 @@ const Controls = () => {
         </Row>
 
         <Row style={{ justifyContent: 'center' }}>
-            <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>A</Alert>
-            <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>S</Alert>
-            <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>D</Alert>
+          <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>A</Alert>
+          <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>S</Alert>
+          <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>D</Alert>
+        </Row>
+
+        <Row>
+          <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>U</Alert>
+          <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>I</Alert>
+          <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>J</Alert>
+          <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>K</Alert>
         </Row>
         </Container>
       </div>
