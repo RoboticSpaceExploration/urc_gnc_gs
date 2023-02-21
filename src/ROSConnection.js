@@ -2,15 +2,16 @@ class ROSConnection {
     constructor() {
         this.ros = null;
         this.connected = false;
-       
+
         //Simulation ip
-        //this.rosbridge_server_ip = "192.168.0.223";
+        this.rosbridge_server_ip = "192.168.0.223";
+        this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
 
         //Rover ip
-        this.rosbridge_server_ip = "128.171.150.2";
+        // this.rosbridge_server_ip = "172.17.0.1";
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
-        this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
+        // this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
 
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",

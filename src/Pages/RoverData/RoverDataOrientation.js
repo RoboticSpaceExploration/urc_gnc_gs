@@ -6,7 +6,7 @@ class RoverDataOrientation extends React.Component {
   render() {
     return (
         <div>
-        <RoverDataDropdown />
+        <RoverDataDropdown dataType="Orientation"/>
         <Compass/>
         </div>
     );

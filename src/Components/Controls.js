@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 
@@ -18,10 +18,13 @@ const Controls = () => {
   });
   let message = {};
   let linSpeed = 1;
-  let angSpeed = 0.5; 
+  let angSpeed = 0.5;
 
-  window.addEventListener("keydown", onKeyDown, { passive: false});
-  window.addEventListener("keyup", onKeyUp, { passive: false});
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
+    window.addEventListener("keyup", onKeyUp, {capture: true, passive: false});
+  })
+
 
   /////////////////////////
   // Movement control
@@ -32,11 +35,8 @@ const Controls = () => {
         angular: { x: 0, y: 0, z: 0, },
     })
 
-    //setMessage(message);
-    console.log(message);
     //Call velocity topic from ROS connection
     cmd_vel.publish(message);
-    console.log('forward');
   };
 
   function backward() {
@@ -45,11 +45,8 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    //setMessage(message);
-      console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
-      console.log('back');
   };
 
   function turnLeft() {
@@ -58,11 +55,8 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: angSpeed, },
   })
 
-    //setMessage(message);
-     console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
-      console.log("left");
   };
 
   function turnRight() {
@@ -71,11 +65,8 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: -angSpeed, },
   })
 
-    // setMessage(message);
-      console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
-      console.log("right");
   };
 
   function stop() {
@@ -84,33 +75,30 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    // setMessage(message);
-      console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
-      console.log("stop");
   };
 
   ///////////////////////////
   // Speed control
   ///////////////////////////
   function incLinSpeed() {
-    linSpeed = linSpeed * 1.1;
+    linSpeed *= 1.1;
     console.log(linSpeed);
   };
 
   function decLinSpeed() {
-    linSpeed = linSpeed * 0.9;
+    linSpeed *= 0.9;
     console.log(linSpeed);
-  }; 
+  };
 
   function incAngSpeed() {
-    angSpeed = angSpeed * 1.1;
+    angSpeed *= 1.1;
     console.log(angSpeed);
   };
 
   function decAngSpeed() {
-    angSpeed = angSpeed * 0.9;
+    angSpeed *= 0.9;
     console.log(angSpeed);
   };
 
@@ -121,8 +109,8 @@ const Controls = () => {
     var keyCode = event.keyCode;
     switch (keyCode) {
       case 68: //d turn right
-        setKeyD(true)
         turnRight();
+        setKeyD(true)
         break;
       case 83: //s move backward
         setKeyS(true)
@@ -189,7 +177,6 @@ const Controls = () => {
     stop();
     event.stopImmediatePropagation();
   }
-
 
   return (
       <div>
