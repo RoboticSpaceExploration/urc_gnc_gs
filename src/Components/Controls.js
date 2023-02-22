@@ -196,6 +196,10 @@ const Controls = () => {
         setKeyA(false)
         setKeyS(false)
         setKeyD(false)
+        setKeyI(false)
+        setKeyU(false)
+        setKeyK(false)
+        setKeyJ(false)
         break;
     }
 

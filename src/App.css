@@ -143,3 +143,6 @@
   background: url('/src/Images/compass.png') center no-repeat;
 }
 
+canvas {
+  margin-top: 5px !important;
+}

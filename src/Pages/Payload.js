@@ -11,11 +11,10 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "45vh", justifyContent: 'center', alignItems: 'center', minWidth: '35vw', alignContent: 'center' };
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em', flexWrap: 'wrap', flexDirection: 'row' };
+  const cardStyle = { height: "50vh", justifyContent: 'center', alignItems: 'center', minWidth: '700px', alignContent: 'center' };
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', flexWrap: 'wrap', flexDirection: 'row' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
-  const titleStyle = { textAlign: 'center' };
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -224,8 +223,7 @@ function Payload() {
   return (
     <div id="payload-page">
 
-      <Container style={titleStyle}>
-        <h1>PAYLOAD</h1>
+      <div>
         <SideNav/>
 
         {/* Camera Feeds */}
@@ -276,7 +274,7 @@ function Payload() {
             </Container>
           </Col>
         </Row>
-      </Container>
+      </div>
 
       {/* Buttons to add/remove rows*/}
       <Container style={rowStyle}>

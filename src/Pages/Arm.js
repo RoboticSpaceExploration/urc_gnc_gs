@@ -8,25 +8,17 @@ import SideNav from "../Components/SideNav";
 class Arm extends React.Component {
 
   render() {
-    const cardStyle = { width: '50vm', height: '50vh', padding: '10px' };
-    const containerStyle = { height: '100%' };
-    const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex' };
-
     return (
-
-        <Container style={containerStyle}>
+        <div>
             <SideNav/>
-          <Row style={rowStyle}>
-            <h1>ARM</h1>
-            <h3 style={{ textAlign: 'center' }}>Camera Feeds</h3>
-            <Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
-            <Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
+          <Row>
+            <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
+            <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
 
-            <h3 style={{ textAlign: 'center' }}>ARM Controls</h3>
             <ReactNipple
                 options={{
                   mode: 'static',
-                  position: { top: '85%', left: '50%' },
+                  position: { bottom: '-50%', left: '50%' },
                   color: "black"
                 }}
                 style={{
@@ -37,7 +29,7 @@ class Arm extends React.Component {
             <ReactNipple
                 options={{
                   mode: 'static',
-                  position: { top: '85%', left: '60%' },
+                  position: { bottom: '-50%', left: '60%' },
                   color: "black"
                 }}
                 style={{
@@ -47,7 +39,7 @@ class Arm extends React.Component {
             />
 
           </Row>
-        </Container>
+        </div>
     );
   };
 }
