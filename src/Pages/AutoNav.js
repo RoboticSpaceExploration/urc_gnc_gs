@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
 import SideNav from '../Components/SideNav';
+import Map from '../Components/Map';
 
 function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
@@ -89,7 +90,7 @@ function AutoNav() {
 
   return (
     <Container style={{ marginTop: "10px" }}>
-      <SideNav/>
+      <SideNav />
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
@@ -144,31 +145,8 @@ function AutoNav() {
             </Col>
 
             <Col style={{ height: "60vh" }}>
-              <h3 style={{ textAlign: "center" }}>Map</h3>
-              {waypointData &&
-                waypointData.map((waypoint, index) => {
-                  console.log(waypoint);
-                  return (
-                    <div key={index}>
-                      <h3 style={{ textAlign: "center" }}>id: {waypoint.id}</h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        type: {waypoint.type}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        latitude: {waypoint.latitude}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        longitude: {waypoint.longitude}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        visited: {waypoint.visited}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        visible: {waypoint.visible}
-                      </h3>
-                    </div>
-                  );
-                })}
+              <h3 style={{ textAlign: "center" }}>Testing</h3>
+              <Map />
             </Col>
           </Row>
         </div>
