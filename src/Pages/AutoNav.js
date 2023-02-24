@@ -145,7 +145,7 @@ function AutoNav() {
             </Col>
 
             <Col style={{ height: "60vh" }}>
-              <h3 style={{ textAlign: "center" }}>Testing</h3>
+              <h3 style={{ textAlign: "center" }}>Map</h3>
               <Map />
             </Col>
           </Row>
