@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { render } from "@testing-library/react";
+import { Button } from "react-bootstrap";
 
 // needed to properly display the default marker on the map
 // delete L.Icon.Default.prototype._getIconUrl;
@@ -21,13 +22,13 @@ function Map(props) {
             lng: -157.8148,
         },
         testLocation: {
-            lat: 21.2998,
+            lat: 21.3000,
             lng: -157.8159,
         },
         traceLine: [[21.2998, -157.8148], [21.2998, -157.8155], [21.2998, -157.8159]],
     }
     const mapStyle = {
-        height: "300px",
+        height: "60vh",
         width: "100%"
     }
     const roverIcon = L.icon({
@@ -49,7 +50,17 @@ function Map(props) {
         shadowAnchor: null
     });
 
+    const [roverLocation, setRoverLocation] = useState(state.location);
+    const [lineLocation, setLineLocation] = useState(state.traceLine);
+    // update locations
+    const updateLocation = (newLocation) => {
+        setRoverLocation(newLocation);
+    }
+
+
     function RoverMarker(props) {
+
+        // updateLocation([21.2998, -157.8159]);
 
         return (
             <Marker position={props.position} icon={props.icon} />
@@ -65,20 +76,20 @@ function Map(props) {
         );
     }
 
+
     return (
         <div>
             <MapContainer center={state.location} zoom={20} style={mapStyle}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <RoverMarker position={state.location} icon={roverIcon} />
+                <RoverMarker position={roverLocation} icon={roverIcon} />
                 <ObjMarker position={state.testLocation} icon={objIcon} />
-                <Polyline positions={state.traceLine} color="red" />
+                <Polyline positions={lineLocation} color="red" />
             </MapContainer>
+            <Button onClick={() => updateLocation([21.2998, -157.8159])
+            }>Update Location</Button>
         </div>
     );
-
-
 }
-
 
 export default Map;
