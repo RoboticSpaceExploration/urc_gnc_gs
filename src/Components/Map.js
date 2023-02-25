@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState, Component, useCallback } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
@@ -15,17 +15,11 @@ import { Button } from "react-bootstrap";
 
 function Map(props) {
 
-
+    // dummy data for rover and waypoint location data
     const state = {
-        location: {
-            lat: 21.2998,
-            lng: -157.8148,
-        },
-        testLocation: {
-            lat: 21.3000,
-            lng: -157.8159,
-        },
-        traceLine: [[21.2998, -157.8148], [21.2998, -157.8155], [21.2998, -157.8159]],
+        location: [21.2998, -157.8148],
+        testLocation: [[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
+        traceLine: [[21.2998, -157.8148],[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
     }
     const mapStyle = {
         height: "60vh",
@@ -41,22 +35,34 @@ function Map(props) {
         shadowAnchor: null
     });
     const objIcon = L.icon({
-        iconUrl: require('../Images/payload.png'),
-        iconSize: [40, 40],
-        iconAnchor: [20, 20],
+        iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        iconSize: [20, 30],
+        iconAnchor: [10, 30],
         popupAnchor: null,
         shadowUrl: null,
         shadowSize: null,
         shadowAnchor: null
     });
 
-    const [roverLocation, setRoverLocation] = useState(state.location);
-    const [lineLocation, setLineLocation] = useState(state.traceLine);
-    // update locations
-    const updateLocation = (newLocation) => {
-        setRoverLocation(newLocation);
-    }
+    const [roverLocation, setRoverLocation] = useState(state.location); //the current location of the rover
+    const [objLocation, setObjLocation] = useState([]);
+    const [lineLocation, setLineLocation] = useState([state.location]); //traces the motion of the rover
 
+    // update locations of rover and trace line
+    const updateLocation = useCallback((newLocation) => {
+      //  setRoverLocation(newLocation);
+        if (newLocation !== lineLocation){
+          setLineLocation([...lineLocation, newLocation]);
+          setRoverLocation(newLocation);
+        }
+        console.log(lineLocation);
+    }, [roverLocation, objLocation]
+    );
+
+    // allow users to submit waypoints data
+    const updateObjLocation = (newLocation) => {
+        setObjLocation([...objLocation, newLocation]);
+    }
 
     function RoverMarker(props) {
 
@@ -79,15 +85,20 @@ function Map(props) {
 
     return (
         <div>
-            <MapContainer center={state.location} zoom={20} style={mapStyle}>
+            <MapContainer center={state.location} zoom={25} style={mapStyle}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <RoverMarker position={roverLocation} icon={roverIcon} />
-                <ObjMarker position={state.testLocation} icon={objIcon} />
+                {/*<ObjMarker position={state.testLocation[2]} icon={objIcon} />*/}
+              {state.testLocation && state.testLocation.map((obj, index) => {
+                 return (
+                   <ObjMarker position={obj} icon={objIcon} key={index} />
+                 );
+              })}
                 <Polyline positions={lineLocation} color="red" />
             </MapContainer>
-            <Button onClick={() => updateLocation([21.2998, -157.8159])
-            }>Update Location</Button>
+            <Button onClick={() => updateLocation(state.traceLine[2])
+            }>Next Destination</Button>
         </div>
     );
 }
