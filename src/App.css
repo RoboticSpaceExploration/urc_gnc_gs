@@ -64,11 +64,13 @@
 }
 
 .main {
-  margin-left: 10%;
-  width: 70vm;
   display: block;
-  padding: 0px 10px;
   overflow-x: hidden;
+}
+
+main.dark, div.offcanvas-body.dark, div.offcanvas-header.dar, div.offcanvas.offcanvas-start.dark, html.dark {
+  background-color: #292c35 !important;
+  color: #e3d9e1 !important;
 }
 
 .queue-img {
@@ -145,4 +147,48 @@
 
 canvas {
   margin-top: 5px !important;
+}
+
+div.offcanvas-body, div.offcanvas-header, div.offcanvas.offcanvas-start {
+  min-width: 270px !important;
+  width: 270px !important;
+  background-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.label {
+  margin-left: 10px;
+  width: 60px;
+  height: 26px;
+  background-color:#111;
+  display: flex;
+  border-radius:50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  transform: scale(1.5);
+}
+
+.ball {
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball{
+  transform: translateX(32px);
 }

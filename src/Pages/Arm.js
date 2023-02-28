@@ -18,7 +18,7 @@ class Arm extends React.Component {
             <ReactNipple
                 options={{
                   mode: 'static',
-                  position: { bottom: '-50%', left: '50%' },
+                  position: { bottom: '-30%', left: '45%' },
                   color: "black"
                 }}
                 style={{
@@ -29,7 +29,7 @@ class Arm extends React.Component {
             <ReactNipple
                 options={{
                   mode: 'static',
-                  position: { bottom: '-50%', left: '60%' },
+                  position: { bottom: '-30%', left: '55%' },
                   color: "black"
                 }}
                 style={{
