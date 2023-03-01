@@ -17,8 +17,8 @@ class Arm extends React.Component {
             <SideNav/>
           <Row style={rowStyle}>
             <h1>ARM</h1>
-              <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
-              <Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
+              <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>
+              <Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>
           </Row>
           <Row style={rowStyle}>
             <Col>

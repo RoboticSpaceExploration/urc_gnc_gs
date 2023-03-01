@@ -17,9 +17,8 @@ class Camera extends Component {
             this.camera = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
                 host: this.props.host,
-                width: 200,
-                height: 200,
-                // topic: '/camera/rgb/image_raw',
+                width: 600,
+                height: 400,
                 topic: this.props.topic,
                 ssl: true,
             });
