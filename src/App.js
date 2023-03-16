@@ -5,19 +5,18 @@ import AutoNav from './Pages/AutoNav.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
-import React, { useState } from 'react';
+import React  from 'react';
 import GPSCoordinates from './Components/GPSCoordinates';
 import Speedometer from './Components/Speedometer';
 import Compass from './Components/Compass';
 import Controls from './Components/Controls';
-import SideNav from './Components/SideNav';
 
 function App() {
 
   return (
     <Router>
 
-      <div className="main">
+      <div>
           <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
             <Route path="/payload" element={<Payload/>} />

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
-import { Button, Navbar, Offcanvas, Image, Nav, NavbarBrand } from "react-bootstrap";
+import { Button, Navbar, Offcanvas, Image, Nav, ButtonGroup, ToggleButton } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import RoseLogo from "../Images/rose-logo.png";
 import ListGroup from 'react-bootstrap/ListGroup';
+import Home from '../Pages/Home';
 
 const SideNav = (props) => {
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState('light');
+  const [radioValue, setRadioValue] = useState('1');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,8 +20,13 @@ const SideNav = (props) => {
   const otherFeats = 'left=0, top=500, width=750, height=400';
   const controlFeats = 'left=1000, top=500, width=750, height=400';
   const imageStyle = { width: "85px", height: "80px", marginLeft: '10px', marginRight: '10px' }
-  const navbarStyle = { textDecoration: 'none', color: '#ab2c94', marginBottom: '10px' }
+  const navbarStyle = { textDecoration: 'none', color: '#ab2c94' }
   const logoStyle = { padding: 0, hover: 'none', boxShadow: 'none', boxShadowColor: 'none', margin: 'none' }
+
+  const radios = [
+    { name: 'Light', value: '1' },
+    { name: 'Dark', value: '2' },
+  ];
 
   const popover = (
       <Popover id="popover-basic">
@@ -36,15 +43,19 @@ const SideNav = (props) => {
       </Popover>
   );
 
-  document.getElementById('checkbox')?.addEventListener('change', () => {
-    document.div.classList.toggle('dark');
-    document.main.classList.toggle('dark');
-    setMode('dark')
-  })
+  const toggleDarkMode = (e) => {
+    setRadioValue(e.currentTarget.value)
+    document.body.classList.toggle("dark-mode");
+    if (mode === 'light') {
+      setMode('dark');
+    } else {
+      setMode('light')
+    }
+  };
 
   return (
       <>
-        <Navbar bg={mode} variant={mode}>
+        <Navbar bg={mode} variant={mode} style={{ display: 'flex' }}>
             <Button variant={mode} onClick={handleShow} style={logoStyle}>
               <Image src={RoseLogo} style={imageStyle}/>
             </Button>
@@ -53,12 +64,21 @@ const SideNav = (props) => {
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
                   <div style={{ justifyContent: 'flex-end' }}>
-                    <input type="checkbox" className="checkbox" id="checkbox" />
-                    <label htmlFor="checkbox" className="label">
-                      <i className="fas fa-moon" style={{ color: 'whitesmoke' }} />
-                      <i className='fas fa-sun' style={{ color: 'yellow' }}/>
-                      <div className='ball' />
-                    </label>
+                    <ButtonGroup>
+                      {radios.map((radio, idx) => (
+                          <ToggleButton
+                              key={idx}
+                              id={`radio-${idx}`}
+                              type="radio"
+                              variant={idx % 2 ? 'outline-dark' : 'outline-secondary'}
+                              value={radio.value}
+                              checked={radioValue === radio.value}
+                              onChange={(e) => toggleDarkMode(e)}
+                          >
+                            {radio.name}
+                          </ToggleButton>
+                      ))}
+                    </ButtonGroup>
                   </div>
                 </Offcanvas.Title>
               </Offcanvas.Header>
