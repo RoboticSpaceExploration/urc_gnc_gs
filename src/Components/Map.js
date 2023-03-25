@@ -1,10 +1,10 @@
-import React, { useEffect, useState, Component, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { render } from "@testing-library/react";
-import { Button } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 
 // needed to properly display the default marker on the map
 // delete L.Icon.Default.prototype._getIconUrl;
@@ -88,6 +88,22 @@ function Map(props) {
 
     return (
         <div>
+          <Form>
+            <Form.Control
+              type="number"
+              step="0.01"
+              name="longitude"
+              placeholder="enter longitude"
+              required
+            />
+            <Form.Control
+              type="number"
+              step="0.01"
+              name="longitude"
+              placeholder="enter latitude"
+              required
+            />
+          </Form>
             <MapContainer center={state.location} zoom={25} style={mapStyle}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
