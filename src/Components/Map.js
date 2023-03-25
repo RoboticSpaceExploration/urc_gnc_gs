@@ -21,10 +21,12 @@ function Map(props) {
         testLocation: [[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
         traceLine: [[21.2998, -157.8148],[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
     }
+
     const mapStyle = {
         height: "60vh",
         width: "100%"
     }
+
     const roverIcon = L.icon({
         iconUrl: require('../Images/rover-data.png'),
         iconSize: [40, 40],
@@ -51,10 +53,11 @@ function Map(props) {
     // update locations of rover and trace line
     const updateLocation = useCallback((newLocation) => {
       //  setRoverLocation(newLocation);
-        if (newLocation !== lineLocation){
+        if ((newLocation[0] !== lineLocation[lineLocation.length - 1][0]) && (newLocation[1] !== lineLocation[lineLocation.length - 1][1])){
           setLineLocation([...lineLocation, newLocation]);
           setRoverLocation(newLocation);
         }
+        console.log(lineLocation[lineLocation.length - 1], newLocation);
         console.log(lineLocation);
     }, [roverLocation, objLocation]
     );
@@ -97,7 +100,7 @@ function Map(props) {
               })}
                 <Polyline positions={lineLocation} color="red" />
             </MapContainer>
-            <Button onClick={() => updateLocation(state.traceLine[2])
+            <Button onClick={() => updateLocation(state.traceLine[3])
             }>Next Destination</Button>
         </div>
     );
