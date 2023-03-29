@@ -146,7 +146,7 @@ function AutoNav() {
 
             <Col style={{ height: "60vh" }}>
               <h3 style={{ textAlign: "center" }}>Map</h3>
-              <Map />
+              <Map waypointData={waypointData}/>
             </Col>
           </Row>
         </div>

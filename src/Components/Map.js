@@ -93,15 +93,14 @@ function Map(props) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <RoverMarker position={roverLocation} icon={roverIcon} />
                 {/*<ObjMarker position={state.testLocation[2]} icon={objIcon} />*/}
-              {state.testLocation && state.testLocation.map((obj, index) => {
+              {props.waypointData && props.waypointData.map((waypoint, index) => {
                  return (
-                   <ObjMarker position={obj} icon={objIcon} key={index} />
+                   <ObjMarker position={waypoint.position} icon={objIcon} key={index} />
                  );
               })}
                 <Polyline positions={lineLocation} color="red" />
             </MapContainer>
-            <Button onClick={() => updateLocation(state.traceLine[3])
-            }>Next Destination</Button>
+            <Button onClick={() => updateLocation(state.traceLine[3])}>Next Destination</Button>
         </div>
     );
 }
