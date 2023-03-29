@@ -15,8 +15,8 @@ function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
   const [queueData, setQueueData] = useState(null);
   const [newCoord, setCoord] = useState({
-    longitude: null,
     latitude: null,
+    longitude: null,
   });
   const [queueValidated, setValidated] = useState(false);
 
@@ -72,8 +72,8 @@ function AutoNav() {
     }
     setValidated(true);
     const coordData = {
-      longitude: newCoord.longitude,
-      latitude: newCoord.latitude,
+      longitude: Number(newCoord.longitude),
+      latitude: Number(newCoord.latitude),
     };
     if (!coordData.longitude || !coordData.latitude) {
       console.log("xd");
@@ -121,8 +121,8 @@ function AutoNav() {
                 <Form.Control
                   type="number"
                   step="0.01"
-                  name="longitude"
-                  placeholder="enter longitude"
+                  name="latitude"
+                  placeholder="enter latitude"
                   onChange={handleChange}
                   required
                 />
@@ -132,8 +132,8 @@ function AutoNav() {
                 <Form.Control
                   type="number"
                   step="0.01"
-                  name="latitude"
-                  placeholder="enter latitude"
+                  name="longitude"
+                  placeholder="enter longitude"
                   onChange={handleChange}
                   required
                 />
