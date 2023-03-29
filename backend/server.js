@@ -9,16 +9,21 @@ let waypoints = [
   {
     id: 1,
     type: "AR tag",
-    latitude: 0,
-    longitude: 0,
+    position: [21.2992, -157.8148],
     visited: true,
     visible: false,
   },
   {
     id: 2,
     type: "Goal",
-    latitude: 2,
-    longitude: 4,
+    position: [21.3, -157.8155],
+    visited: true,
+    visible: true,
+  },
+  {
+    id: 3,
+    type: "Goal",
+    position: [21.2995, -157.8159],
     visited: true,
     visible: true,
   },
@@ -32,7 +37,6 @@ let payloadData = [
 let queueList = [
   {
     queue: 1,
-
     longitude: 12,
     latitude: 14,
   },
