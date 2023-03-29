@@ -20,7 +20,7 @@ function AutoNav() {
   });
   const [queueValidated, setValidated] = useState(false);
 
-  const cardStyle = { height: "70vh" };
+  const cardStyle = { height: "100vh" };
   const titleStyle = { textAlign: "center", marginBottom: "10px" };
 
   useEffect(() => {
