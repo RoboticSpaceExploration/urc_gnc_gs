@@ -9,6 +9,7 @@ import QueueFeed from "../Components/QueueFeed";
 import SideNav from '../Components/SideNav';
 import Map from '../Components/Map';
 import QueueForm from '../Components/Forms/QueueForm';
+import WaypointForm from '../Components/Forms/WaypointForm';
 
 function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
@@ -82,9 +83,13 @@ function AutoNav() {
               <QueueForm/>
             </Col>
 
-            <Col style={{ height: "60vh" }}>
+            <Col style={cardStyle} className="divider" xs={4}>
               <h3 style={{ textAlign: "center" }}>Map</h3>
               <Map waypointData={waypointData}/>
+            </Col>
+            <Col style={{ height: "60vh" }}>
+              <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
+              <WaypointForm/>
             </Col>
           </Row>
         </div>
