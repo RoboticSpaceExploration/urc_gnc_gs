@@ -6,11 +6,12 @@ import Popover from 'react-bootstrap/Popover';
 import RoseLogo from "../Images/rose-logo.png";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Home from '../Pages/Home';
+import PropTypes from 'prop-types';
 
-const SideNav = (props) => {
+const SideNav = ({ mode, radioValue }) => {
   const [show, setShow] = useState(false);
-  const [mode, setMode] = useState('light');
-  const [radioValue, setRadioValue] = useState('1');
+  const [setting, setSetting] = useState(mode);
+  const [radioVal, setRadio] = useState(radioValue);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,19 +45,19 @@ const SideNav = (props) => {
   );
 
   const toggleDarkMode = (e) => {
-    setRadioValue(e.currentTarget.value)
+    setRadio(e.currentTarget.value)
     document.body.classList.toggle("dark-mode");
-    if (mode === 'light') {
-      setMode('dark');
+    if (setting === 'light') {
+      setSetting('dark');
     } else {
-      setMode('light')
+      setSetting('light');
     }
   };
 
   return (
       <>
         <Navbar bg={mode} variant={mode} style={{ display: 'flex' }}>
-            <Button variant={mode} onClick={handleShow} style={logoStyle}>
+            <Button variant="link" onClick={handleShow} style={logoStyle}>
               <Image src={RoseLogo} style={imageStyle}/>
             </Button>
 
@@ -70,9 +71,9 @@ const SideNav = (props) => {
                               key={idx}
                               id={`radio-${idx}`}
                               type="radio"
-                              variant={idx % 2 ? 'outline-dark' : 'outline-secondary'}
+                              variant={idx % 2 ? 'outline-secondary' : 'outline-dark'}
                               value={radio.value}
-                              checked={radioValue === radio.value}
+                              checked={radioVal === radio.value}
                               onChange={(e) => toggleDarkMode(e)}
                           >
                             {radio.name}
@@ -146,6 +147,11 @@ const SideNav = (props) => {
         </Navbar>
       </>
   );
+};
+
+SideNav.propType = {
+  mode: PropTypes.string.isRequired,
+  radioValue: PropTypes.number.isRequired,
 };
 
 export default SideNav;
