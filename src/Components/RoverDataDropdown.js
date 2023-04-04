@@ -33,7 +33,7 @@ const RoverDataDropdown = ({ dataType }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-  ); 
+  );
 };
 
 RoverDataDropdown.propTypes = {

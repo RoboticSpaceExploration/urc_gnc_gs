@@ -4,22 +4,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
 import SideNav from '../Components/SideNav';
+import Map from '../Components/Map';
+import QueueForm from '../Components/Forms/QueueForm';
+import WaypointForm from '../Components/Forms/WaypointForm';
 
 function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
   const [queueData, setQueueData] = useState(null);
-  const [newCoord, setCoord] = useState({
-    longitude: null,
-    latitude: null,
-  });
-  const [queueValidated, setValidated] = useState(false);
 
-  const cardStyle = { height: "70vh" };
+  const cardStyle = { height: "100vh" };
   const titleStyle = { textAlign: "center", marginBottom: "10px" };
 
   useEffect(() => {
@@ -55,41 +51,9 @@ function AutoNav() {
       });
   }, []);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setCoord({
-      ...newCoord,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    e.preventDefault();
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    }
-    setValidated(true);
-    const coordData = {
-      longitude: newCoord.longitude,
-      latitude: newCoord.latitude,
-    };
-    if (!coordData.longitude || !coordData.latitude) {
-      console.log("xd");
-    } else {
-      axios
-        .post("http://localhost:9000/autonav", coordData)
-        .then((response) => {
-          console.log(response.status);
-          console.log(response.data.token);
-          window.location.reload();
-        });
-    }
-  };
-
   return (
-    <div style={{ marginTop: "10px" }}>
-      <SideNav/>
+    <Container style={{ marginTop: "10px" }}>
+      <SideNav />
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
@@ -116,64 +80,21 @@ function AutoNav() {
                     />
                   );
                 })}
-              <Form noValidate validated={queueValidated} onSubmit={handleSubmit}>
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  name="longitude"
-                  placeholder="enter longitude"
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please give valid input.
-                </Form.Control.Feedback>
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  name="latitude"
-                  placeholder="enter latitude"
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please give valid input.
-                </Form.Control.Feedback>
-                <Button type="submit">Submit</Button>
-              </Form>
+              <QueueForm/>
             </Col>
 
-            <Col style={{ height: "60vh" }}>
+            <Col style={cardStyle} className="divider" xs={4}>
               <h3 style={{ textAlign: "center" }}>Map</h3>
-              {waypointData &&
-                waypointData.map((waypoint, index) => {
-                  console.log(waypoint);
-                  return (
-                    <div key={index}>
-                      <h3 style={{ textAlign: "center" }}>id: {waypoint.id}</h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        type: {waypoint.type}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        latitude: {waypoint.latitude}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        longitude: {waypoint.longitude}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        visited: {waypoint.visited}
-                      </h3>
-                      <h3 style={{ textAlign: "center" }}>
-                        visible: {waypoint.visible}
-                      </h3>
-                    </div>
-                  );
-                })}
+              <Map waypointData={waypointData}/>
+            </Col>
+            <Col style={{ height: "60vh" }}>
+              <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
+              <WaypointForm/>
             </Col>
           </Row>
         </div>
       </Card>
-    </div>
+    </Container>
   );
 }
 

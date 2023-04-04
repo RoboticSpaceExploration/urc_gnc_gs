@@ -1,130 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container } from 'react-bootstrap';
-import Config from '../scripts/config';
 import { init_ros_connection } from '../ROSConnection';
-import RoverDataDropdown from './RoverDataDropdown';
 
 const Controls = () => {
   const [keyA, setKeyA] = useState(false);
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);
   const [keyW, setKeyW] = useState(false);
-  const [keyI, setKeyI] = useState(false);
   const [keyU, setKeyU] = useState(false);
   const [keyJ, setKeyJ] = useState(false);
+  const [keyI, setKeyI] = useState(false);
   const [keyK, setKeyK] = useState(false);
-  const [newMessage, setMessage] = useState(null);
+  const cmd_vel = new window.ROSLIB.Topic({
+    ros: init_ros_connection.ros,
+    name: init_ros_connection.cmd_vel_topic,
+    messageType: "geometry_msgs/Twist",
+  });
+  let message = {};
+  let linSpeed = 1;
+  let angSpeed = 0.5;
 
-  window.addEventListener("keydown", onKeyDown, false);
-  window.addEventListener("keyup", onKeyUp, false);
-  
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
+    window.addEventListener("keyup", onKeyUp, {capture: true, passive: false});
+  })
+
+
+  /////////////////////////
+  // Movement control
+  /////////////////////////
   function forward() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
-        linear: { x: 0.15, y: 0, z: 0, },
+    message = new window.ROSLIB.Message({
+        linear: { x: linSpeed, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
-    setMessage(message);
-    console.log(newMessage);
-    //Call velocity topic from ROS connection 
-    cmd_vel.publish(newMessage);
+    //Call velocity topic from ROS connection
+    cmd_vel.publish(message);
   };
 
   function backward() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
-      linear: { x: -0.15, y: 0, z: 0, },
+    message = new window.ROSLIB.Message({
+      linear: { x: -linSpeed, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
   };
 
   function turnLeft() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: 0.2, },
+      angular: { x: 0, y: 0, z: angSpeed, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
   };
 
   function turnRight() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: -0.2, },
+      angular: { x: 0, y: 0, z: -angSpeed, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
   };
 
   function stop() {
-
-    var cmd_vel = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: init_ros_connection.cmd_vel_topic,
-      messageType: "geometry_msgs/Twist",
-
-  }); 
-
-    let message = new window.ROSLIB.Message({
+    message = new window.ROSLIB.Message({
       linear: { x: 0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    setMessage(message);
-      console.log(newMessage);
-      //Call velocity topic from ROS connection 
-      cmd_vel.publish(newMessage);
+      //Call velocity topic from ROS connection
+      cmd_vel.publish(message);
   };
 
+  ///////////////////////////
+  // Speed control
+  ///////////////////////////
+  function incLinSpeed() {
+    linSpeed *= 1.1;
+    console.log(linSpeed);
+  };
 
+  function decLinSpeed() {
+    linSpeed *= 0.9;
+    console.log(linSpeed);
+  };
+
+  function incAngSpeed() {
+    angSpeed *= 1.1;
+    console.log(angSpeed);
+  };
+
+  function decAngSpeed() {
+    angSpeed *= 0.9;
+    console.log(angSpeed);
+  };
+
+  ///////////////////////////
+  // Keyboard listener
+  ///////////////////////////
   function onKeyDown(event) {
     var keyCode = event.keyCode;
     switch (keyCode) {
       case 68: //d turn right
-        setKeyD(true)
         turnRight();
+        setKeyD(true)
         break;
       case 83: //s move backward
         setKeyS(true)
@@ -138,17 +124,21 @@ const Controls = () => {
         setKeyW(true)
         forward();
         break;
-      case 73:
-        setKeyI(true);
+      case 85: //u fast lin speed
+        setKeyU(true)
+        incLinSpeed();
         break;
-      case 74:
-        setKeyJ(true);
+      case 74: //j slow lin speed
+        setKeyJ(true)
+        decLinSpeed();
         break;
-      case 75:
-        setKeyK(true);
+      case 73: //i fast ang speed
+        setKeyI(true)
+        incAngSpeed();
         break;
-      case 85:
-        setKeyU(true);
+      case 75: //k slow ang speed
+        setKeyK(true)
+        decAngSpeed();
         break;
       default:
         setKeyW(false)
@@ -161,6 +151,7 @@ const Controls = () => {
         setKeyJ(false)
         break;
     }
+    event.stopImmediatePropagation();
   }
 
   function onKeyUp(event) {
@@ -204,13 +195,11 @@ const Controls = () => {
     }
 
     stop();
-
+    event.stopImmediatePropagation();
   }
 
-  
   return (
       <div>
-        <RoverDataDropdown dataType="Controls"/>
         <Container style={{ textAlign: 'center', marginTop: '20vh' }}>
         <Row style={{ justifyContent: 'center', alignContent: 'center' }}>
           <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>W</Alert>
