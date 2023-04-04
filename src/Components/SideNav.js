@@ -8,10 +8,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Home from '../Pages/Home';
 import PropTypes from 'prop-types';
 
-const SideNav = ({ mode, radioValue }) => {
+const SideNav = ({ mode }) => {
   const [show, setShow] = useState(false);
-  const [setting, setSetting] = useState(mode);
-  const [radioVal, setRadio] = useState(radioValue);
+  const [setting, setSetting] = useState(document.body.classList.toggle("dark-mode") ? 'light' : 'dark');
+  const [radioVal, setRadio] = useState(document.body.classList.toggle("dark-mode") ? '2' : '1');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -45,18 +45,14 @@ const SideNav = ({ mode, radioValue }) => {
   );
 
   const toggleDarkMode = (e) => {
+    console.log(document.body.classList.toggle("dark-mode"));
+    setSetting((radioVal === 1) ? 'dark' : 'light')
     setRadio(e.currentTarget.value)
-    document.body.classList.toggle("dark-mode");
-    if (setting === 'light') {
-      setSetting('dark');
-    } else {
-      setSetting('light');
-    }
   };
 
   return (
       <>
-        <Navbar bg={mode} variant={mode} style={{ display: 'flex' }}>
+        <Navbar bg={mode} style={{ display: 'flex' }}>
             <Button variant="link" onClick={handleShow} style={logoStyle}>
               <Image src={RoseLogo} style={imageStyle}/>
             </Button>
@@ -151,7 +147,6 @@ const SideNav = ({ mode, radioValue }) => {
 
 SideNav.propType = {
   mode: PropTypes.string.isRequired,
-  radioValue: PropTypes.number.isRequired,
 };
 
 export default SideNav;
