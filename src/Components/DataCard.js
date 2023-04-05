@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 
 function DataCard(props){
-  const cardStyle = { height: "25vh", width: "20vw" };
+  const cardStyle = { height: "25vh", width: "20vw", margin: "0.4em"};
 
   return (
     <Card style={cardStyle} >
