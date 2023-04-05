@@ -6,6 +6,10 @@ import AutoNav from './Pages/AutoNav.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
+import GPSCoordinates from './Components/GPSCoordinates';
+import Speedometer from './Components/Speedometer';
+import Compass from './Components/Compass';
+import Controls from './Components/Controls';
 import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
 import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
@@ -14,10 +18,12 @@ import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
 import RoverDataControl from './Pages/RoverData/RoverDataControl';
 
 function App() {
+
   return (
     <Router>
-      <div className="main">
-        <Routes>
+
+      <div>
+          <Routes>
             <Route path="/autonav" element={<AutoNav/>} />
             <Route path="/payload" element={<Payload/>} />
             <Route path="/arm" element={<Arm/>} />

@@ -1,88 +1,32 @@
-.App {
-  background-size: auto auto;
+.dark-mode {
+  background-color: #181a1b !important;
+  color: ghostwhite !important;
 }
 
-.App-logo {
-  height: 15vmin;
-  pointer-events: none;
+.dark-mode a {
+  background-color: #181a1b !important;
+  color: ghostwhite !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.dark-mode div.row {
+  background-color: #181a1b !important;
+  color: ghostwhite !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.dark-mode div.col {
+  background-color: #181a1b !important;
+  color: ghostwhite !important;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.sidenav {
-  height: 100%;
-  width: 20vm;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color:#000000;
-  transition: .5s ease;
-  display: flex;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.sidenav-logos {
-  display: block;
-  flex-direction: column;
-  margin: auto;
-  width: 18vm;
-  height: 18vh;
-}
-
-.main {
-  margin-left: 10%;
-  width: 70vm;
-  display: block;
-  padding: 0px 10px;
-  overflow-x: hidden;
-}
-
-.queue-img {
-  width: 20px;
-  height: 20px;
-  border-radius: var(--bs-border-radius)!important;
-  margin-right: 0.5rem!important;
+.dark-mode div.offcanvas-body {
+  background-color: #181a1b !important;
+  color: ghostwhite !important;
 }
 
 .divider {
   border-right: 0.0625rem solid #c1c0c0;
   padding-right: 0;
 }
-
 
 .btn-circle.btn-xl {
   width: 100px;
@@ -143,3 +87,11 @@
   background: url('/src/Images/compass.png') center no-repeat;
 }
 
+canvas {
+  margin-top: 5px !important;
+}
+
+div.offcanvas-body, div.offcanvas-header, div.offcanvas.offcanvas-start {
+  min-width: 270px !important;
+  width: 270px !important;
+}
