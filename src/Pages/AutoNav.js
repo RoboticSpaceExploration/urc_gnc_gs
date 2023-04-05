@@ -15,11 +15,7 @@ function AutoNav() {
   const [waypointData, setWaypointData] = useState(null);
   const [queueData, setQueueData] = useState(null);
 
-<<<<<<< HEAD
-  const cardStyle = { height: "90vh" };
-=======
   const cardStyle = { height: "100vh" };
->>>>>>> main
   const titleStyle = { textAlign: "center", marginBottom: "10px" };
 
   useEffect(() => {
