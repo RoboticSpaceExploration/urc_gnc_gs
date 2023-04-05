@@ -6,6 +6,7 @@ import AutoNav from './Pages/AutoNav.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
+import System from './Pages/System.js';
 import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
 import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
@@ -21,6 +22,7 @@ function App() {
             <Route path="/autonav" element={<AutoNav/>} />
             <Route path="/payload" element={<Payload/>} />
             <Route path="/arm" element={<Arm/>} />
+            <Route path="/system" element={<System/>} />
             <Route path="/" element={<Home/>} />
           </Routes>
         </div>
