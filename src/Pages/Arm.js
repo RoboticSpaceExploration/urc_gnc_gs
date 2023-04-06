@@ -10,13 +10,13 @@ class Arm extends React.Component {
     return (
         <div>
             <SideNav/>
+            <Button onClick={()=> window.open('/#/arm/controls','controls', controls)}>
+                Open Arm Controls
+            </Button>
           <Row>
             <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
             <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
           </Row>
-          <Button onClick={()=> window.open('/#/arm/controls','controls', controls)}>
-              Arm Controls
-          </Button>
         </div>
     );
   };

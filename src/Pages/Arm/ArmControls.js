@@ -15,7 +15,6 @@ const ArmControls = () => {
     const [gearbox, setGearbox] = useState(false);
     const [grip, setGrip] = useState(false);
     const [wrist, setWrist] = useState(false);
-    const intervalRef = React.useRef(null);
 
     const imageStyle = { width: '80wh', position: 'absolute'};
 
@@ -37,10 +36,10 @@ const ArmControls = () => {
                     setGearbox(true);
                 }
                 if (number === 5) {
-                    setGrip(true);
+                    setEE(true);
                 }
                 if (number === 6) {
-                    setEE(true);
+                    setGrip(true);
                 }
             } else {
                 setShoulder(false);
