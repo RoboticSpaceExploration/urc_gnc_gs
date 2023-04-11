@@ -134,7 +134,7 @@ const SideNav = ({ mode }) => {
                       to="/arm"
                       style={navbarStyle}
                   >
-                    <h3><i className="fa-solid fa-robot" /> ARM</h3>
+                    <h3><i className="fa-solid fa-robot" /> Arm</h3>
                   </Nav.Item>
                 </Nav>
               </Offcanvas.Body>
