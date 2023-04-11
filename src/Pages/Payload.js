@@ -11,11 +11,10 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "25vh", width: "20vw", justifyContent: 'center' };
-  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em' };
+  const cardStyle = { height: "50vh", justifyContent: 'center', alignItems: 'center', minWidth: '700px', alignContent: 'center' };
+  const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', flexWrap: 'wrap', flexDirection: 'row' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
   const tableStyle = { height: "40vh", width: "80vw", float: "right" };
-  const titleStyle = { textAlign: 'center' }
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -224,12 +223,11 @@ function Payload() {
   return (
     <div id="payload-page">
 
-      <Container style={titleStyle}>
-        <h1>PAYLOAD</h1>
+      <div>
         <SideNav/>
 
         {/* Camera Feeds */}
-        <Row style={rowStyle} xs="auto">
+        <Row style={rowStyle}>
           <Col>
             <Card style={cardStyle}>Camera Feed 1</Card>
             {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
@@ -239,7 +237,7 @@ function Payload() {
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>*/}
           </Col>
         </Row>
-        <Row style={rowStyle} xs="auto">
+        <Row style={rowStyle}>
           <Col>
             <Card style={cardStyle}>Camera Feed 3</Card>
             {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>*/}
@@ -247,7 +245,7 @@ function Payload() {
           <Col>
             {/* Photo Gallery */}
             <Container style={cardStyle}>
-              <Carousel activeIndex={index} onSelect={handleSelect}>
+              <Carousel stye={cardStyle} activeIndex={index} onSelect={handleSelect}>
 
                 <Carousel.Item>
                   <img
@@ -276,7 +274,7 @@ function Payload() {
             </Container>
           </Col>
         </Row>
-      </Container>
+      </div>
 
       {/* Buttons to add/remove rows*/}
       <Container style={rowStyle}>
