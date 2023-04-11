@@ -7,16 +7,49 @@ import Forearm from '../../Images/forearm_outline.png';
 import Gearbox from '../../Images/gearbox_outline.png';
 import Grip from '../../Images/grip_outline.png';
 import Wrist from '../../Images/wrist_outline.png';
+import { init_ros_connection } from '../../ROSConnection';
 
 const ArmControls = () => {
     const [shoulder, setShoulder] = useState(false);
-    const [ee, setEE] = useState(false);
-    const [forearm, setForearm] = useState(false);
-    const [gearbox, setGearbox] = useState(false);
-    const [grip, setGrip] = useState(false);
-    const [wrist, setWrist] = useState(false);
+    const [ee,       setEE]       = useState(false);
+    const [forearm,  setForearm]  = useState(false);
+    const [gearbox,  setGearbox]  = useState(false);
+    const [grip,     setGrip]     = useState(false);
+    const [wrist,    setWrist]    = useState(false);
+    const cmd_vel = new window.ROSLIB.Topic({
+        ros: init_ros_connection.ros,
+        name: init_ros_connection.cmd_vel_topic,
+        messageType: "geometry_msgs/Twist",
+      });
+      let message = {};
+      let linSpeed = 1;
+      let angSpeed = 0.5;
+
 
     const imageStyle = { width: '80wh', position: 'absolute'};
+
+    /////////////////////////
+    // Movement control
+    /////////////////////////
+    function up() {
+        message = new window.ROSLIB.Message({
+            linear: { x: linSpeed, y: 0, z: 0, },
+            angular: { x: 0, y: 0, z: 0, },
+        })
+    
+        //Call velocity topic from ROS connection
+        cmd_vel.publish(message);
+      };
+    
+      function down() {
+        message = new window.ROSLIB.Message({
+          linear: { x: -linSpeed, y: 0, z: 0, },
+          angular: { x: 0, y: 0, z: 0, },
+      })
+    
+          //Call velocity topic from ROS connection
+          cmd_vel.publish(message);
+      };
 
     const ArmControlButtons = ({ top, left, number }) => {
         const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };

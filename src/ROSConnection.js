@@ -13,7 +13,11 @@ class ROSConnection {
         this.reconnection_timer = 3000;
         // this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
+        
+        //Arm Control topic
+        //this.arm_cmd_topic = ""
 
+        //Camera topics
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
             //cam1: "/camera/ired1/image_raw",
