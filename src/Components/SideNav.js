@@ -5,7 +5,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import RoseLogo from "../Images/rose-logo.png";
 import ListGroup from 'react-bootstrap/ListGroup';
-import Home from '../Pages/Home';
 import PropTypes from 'prop-types';
 
 const SideNav = ({ mode }) => {
