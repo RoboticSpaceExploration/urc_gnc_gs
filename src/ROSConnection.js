@@ -8,7 +8,13 @@ class ROSConnection {
         //this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
 
         //Rover ip
-        // this.rosbridge_server_ip = "172.17.0.1";
+        //this.rosbridge_server_ip = "172.17.0.1";
+
+        //Laptop ip
+        this.rosbridge_server_ip = "192.168.3.2";
+
+        //
+
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
         this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
@@ -27,8 +33,10 @@ class ROSConnection {
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
             //cam1: "/camera/ired1/image_raw",
-            cam1: "d435i/color/image_raw",
-            cam2: "/camera/color/image_raw",
+            //cam1: "d435i/color/image_raw",
+
+            cam1: "/zedm/zed_node/right_raw/image_raw_color",
+            cam2: "/zedm/zed_node/right_raw/image_raw_gray",
             cam3: "/camera/ired2/image_raw",
             cam4: "/camera_z/color/image_raw",
             cam5: "/camera_z/fisheye2/image_raw",
