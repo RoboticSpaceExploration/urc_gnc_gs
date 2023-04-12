@@ -31,6 +31,7 @@ const ArmControls = () => {
     /////////////////////////
     // Movement control
     /////////////////////////
+
     function up() {
         message = new window.ROSLIB.Message({
             linear: { x: linSpeed, y: 0, z: 0, },
@@ -83,6 +84,12 @@ const ArmControls = () => {
                 setForearm(false);
             }
         }
+
+        // moveJoint(id) {
+        //     if (id == 1) {
+        //         setShoulder(true);
+        //     }
+        // }
 
         return (
             <ButtonGroup vertical style={buttonStyle}>
