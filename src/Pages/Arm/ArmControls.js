@@ -19,7 +19,7 @@ const ArmControls = () => {
     const cmd_vel = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
         name: init_ros_connection.cmd_vel_topic,
-        messageType: "geometry_msgs/Twist",
+        messageType: "std_msgs/Float64",
       });
       let message = {};
       let linSpeed = 1;

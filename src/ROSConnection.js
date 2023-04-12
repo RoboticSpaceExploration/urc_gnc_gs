@@ -5,17 +5,23 @@ class ROSConnection {
 
         //Simulation ip
         this.rosbridge_server_ip = "192.168.0.223";
-        this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
+        //this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
 
         //Rover ip
         // this.rosbridge_server_ip = "172.17.0.1";
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
-        // this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
+        this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
-        
         //Arm Control topic
-        //this.arm_cmd_topic = ""
+        this.arm_cmd_topics = {
+           joint1: "/arm/joint1_position_controller/command",
+           joint2: "/arm/joint2_position_controller/command",
+           joint3: "/arm/joint3_position_controller/command",
+           joint4: "/arm/joint4_position_controller/command",
+           joint5: "/arm/joint5_position_controller/command",
+           joint6: "/arm/joint6_position_controller/command",
+        }
 
         //Camera topics
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
