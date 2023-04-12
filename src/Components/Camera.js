@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import MJPEGCANVAS from "../scripts/mjpegcanvas.min";
 import { Rnd } from "react-rnd";
+import ReactPlayer from 'react-player'; 
 
 class Camera extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class Camera extends Component {
                 topic: this.props.topic,
                 ssl: true,
             });
+            // this.camera = <ReactPlayer url = 'rtsp://192.168.0.112:8554/ts.m3u8'/>
     }
 
     render() {

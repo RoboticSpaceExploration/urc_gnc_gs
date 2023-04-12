@@ -3,6 +3,7 @@ import { Row, Button } from 'react-bootstrap';
 import Camera from "../Components/Camera";
 import { init_ros_connection } from '../ROSConnection';
 import SideNav from "../Components/SideNav";
+// import ReactPlayer from 'react-player';
 
 class Arm extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Arm extends React.Component {
                 Open Arm Controls
             </Button>
           <Row>
+            {/* <ReactPlayer url = 'http://192.168.0.112:8554/ts.m3u8'/> */}
             <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam3}/>
             <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam5}/>
           </Row>

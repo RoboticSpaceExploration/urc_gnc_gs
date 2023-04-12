@@ -18,40 +18,23 @@ const ArmControls = () => {
     const [wrist,    setWrist]    = useState(false);
     const cmd_vel = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
-        // name: init_ros_connection.arm_cmd_topics.joint1,
+        //name: init_ros_connection.arm_cmd_topics.joint1,
+        name: init_ros_connection.arm1_topic,
         messageType: "std_msgs/Float64",
+
+        // name: init_ros_connection.cmd_vel_topic,
+        // messageType: "geometry_msgs/Twist"
       });
       let message = {};
-      // let linSpeed = 1;
-      // let angSpeed = 0.5;
-
+      //let linSpeed = 1;
 
     const imageStyle = { width: '80wh', position: 'absolute'};
 
     /////////////////////////
-    // Movement control
+    // Arm movement control
     /////////////////////////
-
-    // function up() {
-    //     message = new window.ROSLIB.Message({
-    //         linear: { x: linSpeed, y: 0, z: 0, },
-    //         angular: { x: 0, y: 0, z: 0, },
-    //     })
-    //
-    //     //Call velocity topic from ROS connection
-    //     cmd_vel.publish(message);
-    //   };
-    //
-    //   function down() {
-    //     message = new window.ROSLIB.Message({
-    //       linear: { x: -linSpeed, y: 0, z: 0, },
-    //       angular: { x: 0, y: 0, z: 0, },
-    //   })
-    //
-    //       //Call velocity topic from ROS connection
-    //       cmd_vel.publish(message);
-    //   };
-
+      
+      
     const ArmControlButtons = ({ top, left, number }) => {
         const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
 
@@ -61,103 +44,95 @@ const ArmControls = () => {
                 if (motorID === '1-up') {
                     setShoulder(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint1;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
-                    console.log(cmd_vel);
+                    console.log(cmd_vel.name);
                     cmd_vel.publish(message);
+                    // forward(); 
                 } else if (motorID === '1-down') {
                     setShoulder(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint1;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
-                    console.log(cmd_vel);
+                    console.log(cmd_vel.name);
                     cmd_vel.publish(message);
+                    // backward();
                 } else if (motorID === '2-up') {
                     setForearm(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint2;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
-                    console.log(cmd_vel);
+                    console.log(cmd_vel.name);
                     cmd_vel.publish(message);
+                    // forward();
                 } else if (motorID === '2-down') {
                     setForearm(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint2;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: -40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
+                    // forward();
                 } else if (motorID === '3-up') {
                     setWrist(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint3;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
+                    // forward();
                 } else if (motorID === '3-down') {
                     setWrist(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint3;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: -40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
+                    // forward();
                 } else if (motorID === '4-up') {
                     setGearbox(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint4;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 } else if (motorID === '4-down') {
                     setGearbox(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint4;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: -40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 } else if (motorID === '5-up') {
                     setEE(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint5;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 } else if (motorID === '5-down') {
                     setEE(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint5;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: -40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 } else if (motorID === '6-up') {
                     setGrip(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint6;
-                    message = new window.ROSLIB.Message({effort: 0.99});
+                    message = new window.ROSLIB.Message({data: 40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 } else if (motorID === '6-down'){
                     setGrip(true);
                     cmd_vel.name = init_ros_connection.arm_cmd_topics.joint6;
-                    message = new window.ROSLIB.Message({effort: -0.99});
+                    message = new window.ROSLIB.Message({data: -40});
                     console.log(message);
                     console.log(cmd_vel);
                     cmd_vel.publish(message);
                 }
-                // if (number === 2) {
-                //     setForearm(true);
-                // }
-                // if (number === 3) {
-                //     setWrist(true);
-                // }
-                // if (number === 4) {
-                //     setGearbox(true);
-                // }
-                // if (number === 5) {
-                //     setEE(true);
-                // }
-                // if (number === 6) {
-                //     setGrip(true);
-                // }
+                
             } else {
                 setShoulder(false);
                 setWrist(false);
@@ -166,6 +141,8 @@ const ArmControls = () => {
                 setEE(false);
                 setForearm(false);
             }
+
+            event.stopImmediatePropagation();
         }
 
         // moveJoint(id) {

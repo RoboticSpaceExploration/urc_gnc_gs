@@ -4,20 +4,23 @@ class ROSConnection {
         this.connected = false;
 
         //Simulation ip
-        this.rosbridge_server_ip = "192.168.0.223";
+        // this.rosbridge_server_ip = "192.168.0.223";
         //this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
 
-        //Rover ip
-        //this.rosbridge_server_ip = "172.17.0.1";
+        //Thinkpad laptop ip
+        // this.rosbridge_server_ip = "192.168.3.2";
 
-        //Laptop ip
-        this.rosbridge_server_ip = "192.168.3.2";
+        //TX2 IP
+        //this.rosbridge_server_ip = "192.168.0.156";
 
-        //
+        //Xavier IP
+        this.rosbridge_server_ip = "192.168.2.2"
 
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
         this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
+
+        this.arm1_topic = "/arm/joint1_position_controller/command";
 
         //Arm Control topic
         this.arm_cmd_topics = {
@@ -27,7 +30,7 @@ class ROSConnection {
            joint4: "/arm/joint4_position_controller/command",
            joint5: "/arm/joint5_position_controller/command",
            joint6: "/arm/joint6_position_controller/command",
-        }
+        };
 
         //Camera topics
             // cmd_cam_topic: "/d435i/color/image_raw/compressed",
@@ -40,8 +43,11 @@ class ROSConnection {
             cam3: "/camera/ired2/image_raw",
             cam4: "/camera_z/color/image_raw",
             cam5: "/camera_z/fisheye2/image_raw",
-            cam6: "/teleop_cam/image_raw"
+            cam6: "/teleop_cam/image_raw", 
+
+            cam7: "/arm/camera/image_raw"
         };
+
         this.init_connection();
     }
     init_connection(){
