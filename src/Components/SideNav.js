@@ -136,6 +136,17 @@ const SideNav = ({ mode }) => {
                   >
                     <h3><i className="fa-solid fa-robot" /> Arm</h3>
                   </Nav.Item>
+                  <Nav.Item
+                    key="sixth"
+                    id="navbar-system"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    to="/system"
+                    style={navbarStyle}
+                  >
+                    <h3><i className="fa-solid fa-wifi"></i> System</h3>
+                  </Nav.Item>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
