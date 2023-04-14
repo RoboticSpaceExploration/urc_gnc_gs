@@ -5,7 +5,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import RoseLogo from "../Images/rose-logo.png";
 import ListGroup from 'react-bootstrap/ListGroup';
-import Home from '../Pages/Home';
 import PropTypes from 'prop-types';
 
 const SideNav = ({ mode }) => {
@@ -135,7 +134,7 @@ const SideNav = ({ mode }) => {
                       to="/arm"
                       style={navbarStyle}
                   >
-                    <h3><i className="fa-solid fa-robot" /> ARM</h3>
+                    <h3><i className="fa-solid fa-robot" /> Arm</h3>
                   </Nav.Item>
                 </Nav>
               </Offcanvas.Body>

@@ -6,11 +6,14 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . . 
+COPY . .
+
+RUN npm run build
+RUN npm install -g serve
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "start"]
+CMD [ "serve", "-s", "build"]
 
 # FROM node:12.18.1
 # ENV NODE_ENV=production

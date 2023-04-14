@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Row, Container } from 'react-bootstrap';
+import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 
 const Controls = () => {
@@ -201,22 +201,41 @@ const Controls = () => {
   return (
       <div>
         <Container style={{ textAlign: 'center', marginTop: '20vh' }}>
-        <Row style={{ justifyContent: 'center', alignContent: 'center' }}>
-          <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>W</Alert>
-        </Row>
-
-        <Row style={{ justifyContent: 'center' }}>
-          <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>A</Alert>
-          <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>S</Alert>
-          <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>D</Alert>
-        </Row>
-
-        <Row>
-          <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: '20px' }}>U</Alert>
-          <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: 0, marginRight: 0 }}>I</Alert>
-          <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>J</Alert>
-          <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '150px', marginLeft: '20px', marginRight: 0 }}>K</Alert>
-        </Row>
+          <Row>
+            <Col style={{textAlign:'center'}}>
+              <h3>Teleoperation Control</h3>
+              <Row style={{ justifyContent: 'center', alignContent: 'center' }}>
+                <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>W</Alert>
+              </Row>
+              <Row style={{ justifyContent: 'center' }}>
+                <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: '10px' }}>A</Alert>
+                <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>S</Alert>
+                <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: '10px', marginRight: 0 }}>D</Alert>
+              </Row>
+            </Col>
+            <Col>
+              <Row>
+                <Col>
+                  <h3>Linear Speed</h3>
+                  <Row>
+                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0}}>U</Alert>
+                  </Row>
+                  <Row>
+                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>J</Alert>
+                  </Row>
+                </Col>
+                <Col>
+                  <h3>Angular Speed</h3>
+                  <Row>
+                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>I</Alert>
+                  </Row>
+                  <Row>
+                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>K</Alert>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </Container>
       </div>
   );
