@@ -7,6 +7,12 @@ import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
 import System from './Pages/System.js';
+import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
+import RoverDataArmCam from './Pages/RoverData/RoverDataArmCam';
+import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
+import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
+import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
+import RoverDataControl from './Pages/RoverData/RoverDataControl';
 
 
 function App() {
