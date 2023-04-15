@@ -16,11 +16,13 @@ class ROSConnection {
         //Xavier IP
         this.rosbridge_server_ip = "192.168.2.2"
 
+        //this.rosbridge_server_ip
+
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
         this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
-        this.arm1_topic = "/arm/joint1_position_controller/command";
+        //this.arm1_topic = "/arm/joint1_position_controller/command";
 
         //Arm Control topic
         this.arm_cmd_topics = {
