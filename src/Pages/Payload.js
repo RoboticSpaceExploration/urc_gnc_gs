@@ -11,10 +11,10 @@ import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
-  const cardStyle = { height: "50vh", justifyContent: 'center', alignItems: 'center', minWidth: '700px', alignContent: 'center' };
+  const cardStyle = { height: "30vh", justifyContent: 'center', alignItems: 'center', alignContent: 'center' };
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', flexWrap: 'wrap', flexDirection: 'row' };
   const buttonStyle = { backgroundColor: "purple", borderStyle: "none", marginRight: "0.25em" };
-  const tableStyle = { height: "40vh", width: "80vw", float: "right" };
+  const tableStyle = { height: "40vh", width: "90vw", float: "right" };
   //stores table data
   const [rowData, setRowData] = useState([]);
 
@@ -222,10 +222,9 @@ function Payload() {
 
   return (
     <div id="payload-page">
-
-      <div>
-        <SideNav/>
-
+      <SideNav/>
+      <Container style={{marginTop: "-80px"}}>
+        <h1 className = 'text-center mt-3'> Payload</h1>
         {/* Camera Feeds */}
         <Row style={rowStyle}>
           <Col>
@@ -245,7 +244,7 @@ function Payload() {
           <Col>
             {/* Photo Gallery */}
             <Container style={cardStyle}>
-              <Carousel stye={cardStyle} activeIndex={index} onSelect={handleSelect}>
+              <Carousel activeIndex={index} onSelect={handleSelect}>
 
                 <Carousel.Item>
                   <img
@@ -274,7 +273,7 @@ function Payload() {
             </Container>
           </Col>
         </Row>
-      </div>
+      </Container>
 
       {/* Buttons to add/remove rows*/}
       <Container style={rowStyle}>
