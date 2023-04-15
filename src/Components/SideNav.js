@@ -123,7 +123,7 @@ const SideNav = ({ mode }) => {
                       to="/payload"
                       style={navbarStyle}
                   >
-                    <h3><i className="fa-solid fa-cart-flatbed-suitcase" /> Payload</h3>
+                    <h3><i className="fa-solid fa-seedling" /> Payload</h3>
                   </Nav.Item>
                   <Nav.Item
                       key="fifth"

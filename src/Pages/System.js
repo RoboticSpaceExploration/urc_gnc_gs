@@ -29,8 +29,10 @@ function System(props){
   console.log(Object.entries(sampleData)[0][1]);
 
     return (
-      <Container>
-        <SideNav />
+      <div id="system-page">
+        <SideNav/>
+        <Container style={{marginTop: "-80px"}}>
+          <h1 className = 'text-center mt-3'> System </h1>
           {/* Comms */}
         <Row style={rowStyle}>
           <DataCard title={Object.entries(sampleData)[0][0] + ": " +  Object.entries(Object.entries(sampleData)[0][1])[0][0]} data={sampleData}/>
@@ -65,9 +67,8 @@ function System(props){
             <DataCard title={Object.entries(sampleData)[3][0]} data={sampleData}/>
           </Col>
         </Row>
-
-
     </Container>
+      </div>
     );
 
 }
