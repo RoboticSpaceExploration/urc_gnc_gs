@@ -29,30 +29,23 @@ const ArmControls = () => {
     /////////////////////////
     // Arm movement control
     /////////////////////////
-
     function up(topic_name) {
         cmd_vel.name = topic_name;
         message = new window.ROSLIB.Message({data: 40});
-        console.log(message);
-        console.log(cmd_vel);
         cmd_vel.publish(message);
     }
     function down(topic_name){
         cmd_vel.name = topic_name;
         message = new window.ROSLIB.Message({data: -40});
-        console.log(message);
-        console.log(cmd_vel);
         cmd_vel.publish(message);
     }
     function stop(topic_name) {
         cmd_vel.name = topic_name;
         message = new window.ROSLIB.Message({data: 0});
-        console.log(message);
-        console.log(cmd_vel);
         cmd_vel.publish(message);
       };
 
-    const ArmControlButtons = ({ top, left, number }) => {
+    const ArmControlButtons = ({ top, left, number, topicName }) => {
         const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
 
         const handleEvent = (event) => {
@@ -60,43 +53,29 @@ const ArmControls = () => {
             if (event.type === "mousedown") {
                 if (motorID === '1-up') {
                     setShoulder(true);
-                    up(init_ros_connection.arm_cmd_topics.joint1);
                 } else if (motorID === '1-down') {
                     setShoulder(true);
-                    down(init_ros_connection.arm_cmd_topics.joint1);
                 } else if (motorID === '2-up') {
                     setForearm(true);
-                    up(init_ros_connection.arm_cmd_topics.joint2);
                 } else if (motorID === '2-down') {
                     setForearm(true);
-                    down(init_ros_connection.arm_cmd_topics.joint2);
                 } else if (motorID === '3-up') {
                     setWrist(true);
-                    up(init_ros_connection.arm_cmd_topics.joint3);
                 } else if (motorID === '3-down') {
                     setWrist(true);
-                    down(init_ros_connection.arm_cmd_topics.joint3);
                 } else if (motorID === '4-up') {
                     setGearbox(true);
-                    up(init_ros_connection.arm_cmd_topics.joint4);
                 } else if (motorID === '4-down') {
                     setGearbox(true);
-                    down(init_ros_connection.arm_cmd_topics.joint4);
                 } else if (motorID === '5-up') {
                     setEE(true);
-                    up(init_ros_connection.arm_cmd_topics.joint5);
                 } else if (motorID === '5-down') {
                     setEE(true);
-                    down(init_ros_connection.arm_cmd_topics.joint5);
                 } else if (motorID === '6-up') {
                     setGrip(true);
-                    up(init_ros_connection.arm_cmd_topics.joint6);
                 } else if (motorID === '6-down'){
                     setGrip(true);
-                    down(init_ros_connection.arm_cmd_topics.joint6);
                 }
-
-                //event.stopImmediatePropagation();
             } else if (event.type === "mouseup"){
                 setShoulder(false);
                 setWrist(false);
@@ -104,43 +83,15 @@ const ArmControls = () => {
                 setGrip(false);
                 setEE(false);
                 setForearm(false);
-                if (motorID === '1-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint1);
-                } else if (motorID === '1-down') {
-                    stop(init_ros_connection.arm_cmd_topics.joint1);
-                } else if (motorID === '2-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint2);
-                } else if (motorID === '2-down') {
-                    stop(init_ros_connection.arm_cmd_topics.joint2);
-                } else if (motorID === '3-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint3);
-                } else if (motorID === '3-down') {
-                    stop(init_ros_connection.arm_cmd_topics.joint3);
-                } else if (motorID === '4-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint4);
-                } else if (motorID === '4-down') {
-                    stop(init_ros_connection.arm_cmd_topics.joint4);
-                } else if (motorID === '5-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint5);
-                } else if (motorID === '5-down') {
-                    stop(init_ros_connection.arm_cmd_topics.joint5);
-                } else if (motorID === '6-up') {
-                    stop(init_ros_connection.arm_cmd_topics.joint6);
-                } else if (motorID === '6-down'){
-                    stop(init_ros_connection.arm_cmd_topics.joint6);
-                }
-
-                //event.stopImmediatePropagation();
             }
-
         }
 
         return (
             <ButtonGroup vertical style={buttonStyle}>
-                <Button variant='outline-dark' id={`${number}-up`} onMouseDown={(e) => handleEvent(e)} onMouseUp={(e) => handleEvent(e)}>
+                <Button variant='outline-dark' id={`${number}-up`} onMouseDown={(e) => {handleEvent(e); up(topicName);}} onMouseUp={(e) => {handleEvent(e); stop(topicName);}}>
                     <h3><i className="fa-solid fa-angle-up" /></h3>
                 </Button>
-                <Button variant='outline-dark' id={`${number}-down`} onMouseDown={(e) => handleEvent(e)} onMouseUp={(e) => handleEvent(e)}>
+                <Button variant='outline-dark' id={`${number}-down`} onMouseDown={(e) => {handleEvent(e); down(topicName);}} onMouseUp={(e) => {handleEvent(e); stop(topicName);}}>
                     <h3><i className="fa-solid fa-angle-down" /></h3>
                 </Button>
             </ButtonGroup>
@@ -156,12 +107,12 @@ const ArmControls = () => {
             {gearbox ? <Image src={Gearbox} style={imageStyle}/> : ''}
             {ee ? <Image src={EE} style={imageStyle}/> : ''}
             {grip ? <Image src={Grip} style={imageStyle}/> : ''}
-            <ArmControlButtons top={500} left={0} number={1}/>
-            <ArmControlButtons top={200} left={300} number={2}/>
-            <ArmControlButtons top={50} left={700} number={3}/>
-            <ArmControlButtons top={400} left={1000} number={4}/>
-            <ArmControlButtons top={50} left={1350} number={5}/>
-            <ArmControlButtons top={550} left={1250} number={6}/>
+            <ArmControlButtons top={500} left={0} number={1} topicName={init_ros_connection.arm_cmd_topics.joint1}/>
+            <ArmControlButtons top={200} left={300} number={2} topicName={init_ros_connection.arm_cmd_topics.joint2}/>
+            <ArmControlButtons top={50} left={700} number={3} topicName={init_ros_connection.arm_cmd_topics.joint3}/>
+            <ArmControlButtons top={400} left={1000} number={4} topicName={init_ros_connection.arm_cmd_topics.joint4}/>
+            <ArmControlButtons top={50} left={1350} number={5} topicName={init_ros_connection.arm_cmd_topics.joint5}/>
+            <ArmControlButtons top={550} left={1250} number={6} topicName={init_ros_connection.arm_cmd_topics.joint6}/>
 
         </Row>
     )
