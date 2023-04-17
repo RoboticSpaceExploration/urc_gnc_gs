@@ -16,13 +16,11 @@ const ArmControls = () => {
     const [gearbox,  setGearbox]  = useState(false);
     const [grip,     setGrip]     = useState(false);
     const [wrist,    setWrist]    = useState(false);
-    const cmd_vel = new window.ROSLIB.Topic({
+    const cmd_arm = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
-        name: init_ros_connection.arm_cmd_topics.joint1,
         messageType: "std_msgs/Float64",
       });
       let message = {};
-      //let linSpeed = 1;
 
     const imageStyle = { width: '80wh', position: 'absolute'};
 
@@ -30,19 +28,19 @@ const ArmControls = () => {
     // Arm movement control
     /////////////////////////
     function up(topic_name) {
-        cmd_vel.name = topic_name;
+        cmd_arm.name = topic_name;
         message = new window.ROSLIB.Message({data: 40});
-        cmd_vel.publish(message);
+        cmd_arm.publish(message);
     }
     function down(topic_name){
-        cmd_vel.name = topic_name;
+        cmd_arm.name = topic_name;
         message = new window.ROSLIB.Message({data: -40});
-        cmd_vel.publish(message);
+        cmd_arm.publish(message);
     }
     function stop(topic_name) {
-        cmd_vel.name = topic_name;
+        cmd_arm.name = topic_name;
         message = new window.ROSLIB.Message({data: 0});
-        cmd_vel.publish(message);
+        cmd_arm.publish(message);
       };
 
     const ArmControlButtons = ({ top, left, number, topicName }) => {
@@ -51,29 +49,17 @@ const ArmControls = () => {
         const handleEvent = (event) => {
             let motorID = event.currentTarget.id;
             if (event.type === "mousedown") {
-                if (motorID === '1-up') {
+                if (motorID === '1-up' || motorID === '1-down') {
                     setShoulder(true);
-                } else if (motorID === '1-down') {
-                    setShoulder(true);
-                } else if (motorID === '2-up') {
+                } else if (motorID === '2-up' || motorID === '2-down') {
                     setForearm(true);
-                } else if (motorID === '2-down') {
-                    setForearm(true);
-                } else if (motorID === '3-up') {
+                } else if (motorID === '3-up' || motorID === '3-down') {
                     setWrist(true);
-                } else if (motorID === '3-down') {
-                    setWrist(true);
-                } else if (motorID === '4-up') {
+                } else if (motorID === '4-up' || motorID === '4-down') {
                     setGearbox(true);
-                } else if (motorID === '4-down') {
-                    setGearbox(true);
-                } else if (motorID === '5-up') {
+                } else if (motorID === '5-up' || motorID === '5-down') {
                     setEE(true);
-                } else if (motorID === '5-down') {
-                    setEE(true);
-                } else if (motorID === '6-up') {
-                    setGrip(true);
-                } else if (motorID === '6-down'){
+                } else if (motorID === '6-up' || motorID === '6-down') {
                     setGrip(true);
                 }
             } else if (event.type === "mouseup"){
