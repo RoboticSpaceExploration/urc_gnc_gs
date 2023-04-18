@@ -35,6 +35,8 @@ const Controls = () => {
         angular: { x: 0, y: 0, z: 0, },
     })
 
+    console.log(cmd_vel);
+    console.log(message);
     //Call velocity topic from ROS connection
     cmd_vel.publish(message);
   };
@@ -45,6 +47,7 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: 0, },
   })
 
+    console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
   };
@@ -55,6 +58,7 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: angSpeed, },
   })
 
+      console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
   };
@@ -65,6 +69,7 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: -angSpeed, },
   })
 
+  console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
   };
@@ -75,6 +80,7 @@ const Controls = () => {
       angular: { x: 0, y: 0, z: 0, },
   })
 
+  console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
   };
