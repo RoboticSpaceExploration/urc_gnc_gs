@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 
-const Controls = () => {
+function Controls() {
   const [keyA, setKeyA] = useState(false);
   const [keyS, setKeyS] = useState(false);
   const [keyD, setKeyD] = useState(false);

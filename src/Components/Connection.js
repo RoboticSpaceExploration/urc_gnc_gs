@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import Alert from 'react-bootstrap/Alert';
+import React from 'react';
+import { Alert } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 
-class Connection extends Component {
+class Connection extends React.Component {
     render() {
         return (
             <Alert className="text-center"

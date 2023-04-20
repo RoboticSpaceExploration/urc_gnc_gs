@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from 'react-bootstrap';
 
-const GPSCoordinates = (props) => {
+function GPSCoordinates(props) {
     return (
           <div style={{ display: 'inline-block' }}>
             <Alert variant="dark">

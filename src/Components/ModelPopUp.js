@@ -1,7 +1,5 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
+import { Button, Image, Modal } from 'react-bootstrap';
 
 function ModelModal() {
   const [open, setOpen] = React.useState(false)

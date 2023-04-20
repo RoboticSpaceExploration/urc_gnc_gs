@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
-import { Button, Navbar, Offcanvas, Image, Nav, ButtonGroup, ToggleButton } from "react-bootstrap";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
-import RoseLogo from "../Images/rose-logo.png";
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Button, Navbar, Offcanvas, Image, Nav, ButtonGroup, ToggleButton, OverlayTrigger, Popover, ListGroup } from "react-bootstrap";
 import PropTypes from 'prop-types';
+import RoseLogo from "../Images/rose-logo.png";
 
 const SideNav = ({ mode }) => {
   const [show, setShow] = useState(false);

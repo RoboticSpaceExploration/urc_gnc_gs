@@ -1,6 +1,6 @@
 import React from "react";
 
-const Compass = () => {
+function Compass() {
     return (
             <div className="compass">
               <div className="arrow"></div>

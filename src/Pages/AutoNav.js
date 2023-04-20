@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
 import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
 import SideNav from '../Components/SideNav';
