@@ -24,6 +24,36 @@ const ArmControls = () => {
 
     const imageStyle = { width: '80wh', position: 'absolute'};
 
+    const handleEvent = (event) => {
+        let motorID = event.currentTarget.id;
+        if (event.type === "mousedown") {
+            if (motorID === '1-up' || motorID === '1-down') {
+                setShoulder(true);
+            } else if (motorID === '2-up' || motorID === '2-down') {
+                setForearm(true);
+            } else if (motorID === '3-up' || motorID === '3-down') {
+                setWrist(true);
+            } else if (motorID === '4-up' || motorID === '4-down') {
+                setGearbox(true);
+            } else if (motorID === '5-up' || motorID === '5-down') {
+                setEE(true);
+            } else if (motorID === '6-up' || motorID === '6-down') {
+                setGrip(true);
+            } else if (motorID === '7-up' || motorID === '7-down') {
+                setGearbox(true);
+                setWrist(true)
+            }
+
+        } else if (event.type === "mouseup"){
+            setShoulder(false);
+            setWrist(false);
+            setGearbox(false);
+            setGrip(false);
+            setEE(false);
+            setForearm(false);
+        }
+    }
+
     /////////////////////////
     // Arm movement control
     /////////////////////////
@@ -52,32 +82,6 @@ const ArmControls = () => {
     const ArmControlButtons = ({ top, left, number, topicName }) => {
         const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
 
-        const handleEvent = (event) => {
-            let motorID = event.currentTarget.id;
-            if (event.type === "mousedown") {
-                if (motorID === '1-up' || motorID === '1-down') {
-                    setShoulder(true);
-                } else if (motorID === '2-up' || motorID === '2-down') {
-                    setForearm(true);
-                } else if (motorID === '3-up' || motorID === '3-down') {
-                    setWrist(true);
-                } else if (motorID === '4-up' || motorID === '4-down') {
-                    setGearbox(true);
-                } else if (motorID === '5-up' || motorID === '5-down') {
-                    setEE(true);
-                } else if (motorID === '6-up' || motorID === '6-down') {
-                    setGrip(true);
-                }
-            } else if (event.type === "mouseup"){
-                setShoulder(false);
-                setWrist(false);
-                setGearbox(false);
-                setGrip(false);
-                setEE(false);
-                setForearm(false);
-            }
-        }
-
         return (
             <ButtonGroup vertical style={buttonStyle}>
                 <Button variant='outline-dark' id={`${number}-up`} onMouseDown={(e) => {handleEvent(e); up(topicName);}} onMouseUp={(e) => {handleEvent(e); stop(topicName);}}>
@@ -91,36 +95,6 @@ const ArmControls = () => {
     }
     const ArmControlButtons2 = ({ top, left, number, topicName1, topicName2 }) => {
         const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
-
-        const handleEvent = (event) => {
-            let motorID = event.currentTarget.id;
-            if (event.type === "mousedown") {
-                if (motorID === '1-up' || motorID === '1-down') {
-                    setShoulder(true);
-                } else if (motorID === '2-up' || motorID === '2-down') {
-                    setForearm(true);
-                } else if (motorID === '3-up' || motorID === '3-down') {
-                    setWrist(true);
-                } else if (motorID === '4-up' || motorID === '4-down') {
-                    setGearbox(true);
-                } else if (motorID === '5-up' || motorID === '5-down') {
-                    setEE(true);
-                } else if (motorID === '6-up' || motorID === '6-down') {
-                    setGrip(true);
-                } else if (motorID === '7-up' || motorID === '7-down') {
-                    setGearbox(true);
-                    setWrist(true)
-                }
-                
-            } else if (event.type === "mouseup"){
-                setShoulder(false);
-                setWrist(false);
-                setGearbox(false);
-                setGrip(false);
-                setEE(false);
-                setForearm(false);
-            }
-        }
 
         return (
             <ButtonGroup vertical style={buttonStyle}>
