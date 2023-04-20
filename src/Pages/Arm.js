@@ -16,9 +16,10 @@ class Arm extends React.Component {
         <Container style={{marginTop: "-80px"}}>
           <h1 className = 'text-center mt-3'> System </h1>
 
-          <Button style={buttonStyle} onClick={()=> window.open('/#/arm/controls','controls', controls)}>
+          <Button style={buttonStyle} onClick={()=> window.open('/#/arm/controls','armcontrols', controls)}>
                 Open Arm Controls
-            </Button>
+          </Button>
+            {/* <ReactPlayer url = 'http://192.168.0.112:8554/ts.m3u8'/> */}
 
           {/* Camera Feeds */}
           <Row style={rowStyle}>
