@@ -3,7 +3,7 @@ import { Image, Toast } from 'react-bootstrap';
 import axios from 'axios';
 import RoseLogo from "../Images/rose-logo.png";
 
-const QueueFeed = (props) => {
+function QueueFeed(props) {
     const [show, setShow] = useState(true);
 
     function handleClose(){
@@ -19,11 +19,12 @@ const QueueFeed = (props) => {
     <div className="queue-feed">
         <Toast show={show} onClose={handleClose} animation={false}>
             <Toast.Header closeButton={true}>
-                <Image
-                    src={RoseLogo}
-                    className="queue-img"
-                    alt=""
-                />
+                {/*<Image*/}
+                {/*    src={RoseLogo}*/}
+                {/*    className="queue-img"*/}
+                {/*    alt=""*/}
+                {/*    size="10px"*/}
+                {/*/>*/}
                 <strong className="me-auto">Insert Title</strong>
                 <small className="text-muted">{props.queue}</small>
             </Toast.Header>

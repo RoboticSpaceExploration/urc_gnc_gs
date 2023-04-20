@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import { Container } from 'react-bootstrap'
 import SideNav from '../Components/SideNav';
 
-class Home extends Component {
+class Home extends React.Component {
     state = {};
 
     render() {

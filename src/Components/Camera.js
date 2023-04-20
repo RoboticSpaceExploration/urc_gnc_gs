@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React from "react";
 import MJPEGCANVAS from "../scripts/mjpegcanvas.min";
 import { Rnd } from "react-rnd";
-import ReactPlayer from 'react-player'; 
+import ReactPlayer from 'react-player';
 
-class Camera extends Component {
+class Camera extends React.Component {
     constructor(props) {
         super(props);
         this.camera = null;

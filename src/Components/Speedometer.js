@@ -1,7 +1,7 @@
 import React from "react";
 import GaugeChart from 'react-gauge-chart';
 
-const Speedometer = (props) => {
+function Speedometer(props) {
   return(
         <div style={{ backgroundColor: '#282c34' }}>
           <GaugeChart

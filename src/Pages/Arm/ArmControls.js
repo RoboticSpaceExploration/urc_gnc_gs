@@ -9,7 +9,7 @@ import Grip from '../../Images/grip_outline.png';
 import Wrist from '../../Images/wrist_outline.png';
 import { init_ros_connection } from '../../ROSConnection';
 
-const ArmControls = () => {
+function ArmControls() {
     const [shoulder, setShoulder] = useState(false);
     const [ee,       setEE]       = useState(false);
     const [forearm,  setForearm]  = useState(false);
