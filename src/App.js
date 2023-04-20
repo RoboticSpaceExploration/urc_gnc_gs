@@ -1,7 +1,7 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AutoNav from './Pages/AutoNav.js';
 import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';

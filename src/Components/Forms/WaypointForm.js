@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function WaypointForm() {
     const [ waypoint, setWaypoint ] = useState({

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
-import SideNav from '../Components/SideNav';
 import DataCard from '../Components/DataCard';
+import SideNav from '../Components/SideNav';
 
 function System(props){
   const rowStyle = { justifyContent: 'center', textAlign: 'center', verticalAlign: '50%', display: 'flex', alignItems: 'center', padding: '0.5em' };

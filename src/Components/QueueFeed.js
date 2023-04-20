@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import { Image, Toast } from 'react-bootstrap';
 import axios from 'axios';
-import Image from 'react-bootstrap/Image';
-import Toast from 'react-bootstrap/Toast';
 import RoseLogo from "../Images/rose-logo.png";
 
 const QueueFeed = (props) => {

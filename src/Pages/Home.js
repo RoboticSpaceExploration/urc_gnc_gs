@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import SideNav from '../Components/SideNav';
 import { Container } from 'react-bootstrap'
+import SideNav from '../Components/SideNav';
 
 class Home extends Component {
     state = {};

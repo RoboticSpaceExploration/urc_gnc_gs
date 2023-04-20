@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
+import { Button, Form, Container } from "react-bootstrap";
+import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { render } from "@testing-library/react";
-import { Button, Form, Container } from "react-bootstrap";
 
 // needed to properly display the default marker on the map
 // delete L.Icon.Default.prototype._getIconUrl;

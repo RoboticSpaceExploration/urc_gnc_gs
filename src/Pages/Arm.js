@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Button, Container, Col, Card } from 'react-bootstrap';
 import Camera from "../Components/Camera";
-import { init_ros_connection } from '../ROSConnection';
 import SideNav from "../Components/SideNav";
+import { init_ros_connection } from '../ROSConnection';
 
 class Arm extends React.Component {
   render() {
