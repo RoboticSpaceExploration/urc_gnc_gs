@@ -14,7 +14,8 @@ class ROSConnection {
         //this.rosbridge_server_ip = "192.168.0.156";
 
         //Xavier IP
-        this.rosbridge_server_ip = "192.168.2.2"
+        //this.rosbridge_server_ip = "192.168.2.2"
+        this.rosbridge_server_ip = "192.168.0.184"
 
         //this.rosbridge_server_ip
 
