@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import ArmCad from "../../Images/arm-cad.png";
 import {Button, ButtonGroup, Image, Row} from "react-bootstrap";
 import Shoulder from '../../Images/shoulder_outline.png';
@@ -16,13 +16,27 @@ function ArmControls() {
     const [gearbox,  setGearbox]  = useState(false);
     const [grip,     setGrip]     = useState(false);
     const [wrist,    setWrist]    = useState(false);
+    const [dimensions,    setDimensions]    = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
     const cmd_arm = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
         messageType: "std_msgs/Float64",
       });
       let message = {};
 
-    const imageStyle = { width: '80wh', position: 'absolute'};
+    const imageStyle = { width: '75wh', position: 'absolute'};
+    useEffect(() => {
+        const onResize = () => setDimensions({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+        window.addEventListener('resize', onResize);
+        return () => {
+            window.removeEventListener('resize', onResize);
+        }
+    }, [dimensions]);
 
     const handleEvent = (event) => {
         let motorID = event.currentTarget.id;
@@ -80,7 +94,7 @@ function ArmControls() {
       };
 
     const ArmControlButtons = ({ top, left, number, topicName }) => {
-        const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
+        const buttonStyle = { width: 80, height: 40, top: top, left: left, position: 'absolute' };
 
         return (
             <ButtonGroup vertical style={buttonStyle}>
@@ -94,7 +108,7 @@ function ArmControls() {
         )
     }
     const ArmControlButtons2 = ({ top, left, number, topicName1, topicName2 }) => {
-        const buttonStyle = { width: 100, height: 50, top: top, left: left, position: 'absolute' };
+        const buttonStyle = { width: 80, height: 40, top: top, left: left, position: 'absolute' };
 
         return (
             <ButtonGroup vertical style={buttonStyle}>
@@ -117,13 +131,13 @@ function ArmControls() {
             {gearbox ? <Image src={Gearbox} style={imageStyle}/> : ''}
             {ee ? <Image src={EE} style={imageStyle}/> : ''}
             {grip ? <Image src={Grip} style={imageStyle}/> : ''}
-            <ArmControlButtons top={500} left={0} number={1} topicName={init_ros_connection.arm_cmd_topics.joint1}/>
-            <ArmControlButtons top={200} left={300} number={2} topicName={init_ros_connection.arm_cmd_topics.joint2}/>
-            <ArmControlButtons top={50} left={700} number={3} topicName={init_ros_connection.arm_cmd_topics.joint3}/>
-            <ArmControlButtons top={400} left={1000} number={4} topicName={init_ros_connection.arm_cmd_topics.joint4}/>
-            <ArmControlButtons top={50} left={1350} number={5} topicName={init_ros_connection.arm_cmd_topics.joint5}/>
-            <ArmControlButtons top={550} left={1250} number={6} topicName={init_ros_connection.arm_cmd_topics.joint6}/>
-            <ArmControlButtons2 top={50} left={1000} number={7} topicName1={init_ros_connection.arm_cmd_topics.joint3} topicName2={init_ros_connection.arm_cmd_topics.joint4}/>
+            <ArmControlButtons top={window.innerHeight*0.50} left={0} number={1} topicName={init_ros_connection.arm_cmd_topics.joint1}/>
+            <ArmControlButtons top={window.innerHeight*0.25} left={window.innerWidth*0.25} number={2} topicName={init_ros_connection.arm_cmd_topics.joint2}/>
+            <ArmControlButtons top={window.innerHeight*0.11} left={window.innerWidth*0.45} number={3} topicName={init_ros_connection.arm_cmd_topics.joint3}/>
+            <ArmControlButtons top={window.innerHeight*0.525} left={window.innerWidth*0.65} number={4} topicName={init_ros_connection.arm_cmd_topics.joint4}/>
+            <ArmControlButtons top={window.innerHeight*0.1} left={window.innerWidth*0.9} number={5} topicName={init_ros_connection.arm_cmd_topics.joint5}/>
+            <ArmControlButtons top={window.innerHeight*0.725} left={window.innerWidth*0.82} number={6} topicName={init_ros_connection.arm_cmd_topics.joint6}/>
+            <ArmControlButtons2 top={window.innerHeight*0.1} left={window.innerWidth*0.7} number={7} topicName1={init_ros_connection.arm_cmd_topics.joint3} topicName2={init_ros_connection.arm_cmd_topics.joint4}/>
 
         </Row>
     )
