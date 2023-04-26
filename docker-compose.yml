@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    image: "team-rose-backend"
+    ports:
+      - "9000:9000"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    image: "team-rose-frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - "backend:be"
