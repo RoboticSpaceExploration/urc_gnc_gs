@@ -49,33 +49,27 @@ const SideNav = ({ mode }) => {
   return (
       <>
         <Navbar bg={mode} style={{ display: 'flex' }}>
+          <div show={show} onHide={handleClose}>
             <Button variant="link" onClick={handleShow} style={logoStyle}>
-              <Image src={RoseLogo} style={imageStyle}/>
+                <Image src={RoseLogo} style={imageStyle}/>
             </Button>
-
-            <Offcanvas show={show} onHide={handleClose}>
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>
-                  <div style={{ justifyContent: 'flex-end' }}>
-                    <ButtonGroup>
-                      {radios.map((radio, idx) => (
-                          <ToggleButton
-                              key={idx}
-                              id={`radio-${idx}`}
-                              type="radio"
-                              variant={idx % 2 ? 'outline-secondary' : 'outline-dark'}
-                              value={radio.value}
-                              checked={radioVal === radio.value}
-                              onChange={(e) => toggleDarkMode(e)}
-                          >
-                            {radio.name}
-                          </ToggleButton>
-                      ))}
-                    </ButtonGroup>
-                  </div>
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
+            <ButtonGroup>
+              {radios.map((radio, idx) => (
+                <ToggleButton
+                    key={idx}
+                    id={`radio-${idx}`}
+                    type="radio"
+                    variant={idx % 2 ? 'outline-secondary' : 'outline-dark'}
+                    value={radio.value}
+                    checked={radioVal === radio.value}
+                    onChange={(e) => toggleDarkMode(e)}
+                >
+                  {radio.name}
+                </ToggleButton>
+                ))}
+              </ButtonGroup>
+              
+              <div>
                 <Nav variant="pills" className="flex-column" >
                   <Nav.Item
                       key="first"
@@ -99,6 +93,7 @@ const SideNav = ({ mode }) => {
                     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                       <h3><i className="fa-solid fa-database" /> Rover Data</h3>
                     </OverlayTrigger>
+
                   </Nav.Item>
                   <Nav.Item
                       key="third"
@@ -145,8 +140,8 @@ const SideNav = ({ mode }) => {
                     <h3><i className="fa-solid fa-wifi"></i> System</h3>
                   </Nav.Item>
                 </Nav>
-              </Offcanvas.Body>
-            </Offcanvas>
+              </div>
+            </div>
         </Navbar>
       </>
   );

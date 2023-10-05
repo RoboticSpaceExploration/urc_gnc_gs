@@ -9,7 +9,7 @@ class Home extends React.Component {
         return (
           <div id="home-page">
             <SideNav />
-            <Container style={{marginTop: "-80px"}}>
+            <Container style={{marginTop: "-350px"}}>
                 <h1 className = 'text-center mt-3'> Robot Control Page</h1>
             </Container>
           </div>
