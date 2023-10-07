@@ -1,6 +1,8 @@
 import React from "react";
-import { Container } from 'react-bootstrap'
+import { Container,Row,Col } from 'react-bootstrap'
 import SideNav from '../Components/SideNav';
+
+import Arm from "./Arm";
 
 class Home extends React.Component {
     state = {};
@@ -8,10 +10,26 @@ class Home extends React.Component {
     render() {
         return (
           <div id="home-page">
-            <SideNav />
-            <Container style={{marginTop: "-350px"}}>
+            
+            <Row>
+              <Col lg={2}>
+              <SideNav/>
+              
+              </Col>
+
+              <Col lg={10}>
+              <Container >
                 <h1 className = 'text-center mt-3'> Robot Control Page</h1>
-            </Container>
+                
+              </Container>
+              
+              
+              </Col>
+
+            </Row>
+            
+          
+            
           </div>
         );
     }

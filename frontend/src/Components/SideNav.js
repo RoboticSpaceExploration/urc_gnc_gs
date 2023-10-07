@@ -48,11 +48,10 @@ const SideNav = ({ mode }) => {
 
   return (
       <>
-        <Navbar bg={mode} style={{ display: 'flex' }}>
-          <div show={show} onHide={handleClose}>
-            <Button variant="link" onClick={handleShow} style={logoStyle}>
-                <Image src={RoseLogo} style={imageStyle}/>
-            </Button>
+        <Navbar bg={mode} style={{ display: 'flex'}}>
+          <div >
+           
+          
             <ButtonGroup>
               {radios.map((radio, idx) => (
                 <ToggleButton
