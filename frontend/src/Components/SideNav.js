@@ -48,7 +48,7 @@ const SideNav = ({ mode }) => {
 
   return (
       <>
-        <Navbar bg={mode} style={{ display: 'flex'}}>
+        <Navbar  bg={mode} fixed="top" style={{ display: 'flex',padding:25}}>
           <div >
            
           
