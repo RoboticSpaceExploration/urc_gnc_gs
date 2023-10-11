@@ -4,8 +4,8 @@ class ROSConnection {
         this.connected = false;
 
         //Simulation ip
-        this.rosbridge_server_ip = "192.168.0.223";
-        this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
+        // this.rosbridge_server_ip = "192.168.0.223";
+        // this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
 
         //Thinkpad laptop ip
         // this.rosbridge_server_ip = "192.168.3.2";
@@ -15,12 +15,12 @@ class ROSConnection {
 
         //Xavier IP
         //this.rosbridge_server_ip = "192.168.2.2"
-        // this.rosbridge_server_ip = "192.168.0.184
+        this.rosbridge_server_ip = "192.168.4.184"; // current xavier ip
         //this.rosbridge_server_ip
 
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
-        // this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
+        this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
         //this.arm1_topic = "/arm/joint1_position_controller/command";
 
