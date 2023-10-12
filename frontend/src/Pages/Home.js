@@ -8,10 +8,22 @@ import AutoNav from "./AutoNav";
 import System from "./System";
 
 class Home extends React.Component {
-    state = {};
+    
 
     render() {
+
+
+      const windowArray = [1,2,3,4]
+
+
+      // const populateTiles = windowArray.map((tile,key) =>
+
+       
+      // )
+
+
         return (
+
           <div id="home-page">
             
             <Row style={{padding:20}}>
@@ -21,42 +33,20 @@ class Home extends React.Component {
               </Col>
 
               <Col lg={10} >
-                <Container >
-                  <h1 className = 'text-center mt-3'> Robot Control Page</h1>
-
-                    <Connection />
-               
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <Card >
-                      <Arm />
-                    </Card>
-                  </div>
-
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <Card >
-                      <Payload />
-                    </Card>
-                  </div>
-
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <Card >
-                      <AutoNav />
-                    </Card>
-                  </div>
-
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <Card >
-                       <System/>
-                    </Card>
-                  </div>
+             
 
                   
+                <h1 className = 'text-center mt-3'> Robot Control Page</h1>
+
+                <Connection />
+
+                <Container className=" d-flex justify-content-center flex-row flex-wrap ">
+                  {/* {populateTiles} */}
                   
                   
-                  
+
                 </Container>
-              
-              
+
               </Col>
 
             </Row>
