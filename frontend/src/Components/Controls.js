@@ -206,7 +206,7 @@ function Controls() {
 
   return (
       <div>
-        <Container style={{ textAlign: 'center', marginTop: '20vh' }}>
+        <Container style={{ textAlign: 'center', marginTop: '5vh' }}>
           <Row>
             <Col style={{textAlign:'center'}}>
               <h3>Teleoperation Control</h3>
@@ -224,19 +224,19 @@ function Controls() {
                 <Col>
                   <h3>Linear Speed</h3>
                   <Row>
-                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0}}>U</Alert>
+                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto'}}>U</Alert>
                   </Row>
                   <Row>
-                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>J</Alert>
+                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>J</Alert>
                   </Row>
                 </Col>
                 <Col>
                   <h3>Angular Speed</h3>
                   <Row>
-                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>I</Alert>
+                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>I</Alert>
                   </Row>
                   <Row>
-                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>K</Alert>
+                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>K</Alert>
                   </Row>
                 </Col>
               </Row>

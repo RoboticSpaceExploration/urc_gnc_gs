@@ -7,6 +7,7 @@ import Payload from './Pages/Payload.js';
 import Arm from './Pages/Arm.js';
 import Home from './Pages/Home.js';
 import System from './Pages/System.js';
+import NewHome from './Pages/NewHome.js';
 import RoverDataChassisCam from './Pages/RoverData/RoverDataChassisCam';
 import RoverDataArmCam from './Pages/RoverData/RoverDataArmCam';
 import RoverDataGPS from './Pages/RoverData/RoverDataGPS';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/arm" element={<Arm/>} />
             <Route path="/system" element={<System/>} />
             <Route path="/" element={<Home/>} />
+            <Route path="/newhome" element={<NewHome />} />
           </Routes>
         </div>
         <div>

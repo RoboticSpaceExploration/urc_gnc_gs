@@ -39,52 +39,42 @@
 
 .compass {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background-color: black;
-  border: 10px solid #ab2c94;
-  margin: 50px auto auto;
+  border: 5px solid #ab2c94;
+  margin: 25px auto auto;
 }
 
 .compass > .arrow {
   position: absolute;
   width: 0;
   height: 0;
-  top: -20px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
   border-style: solid;
-  border-width: 40px 30px 0 30px;
+  border-width: 20px 15px 0 15px;
   border-color: grey transparent transparent;
   z-index: 1;
-  margin-top: 5px;
+  margin-top: 2.5px;
 }
 
 .compass-border > .compass > .arrow {
-  position: absolute;
-  width: 340px;
-  height: 340px;
-  margin: auto;
-  border-radius: 50%;
-  background: black url('/src/Images/compass.png') no-repeat center;
+  width: 220px;
+  height: 220px;
 }
 
 .compass > .compass-circle,
 .compass > .my-point {
   position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 50%;
-  left: 49%;
-  transform: translate(-50%, -50%);
+  width: 64%;
+  height: 64%;
+  transform: translate(25%, 25%);
   transition: transform 0.1s ease-out;
   background: url('/src/Images/compass.png') center no-repeat;
   background-size: contain;
-}
-
-.compass-circle {
-  background: url('/src/Images/compass.png') center no-repeat;
 }
 
 canvas {
