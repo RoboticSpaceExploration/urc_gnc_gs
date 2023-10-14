@@ -17,7 +17,7 @@ const  Home = ()=>{
 
               if(windowActive.autonav==false){
                 changeWindowArray([...windowArray, 
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-autonav" style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
                     <Card>
                     
                         {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
@@ -30,12 +30,15 @@ const  Home = ()=>{
                 ])
                 changeWindowActive({...windowActive,autonav:true})
               }
+              else{
+                document.getElementById("window-autonav").scrollIntoView()
+              }
             }
 
             document.getElementById('navbar-payload').onclick = ()=>{
               if(windowActive.payload==false){
                 changeWindowArray([...windowArray, 
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-payload" style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
                     <Card>
                     
                         {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
@@ -48,12 +51,15 @@ const  Home = ()=>{
                 ])
                 changeWindowActive({...windowActive,payload:true})
               }
+              else{
+                document.getElementById("window-payload").scrollIntoView()
+              }
             }
 
             document.getElementById('navbar-arm').onclick = ()=>{
               if(windowActive.arm==false){
                 changeWindowArray([...windowArray, 
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-arm" style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
                     <Card>
                     
                         {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
@@ -66,12 +72,15 @@ const  Home = ()=>{
                 ])
                 changeWindowActive({...windowActive,arm:true})
               }
+              else{
+                document.getElementById("window-arm").scrollIntoView()
+              }
             }
 
             document.getElementById('navbar-system').onclick = ()=>{
               if(windowActive.system==false){
                 changeWindowArray([...windowArray, 
-                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-system"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
                     <Card>
                     
                         {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
@@ -83,6 +92,9 @@ const  Home = ()=>{
                   </div>
                 ])
                 changeWindowActive({...windowActive,system:true})
+              }
+              else{
+                document.getElementById("window-system").scrollIntoView()
               }
             }
 
