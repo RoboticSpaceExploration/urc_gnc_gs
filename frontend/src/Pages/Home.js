@@ -1,5 +1,5 @@
-import React from "react";
-import { Container,Row,Col, Card } from 'react-bootstrap'
+import React, { useEffect, useState } from "react";
+import { Container,Row,Col, Card,But } from 'react-bootstrap'
 import SideNav from '../Components/SideNav';
 import Connection from "../Components/Connection";
 import Arm from "./Arm";
@@ -7,29 +7,67 @@ import Payload from "./Payload";
 import AutoNav from "./AutoNav";
 import System from "./System";
 
-class Home extends React.Component {
-    
+const  Home = ()=>{
 
-    render() {
+        
+
+          useEffect(()=>{
+
+            document.getElementById('navbar-autonav').onclick = ()=>{
+              changeWindowArray([...windowArray, 
+              <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+              <Card>
+              
+                
+                <AutoNav/>
+              </Card>
+            
+              </div>
+            ])
+            }
+
+            document.getElementById('navbar-payload').onclick = ()=>{
+              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+              <Card>
+                <Payload/>
+              </Card>
+            </div>])
+            }
+
+            document.getElementById('navbar-arm').onclick = ()=>{
+              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+              <Card>
+                <Arm/>
+              </Card>
+            </div>])
+            }
+
+            document.getElementById('navbar-system').onclick = ()=>{
+              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+              <Card>
+                <System/>
+              </Card>
+            </div>])
+            }
 
 
-      const windowArray = [1,2,3,4]
+          })
+
+          const [windowArray,changeWindowArray] = useState([])
 
 
-      // const populateTiles = windowArray.map((tile,key) =>
-
-       
-      // )
+         
 
 
-        return (
+          
 
+          return(
           <div id="home-page">
             
             <Row style={{padding:20}}>
               <Col lg={2} >
-                <SideNav fixed="top"/>
-              
+                <SideNav />
+               
               </Col>
 
               <Col lg={10} >
@@ -41,7 +79,28 @@ class Home extends React.Component {
                 <Connection />
 
                 <Container className=" d-flex justify-content-center flex-row flex-wrap ">
-                  {/* {populateTiles} */}
+               
+
+                   {/* <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+
+                    <Card>
+                      <Arm/>
+                    </Card>
+                  </div>
+
+                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
+
+                    <Card>
+                      <Arm/>
+                    </Card>
+                  </div>  */}
+
+                  
+                 
+                 {windowArray}
+
+                 
+
                   
                   
 
@@ -54,8 +113,9 @@ class Home extends React.Component {
           
             
           </div>
-        );
-    }
+          )
+        
+    
 }
 
 export default Home;

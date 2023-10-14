@@ -14,8 +14,8 @@ class Arm extends React.Component {
         <Container >
           <h1 className = 'text-center mt-3'> Arm </h1>
 
-          <Button style={buttonStyle} onClick={()=> window.open('/#/arm/controls','armcontrols', controls)}>
-                Open Arm Controls
+          <Button style={buttonStyle} onClick={()=> window.open('/#/arm/controls','armcontrols', controls)}>	          
+            Open Arm Controls
           </Button>
 
           

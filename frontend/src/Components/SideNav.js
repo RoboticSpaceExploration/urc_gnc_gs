@@ -25,6 +25,8 @@ const SideNav = ({ mode }) => {
     { name: 'Dark', value: '2' },
   ];
 
+
+
   const popover = (
       <Popover id="popover-basic">
         <Popover.Body>
@@ -48,7 +50,7 @@ const SideNav = ({ mode }) => {
 
   return (
       <>
-        <Navbar  bg={mode} fixed="top" style={{ display: 'flex',padding:25}}>
+        <Navbar bg={mode} style={{ display: 'flex'}}>
           <div >
            
           
@@ -100,8 +102,9 @@ const SideNav = ({ mode }) => {
                       as={NavLink}
                       className="active"
                       exact="true"
-                      to="/autonav"
+                      // to="/autonav"
                       style={navbarStyle}
+                      
                   >
                     <h3><i className="fa-solid fa-route" /> AutoNav</h3>
                   </Nav.Item>
@@ -111,7 +114,7 @@ const SideNav = ({ mode }) => {
                       as={NavLink}
                       className="active"
                       exact="true"
-                      to="/payload"
+                      // to="/payload"
                       style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-seedling" /> Payload</h3>
@@ -122,7 +125,7 @@ const SideNav = ({ mode }) => {
                       as={NavLink}
                       className="active"
                       exact="true"
-                      to="/arm"
+                      // to="/arm"
                       style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-robot" /> Arm</h3>
@@ -133,7 +136,7 @@ const SideNav = ({ mode }) => {
                     as={NavLink}
                     className="active"
                     exact="true"
-                    to="/system"
+                    // to="/system"
                     style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-wifi"></i> System</h3>
