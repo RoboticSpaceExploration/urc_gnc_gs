@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container,Row,Col, Card,But } from 'react-bootstrap'
+import { Container,Row,Col, Card,Button, NavItem,Nav } from 'react-bootstrap'
 import SideNav from '../Components/SideNav';
 import Connection from "../Components/Connection";
 import Arm from "./Arm";
@@ -14,46 +14,91 @@ const  Home = ()=>{
           useEffect(()=>{
 
             document.getElementById('navbar-autonav').onclick = ()=>{
-              changeWindowArray([...windowArray, 
-              <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
-              <Card>
-              
+
+              if(windowActive.autonav==false){
+                changeWindowArray([...windowArray, 
+                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                    <Card>
+                    
+                        {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
+                        
                 
-                <AutoNav/>
-              </Card>
-            
-              </div>
-            ])
+                      <AutoNav/>
+                    </Card>
+                
+                  </div>
+                ])
+                changeWindowActive({...windowActive,autonav:true})
+              }
             }
 
             document.getElementById('navbar-payload').onclick = ()=>{
-              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
-              <Card>
-                <Payload/>
-              </Card>
-            </div>])
+              if(windowActive.payload==false){
+                changeWindowArray([...windowArray, 
+                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                    <Card>
+                    
+                        {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
+                        
+                
+                      <Payload/>
+                    </Card>
+                
+                  </div>
+                ])
+                changeWindowActive({...windowActive,payload:true})
+              }
             }
 
             document.getElementById('navbar-arm').onclick = ()=>{
-              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
-              <Card>
-                <Arm/>
-              </Card>
-            </div>])
+              if(windowActive.arm==false){
+                changeWindowArray([...windowArray, 
+                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                    <Card>
+                    
+                        {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
+                        
+                
+                      <Arm/>
+                    </Card>
+                
+                  </div>
+                ])
+                changeWindowActive({...windowActive,arm:true})
+              }
             }
 
             document.getElementById('navbar-system').onclick = ()=>{
-              changeWindowArray([...windowArray, <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
-              <Card>
-                <System/>
-              </Card>
-            </div>])
+              if(windowActive.system==false){
+                changeWindowArray([...windowArray, 
+                  <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                    <Card>
+                    
+                        {/* <i onclick={window.alert("hey")} id='close-autonav' className="fa-solid fa-x" style={{padding:10,}} /> */}
+                        
+                
+                      <System/>
+                    </Card>
+                
+                  </div>
+                ])
+                changeWindowActive({...windowActive,system:true})
+              }
             }
 
 
           })
 
           const [windowArray,changeWindowArray] = useState([])
+          const [windowActive,changeWindowActive] = useState({
+
+            autonav:false,
+            payload:false,
+            arm:false,
+            system:false,
+
+          })
+          
 
 
          
@@ -78,7 +123,7 @@ const  Home = ()=>{
 
                 <Connection />
 
-                <Container className=" d-flex justify-content-center flex-row flex-wrap ">
+                <div className=" d-flex  flex-row flex-wrap justify-content-between">
                
 
                    {/* <div style={{ paddingTop: '20px', paddingBottom: '20px',width:'50%',padding:10}}>
@@ -104,7 +149,7 @@ const  Home = ()=>{
                   
                   
 
-                </Container>
+                </div>
 
               </Col>
 

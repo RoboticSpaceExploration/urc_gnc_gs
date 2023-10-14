@@ -50,7 +50,7 @@ const SideNav = ({ mode }) => {
 
   return (
       <>
-        <Navbar bg={mode} style={{ display: 'flex'}}>
+        <Navbar bg={mode} style={{ display: 'flex',position: '-webkit-sticky',position: 'sticky',top:15}}>
           <div >
            
           
@@ -70,7 +70,7 @@ const SideNav = ({ mode }) => {
                 ))}
               </ButtonGroup>
               
-              <div>
+              <div style={{paddingTop:10}}>
                 <Nav variant="pills" className="flex-column" >
                   <Nav.Item
                       key="first"
