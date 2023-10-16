@@ -3,11 +3,9 @@ import { Alert } from 'react-bootstrap';
 
 function GPSCoordinates(props) {
     return (
-          <div style={{ display: 'inline-block' }}>
-            <Alert variant="dark">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <p><strong>Longitude:  </strong>[longitude goes here]</p>
               <p><strong>Latitude: </strong>[latitude goes here]</p>
-            </Alert>
           </div>
     );
 };
