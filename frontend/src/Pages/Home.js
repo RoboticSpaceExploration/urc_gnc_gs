@@ -116,7 +116,7 @@ const Home = ()=>{
 
                 case "autonav":
                   ret.push(
-                  <div id="window-autonav"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-autonav"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                     <Card style={{padding:10}}>
                       {loadButtons('autonav')}
                       <AutoNav/>
@@ -126,7 +126,7 @@ const Home = ()=>{
                 
                 case "payload":
                   ret.push(
-                  <div id="window-payload"style={{ paddingTop: '20px', paddingBottom: '20px',width:'47%',}}>
+                  <div id="window-payload"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                      <Card style={{padding:10}}>
                     {loadButtons('payload')}
                       <Payload/>
@@ -136,7 +136,7 @@ const Home = ()=>{
 
                 case "arm":
                   ret.push(
-                  <div id="window-arm"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-arm"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                      <Card style={{padding:10}}>
                     {loadButtons('arm')}
                       <Arm/>
@@ -146,7 +146,7 @@ const Home = ()=>{
 
                 case "system":
                   ret.push(
-                  <div id="window-system"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
+                  <div id="window-system"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                     <Card style={{padding:10}}>
                     {loadButtons('system')}
                       <System/>
