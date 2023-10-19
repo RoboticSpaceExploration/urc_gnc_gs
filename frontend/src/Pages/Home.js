@@ -66,6 +66,26 @@ const Home = ()=>{
           })
 
 
+          const loadButtons = (input)=>{
+            return(
+              <div style={{display:"flex",flexDirection:'row',justifyContent:"flex-end"}}>
+                  <Button style={{width:77,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
+                    onClick={()=>{
+                    handlePopout(input)
+                    
+                  }}
+                  > Popout </Button>
+                  <Button style={{width:40,backgroundColor:'red',borderColor:'black'}}
+                  onClick={()=>{
+                    handleClose(input)
+                    
+                  }}
+                  > X </Button>
+             </div>
+            )
+          }
+
+
           const handleClose = (input) =>{
             const newArray = []
            for(let i=0;i<windowArray.length;i++){
@@ -75,6 +95,14 @@ const Home = ()=>{
            }
           changeWindowArray(newArray)
           changeWindowActive({...windowActive,[input]:false})
+          }
+
+          const handlePopout = (input)=>{
+            const windowSettings = 'width=750, height=400';
+            const openLink = '/#/' + input
+            window.open(openLink,'',windowSettings)
+            
+
           }
 
           
@@ -89,13 +117,8 @@ const Home = ()=>{
                 case "autonav":
                   ret.push(
                   <div id="window-autonav"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
-                    <Card>
-                      <Button 
-                      onClick={()=>{
-                        handleClose('autonav')
-                        
-                      }}
-                      > X </Button>
+                    <Card style={{padding:10}}>
+                      {loadButtons('autonav')}
                       <AutoNav/>
                     </Card>
                   </div>)
@@ -104,13 +127,8 @@ const Home = ()=>{
                 case "payload":
                   ret.push(
                   <div id="window-payload"style={{ paddingTop: '20px', paddingBottom: '20px',width:'47%',}}>
-                    <Card> 
-                    <Button 
-                      onClick={()=>{
-                        handleClose('payload')
-                        
-                      }}
-                      > X </Button>
+                     <Card style={{padding:10}}>
+                    {loadButtons('payload')}
                       <Payload/>
                     </Card>
                   </div>)
@@ -119,13 +137,8 @@ const Home = ()=>{
                 case "arm":
                   ret.push(
                   <div id="window-arm"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
-                    <Card>
-                    <Button 
-                      onClick={()=>{
-                        handleClose('arm')
-                        
-                      }}
-                      > X </Button>
+                     <Card style={{padding:10}}>
+                    {loadButtons('arm')}
                       <Arm/>
                     </Card>
                   </div>)
@@ -134,13 +147,8 @@ const Home = ()=>{
                 case "system":
                   ret.push(
                   <div id="window-system"style={{ paddingTop: '20px', paddingBottom: '20px',width:'48%',}}>
-                    <Card>
-                    <Button 
-                      onClick={()=>{
-                        handleClose('system')
-                        
-                      }}
-                      > X </Button>
+                    <Card style={{padding:10}}>
+                    {loadButtons('system')}
                       <System/>
                     </Card>
                   </div>)
