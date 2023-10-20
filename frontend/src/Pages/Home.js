@@ -69,7 +69,7 @@ const Home = ()=>{
           const loadButtons = (input)=>{
             return(
               <div style={{display:"flex",flexDirection:'row',justifyContent:"flex-end"}}>
-                  <Button style={{width:77,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
+                  <Button style={{width:85,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
                     onClick={()=>{
                     handlePopout(input)
                     
