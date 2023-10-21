@@ -98,6 +98,8 @@ const Home = ()=>{
           }
 
           const handlePopout = (input)=>{
+            handleClose(input)
+
             const windowSettings = 'width=750, height=400';
             const openLink = '/#/' + input
             window.open(openLink,'',windowSettings)
@@ -170,7 +172,7 @@ const Home = ()=>{
           <div id="home-page">
             
             <Row style={{padding:20}}>
-              <Col lg={2} >
+              <Col lg={2}>
                 <SideNav />
                
               </Col>
