@@ -6,19 +6,21 @@ import Arm from "./Arm";
 import Payload from "./Payload";
 import AutoNav from "./AutoNav";
 import System from "./System";
+import { Queue } from "../Components/AutoNav/Queue";
+
 
 const Home = ()=>{
 
         useEffect(()=>{
 
-          document.getElementById('navbar-autonav').onclick = ()=>{
+          document.getElementById('navbar-autonav-queue').onclick = ()=>{
 
-            if(windowActive.autonav===false){
-              changeWindowArray([...windowArray,'autonav'])
-              changeWindowActive({...windowActive,autonav:true})
+            if(windowActive.autonavqueue===false){
+              changeWindowArray([...windowArray,'autonavqueue'])
+              changeWindowActive({...windowActive,autonavqueue:true})
             }
             else{
-              document.getElementById("window-autonav").scrollIntoView()
+              document.getElementById("window-autonav-queue").scrollIntoView()
             }
           }
 
@@ -58,7 +60,7 @@ const Home = ()=>{
           const [windowArray,changeWindowArray] = useState([])
           const [windowActive,changeWindowActive] = useState({
 
-            autonav:false,
+            autonavqueue:false,
             payload:false,
             arm:false,
             system:false,
@@ -116,12 +118,12 @@ const Home = ()=>{
 
               switch(window){
 
-                case "autonav":
+                case "autonavqueue":
                   ret.push(
-                  <div id="window-autonav"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                  <div id="window-autonav-queue"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                     <Card style={{padding:10}}>
-                      {loadButtons('autonav')}
-                      <AutoNav/>
+                      {loadButtons('autonavqueue')}
+                      <Queue/>
                     </Card>
                   </div>)
                   break
