@@ -66,7 +66,9 @@ function AutoNav() {
       <Card style={cardStyle}>
         <div>
           <Row style={{ display: "flex" }}>
+
             <Col style={cardStyle} className="divider" xs={4}>
+
               <h3 style={{ textAlign: "center" }}>Queue List</h3>
               {queueData &&
                 queueData.map((queue) => {
@@ -80,16 +82,22 @@ function AutoNav() {
                   );
                 })}
               <QueueForm/>
+
+
             </Col>
 
             <Col style={cardStyle} className="divider" xs={4}>
               <h3 style={{ textAlign: "center" }}>Map</h3>
               <Map waypointData={waypointData}/>
             </Col>
+
+
             <Col style={{ height: "60vh" }}>
               <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
               <WaypointForm/>
             </Col>
+
+            
           </Row>
         </div>
       </Card>

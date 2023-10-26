@@ -111,7 +111,32 @@ const SideNav = ({ mode }) => {
                       <h4 style={{marginLeft:'35px'}}>Queue List</h4>
                     </NavItem>
 
+                    <NavItem
+                    key="blahh"
+                    id="navbar-autonav-map"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    style={navbarStyle}
+                    >
+                      <h4 style={{marginLeft:'35px'}}>Map</h4>
+                    </NavItem>
+
+                    <NavItem
+                    key="blahhh"
+                    id="navbar-autonav-waypoints"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    style={navbarStyle}
+                    >
+                      <h4 style={{marginLeft:'35px'}}>Waypoints</h4>
+                    </NavItem>
+
                   </div>
+
+               
+            
 
 
                     

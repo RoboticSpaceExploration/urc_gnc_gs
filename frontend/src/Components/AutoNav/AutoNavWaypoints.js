@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
 
-import QueueFeed from "../QueueFeed";
-import QueueForm from "../Forms/QueueForm";
+import WaypointForm from "../Forms/WaypointForm";
 
 
-export const Queue = ()=>{
+
+
+
+export const AutoNavWaypoints = ()=>{
     const [waypointData, setWaypointData] = useState(null);
     const [queueData, setQueueData] = useState(null);
 
@@ -45,29 +48,20 @@ export const Queue = ()=>{
         });
     }, []);
 
-    return (
 
-        
+    return(
+
 
 
         <>
-        <div>
-            <h3 style={{ textAlign: "center" }}>Queue List</h3>
-                {queueData &&
-                    queueData.map((queue) => {
-                    return (
-                        <QueueFeed
-                        queue={queue.queue}
-                        latitude={queue.latitude}
-                        longitude={queue.longitude}
-                        key={queue.queue}
-                        />
-                    );
-                    })}
-                <QueueForm/>
+        
+            <div>
+                <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
+              <WaypointForm/>
+            
             </div>
+        
         </>
     )
-
 
 }

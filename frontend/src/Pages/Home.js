@@ -6,12 +6,24 @@ import Arm from "./Arm";
 import Payload from "./Payload";
 import AutoNav from "./AutoNav";
 import System from "./System";
-import { Queue } from "../Components/AutoNav/Queue";
-
+import { AutoNavQueue } from "../Components/AutoNav/AutoNavQueue";
+import { AutoNavMap } from "../Components/AutoNav/AutoNavMap";
+import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
 
 const Home = ()=>{
 
         useEffect(()=>{
+
+          document.getElementById('navbar-autonav-waypoints').onclick = ()=>{
+
+            if(windowActive.autonavwaypoints===false){
+              changeWindowArray([...windowArray,'autonavwaypoints'])
+              changeWindowActive({...windowActive,autonavwaypoints:true})
+            }
+            else{
+              document.getElementById("window-autonav-waypoints").scrollIntoView()
+            }
+          }
 
           document.getElementById('navbar-autonav-queue').onclick = ()=>{
 
@@ -21,6 +33,17 @@ const Home = ()=>{
             }
             else{
               document.getElementById("window-autonav-queue").scrollIntoView()
+            }
+          }
+
+          document.getElementById('navbar-autonav-map').onclick = ()=>{
+
+            if(windowActive.autonavmap===false){
+              changeWindowArray([...windowArray,'autonavmap'])
+              changeWindowActive({...windowActive,autonavmap:true})
+            }
+            else{
+              document.getElementById("window-autonav-map").scrollIntoView()
             }
           }
 
@@ -61,9 +84,12 @@ const Home = ()=>{
           const [windowActive,changeWindowActive] = useState({
 
             autonavqueue:false,
+            autonavmap:false,
+            autonavwaypoints:false,
             payload:false,
             arm:false,
             system:false,
+
 
           })
 
@@ -99,12 +125,29 @@ const Home = ()=>{
           changeWindowActive({...windowActive,[input]:false})
           }
 
+
+
+
           const handlePopout = (input)=>{
             handleClose(input)
 
             const windowSettings = 'width=750, height=400';
-            const openLink = '/#/' + input
-            window.open(openLink,'',windowSettings)
+            const openLink = '/#/' + input 
+
+            switch(input){
+
+              case "payload":
+                window.open(openLink,'',windowSettings)
+              case "arm" :
+                window.open(openLink,'',windowSettings)
+              case"system":
+                window.open(openLink,'',windowSettings)
+              
+              case "autonavqueue":
+                window.open(openLink,'',windowSettings)
+
+            }
+            // window.open(openLink,'',windowSettings)
             
 
           }
@@ -123,7 +166,27 @@ const Home = ()=>{
                   <div id="window-autonav-queue"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                     <Card style={{padding:10}}>
                       {loadButtons('autonavqueue')}
-                      <Queue/>
+                      <AutoNavQueue/>
+                    </Card>
+                  </div>)
+                  break
+
+                case "autonavmap":
+                  ret.push(
+                  <div id="window-autonav-map"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                    <Card style={{padding:10}}>
+                      {loadButtons('autonavmap')}
+                      <AutoNavMap/>
+                    </Card>
+                  </div>)
+                  break
+
+                case "autonavwaypoints":
+                  ret.push(
+                  <div id="window-autonav-waypoints"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                    <Card style={{padding:10}}>
+                      {loadButtons('autonavwaypoints')}
+                      <AutoNavWaypoints/>
                     </Card>
                   </div>)
                   break
