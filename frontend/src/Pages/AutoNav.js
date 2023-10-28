@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
-import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
-import SideNav from '../Components/SideNav';
 import Map from '../Components/Map';
 import QueueForm from '../Components/Forms/QueueForm';
 import WaypointForm from '../Components/Forms/WaypointForm';

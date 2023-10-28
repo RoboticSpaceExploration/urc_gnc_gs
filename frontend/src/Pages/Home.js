@@ -4,12 +4,11 @@ import SideNav from '../Components/SideNav';
 import Connection from "../Components/Connection";
 import Arm from "./Arm";
 import Payload from "./Payload";
-import AutoNav from "./AutoNav";
 import System from "./System";
 import { AutoNavQueue } from "../Components/AutoNav/AutoNavQueue";
 import { AutoNavMap } from "../Components/AutoNav/AutoNavMap";
 import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
-import ArmControls from "./Arm/ArmControls";
+
 
 const Home = ()=>{
 
@@ -48,24 +47,7 @@ const Home = ()=>{
             }
           }
 
-          // document.getElementById('navbar-payload').onclick = ()=>{
-          //   if(windowActive.payload===false){
-          //     changeWindowArray([...windowArray,'payload'])
-          //     changeWindowActive({...windowActive,payload:true})
-          //   }
-          //   else{
-          //     document.getElementById("window-payload").scrollIntoView()
-          //   }
-          // }
-
           document.getElementById('navbar-arm').onclick = ()=>{
-            // if(windowActive.arm===false){
-            //   changeWindowArray([...windowArray,'arm'])
-            //   changeWindowActive({...windowActive,arm:true})
-            // }
-            // else{
-            //   document.getElementById("window-arm").scrollIntoView()
-            // }
             const windowSettings = 'width=750, height=400';
             window.open('/#/arm','',windowSettings)
           }
@@ -80,7 +62,6 @@ const Home = ()=>{
             }
           }
 
-
         })
 
           const [windowArray,changeWindowArray] = useState([])
@@ -92,10 +73,7 @@ const Home = ()=>{
             payload:false,
             arm:false,
             system:false,
-
-
           })
-
 
           const loadButtons = (input)=>{
             return(
@@ -116,7 +94,6 @@ const Home = ()=>{
             )
           }
 
-
           const handleClose = (input) =>{
             const newArray = []
            for(let i=0;i<windowArray.length;i++){
@@ -128,9 +105,6 @@ const Home = ()=>{
           changeWindowActive({...windowActive,[input]:false})
           }
 
-
-
-
           const handlePopout = (input)=>{
             handleClose(input)
 
@@ -138,10 +112,7 @@ const Home = ()=>{
             const openLink = '/#/' +input
 
             window.open(openLink,'',windowSettings)
-            
           }
-
-          
 
           const renderWindows = () =>{
             const ret = []
@@ -212,8 +183,6 @@ const Home = ()=>{
 
                 default:
                   
-
-
               }
 
             })
@@ -226,35 +195,22 @@ const Home = ()=>{
           <div id="home-page">
             
             <Row style={{padding:20}}>
+
               <Col lg={2}>
                 <SideNav />
-               
               </Col>
 
               <Col lg={10} >
-             
-
                 <h1 className = 'text-center mt-3'> Robot Control Page</h1>
-
                 <Connection />
-
                 <div className=" d-flex  flex-row flex-wrap justify-content-between">
-               
-                  
                   {renderWindows()}
-
-
                 </div>
-
               </Col>
 
             </Row>
-            
-          
-            
           </div>
           )
-        
     
 }
 

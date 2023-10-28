@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
-
 import WaypointForm from "../Forms/WaypointForm";
-
-
-
-
 
 export const AutoNavWaypoints = ()=>{
     const [waypointData, setWaypointData] = useState(null);
@@ -51,10 +45,7 @@ export const AutoNavWaypoints = ()=>{
 
     return(
 
-
-
         <>
-        
             <div>
                 <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
               <WaypointForm/>
