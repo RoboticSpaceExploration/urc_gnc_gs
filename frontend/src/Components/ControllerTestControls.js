@@ -1,11 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import {useGamepads} from 'react-gamepads';
+import React, { useState } from 'react';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
+import 'joypad.js';
 
 function ControllerTestControls() {
-    const [gamepads, setGamepads] = useState({});
-    useGamepads(gamepads => setGamepads(gamepads));
+    const [dPadLeft, setDPadLeft] = useState(false);
+    const [dPadDown, setDPadDown] = useState(false);
+    const [dPadRight, setDPadRight] = useState(false);
+    const [dPadUp, setDPadUp] = useState(false);
+    const [buttonA, setButtonA] = useState(false);
+    const [buttonB, setButtonB] = useState(false);
+    const [buttonX, setButtonX] = useState(false);
+    const [buttonY, setButtonY] = useState(false);
+
+    window.joypad.on('connect', (e) => {
+        const { id } = e.gamepad;
+
+        console.log(`${id} connected!`);
+    });
+
     const cmd_vel = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
         name: init_ros_connection.cmd_vel_topic,
@@ -15,10 +28,10 @@ function ControllerTestControls() {
     let linSpeed = 1;
     let angSpeed = 0.5;
 
-    useEffect(() => {
+    /*useEffect(() => {
         window.addEventListener("buttondown", onButtonPress, {capture: true, passive: false});
         window.addEventListener("buttonup", onButtonRelease, {capture: true, passive: false});
-    })
+    })*/
 
     /////////////////////////
     // Movement control
@@ -102,10 +115,62 @@ function ControllerTestControls() {
         console.log(angSpeed);
     };
 
+
     ///////////////////////////
     // Controller Listener
     ///////////////////////////
-    function onButtonPress(event) {
+   window.joypad.on('button_press', e => {
+       const { buttonName } = e.detail;
+
+       switch(buttonName) {
+           case 'button_12': //dPadUp move forward
+               forward();
+               setDPadUp(true);
+               break;
+           case 'button_13': //dPadDown move backward
+               backward();
+               setDPadDown(true);
+               break;
+           case 'button_14': //dPadLeft turn left
+               turnLeft();
+               setDPadLeft(true);
+               break;
+           case 'button_15': //dPadRight turn right
+               turnRight();
+               setDPadRight(true);
+               break;
+           case 'button_0': //aButton inc lin speed
+               incLinSpeed();
+               setButtonA(true);
+               break;
+           case 'button_1': //bButton dec lin speed
+               decLinSpeed();
+               setButtonB(true);
+               break;
+           case 'button_2': //xButton inc ang speed
+               incAngSpeed();
+               setButtonX(true);
+               break;
+           case 'button_3': //yButton dec ang speed
+               decAngSpeed();
+               setButtonY(true);
+               break;
+           default:
+               setDPadUp(false)
+               setDPadDown(false)
+               setDPadLeft(false)
+               setDPadRight(false)
+               setButtonA(false)
+               setButtonB(false)
+               setButtonX(false)
+               setButtonY(false)
+               break;
+       }
+
+       e.stopImmediatePropagation();
+   })
+
+    /*function onButtonPress(event) {
         var keyCode = event.keyCode;
         switch (keyCode) {
             case 68: //d turn right
@@ -152,9 +217,53 @@ function ControllerTestControls() {
                 break;
         }
         event.stopImmediatePropagation();
-    }
+    }*/
 
-    function onButtonRelease(event) {
+    window.joypad.on('button_release', e => {
+        const { buttonName } = e.detail;
+
+        switch(buttonName) {
+            case 'button_12': //dPadUp
+                setDPadUp(false);
+                break;
+            case 'button_13': //dPadDown
+                setDPadDown(false);
+                break;
+            case 'button_14': //dPadLeft
+                setDPadLeft(false);
+                break;
+            case 'button_15': //dPadRight
+                setDPadRight(false);
+                break;
+            case 'button_0': //aButton
+                setButtonA(false);
+                break;
+            case 'button_1': //bButton
+                setButtonB(false);
+                break;
+            case 'button_2': //xButton
+                setButtonX(false);
+                break;
+            case 'button_3': //yButton
+                setButtonY(false);
+                break;
+            default:
+                setDPadUp(false)
+                setDPadDown(false)
+                setDPadLeft(false)
+                setDPadRight(false)
+                setButtonA(false)
+                setButtonB(false)
+                setButtonX(false)
+                setButtonY(false)
+                break;
+        }
+
+        stop();
+        e.stopImmediatePropagation();
+    })
+
+    /*function onButtonRelease(event) {
         var keyCode = event.keyCode;
 
         switch (keyCode) {
@@ -196,7 +305,7 @@ function ControllerTestControls() {
 
         stop();
         event.stopImmediatePropagation();
-    }
+    }*/
 
     return (
         <div>
@@ -205,12 +314,12 @@ function ControllerTestControls() {
                     <Col style={{textAlign:'center'}}>
                         <h3>Teleoperation Control</h3>
                         <Row style={{ justifyContent: 'center', alignContent: 'center' }}>
-                            <Alert variant={keyW ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Dpad-UP</Alert>
+                            <Alert variant={dPadUp ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Dpad-UP</Alert>
                         </Row>
                         <Row style={{ justifyContent: 'center' }}>
-                            <Alert variant={keyA ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: '10px' }}>Dpad-LEFT</Alert>
-                            <Alert variant={keyS ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Dpad-DOWN</Alert>
-                            <Alert variant={keyD ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: '10px', marginRight: 0 }}>Dpad-RIGHT</Alert>
+                            <Alert variant={dPadLeft ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: '10px' }}>Dpad-LEFT</Alert>
+                            <Alert variant={dPadRight ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Dpad-RIGHT</Alert>
+                            <Alert variant={dPadDown ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: '10px', marginRight: 0 }}>Dpad-DOWN</Alert>
                         </Row>
                     </Col>
                     <Col>
@@ -218,19 +327,19 @@ function ControllerTestControls() {
                             <Col>
                                 <h3>Linear Speed</h3>
                                 <Row>
-                                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0}}>A</Alert>
+                                    <Alert variant={buttonA ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0}}>A</Alert>
                                 </Row>
                                 <Row>
-                                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>B</Alert>
+                                    <Alert variant={buttonB ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>B</Alert>
                                 </Row>
                             </Col>
                             <Col>
                                 <h3>Angular Speed</h3>
                                 <Row>
-                                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>X</Alert>
+                                    <Alert variant={buttonX ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>X</Alert>
                                 </Row>
                                 <Row>
-                                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Y</Alert>
+                                    <Alert variant={buttonY ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>Y</Alert>
                                 </Row>
                             </Col>
                         </Row>

@@ -47,7 +47,7 @@ function Controls() {
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    console.log(message);
+      console.log(message);
       //Call velocity topic from ROS connection
       cmd_vel.publish(message);
   };
