@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 import 'joypad.js';
@@ -28,10 +28,10 @@ function ControllerTestControls() {
     let linSpeed = 1;
     let angSpeed = 0.5;
 
-    /*useEffect(() => {
-        window.addEventListener("buttondown", onButtonPress, {capture: true, passive: false});
-        window.addEventListener("buttonup", onButtonRelease, {capture: true, passive: false});
-    })*/
+    useEffect(() => {
+        window.addEventListener("button_press", e => onButtonPress(e), {capture: true, passive: false});
+        window.addEventListener("button_release", e => onButtonRelease(e), {capture: true, passive: false});
+    })
 
     /////////////////////////
     // Movement control
@@ -119,9 +119,9 @@ function ControllerTestControls() {
     ///////////////////////////
     // Controller Listener
     ///////////////////////////
-   window.joypad.on('button_press', e => {
+   function onButtonPress(e) {
        const { buttonName } = e.detail;
-
+        console.log(buttonName);
        switch(buttonName) {
            case 'button_12': //dPadUp move forward
                forward();
@@ -168,7 +168,7 @@ function ControllerTestControls() {
        }
 
        e.stopImmediatePropagation();
-   })
+   }
 
     /*function onButtonPress(event) {
         var keyCode = event.keyCode;
@@ -219,9 +219,9 @@ function ControllerTestControls() {
         event.stopImmediatePropagation();
     }*/
 
-    window.joypad.on('button_release', e => {
+    function onButtonRelease (e) {
         const { buttonName } = e.detail;
-
+        console.log(buttonName);
         switch(buttonName) {
             case 'button_12': //dPadUp
                 setDPadUp(false);
@@ -261,7 +261,7 @@ function ControllerTestControls() {
 
         stop();
         e.stopImmediatePropagation();
-    })
+    }
 
     /*function onButtonRelease(event) {
         var keyCode = event.keyCode;

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a9722276.css",
-    "main.js": "/static/js/main.bce12588.js",
+    "main.css": "/static/css/main.24a15a5d.css",
+    "main.js": "/static/js/main.135d3992.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/test-image-1.jpeg": "/static/media/test-image-1.1f94afdd110d3ee03092.jpeg",
     "static/media/rose-logo.png": "/static/media/rose-logo.af9962a5cca1cdf774f9.png",
@@ -15,12 +15,12 @@
     "static/media/test-image-3.jpeg": "/static/media/test-image-3.9bf72f08d4fb0b72978a.jpeg",
     "static/media/test-image-2.jpeg": "/static/media/test-image-2.4cf6fa70c9f6c7f53cbe.jpeg",
     "index.html": "/index.html",
-    "main.a9722276.css.map": "/static/css/main.a9722276.css.map",
-    "main.bce12588.js.map": "/static/js/main.bce12588.js.map",
+    "main.24a15a5d.css.map": "/static/css/main.24a15a5d.css.map",
+    "main.135d3992.js.map": "/static/js/main.135d3992.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9722276.css",
-    "static/js/main.bce12588.js"
+    "static/css/main.24a15a5d.css",
+    "static/js/main.135d3992.js"
   ]
 }
