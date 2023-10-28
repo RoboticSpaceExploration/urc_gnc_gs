@@ -1,4 +1,4 @@
-import { AutoNavQueue } from "../../Components/AutoNav/AutoNavQueue";
+import { AutoNavQueue } from "../Components/AutoNav/AutoNavQueue";
 
 export  const AutoNavQueuePage = ()=>{
     
@@ -6,9 +6,7 @@ export  const AutoNavQueuePage = ()=>{
 
     return(
 
-
         <>
-        
             <AutoNavQueue/>
         </>
     )

@@ -141,7 +141,7 @@ const SideNav = ({ mode }) => {
 
                     
                   
-                  <Nav.Item
+                  {/* <Nav.Item
                       key="fourth"
                       id="navbar-payload"
                       as={NavLink}
@@ -151,7 +151,7 @@ const SideNav = ({ mode }) => {
                       style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-seedling" /> Payload</h3>
-                  </Nav.Item>
+                  </Nav.Item> */}
 
                   <Nav.Item
                       key="fifth"

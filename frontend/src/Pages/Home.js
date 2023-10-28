@@ -9,6 +9,7 @@ import System from "./System";
 import { AutoNavQueue } from "../Components/AutoNav/AutoNavQueue";
 import { AutoNavMap } from "../Components/AutoNav/AutoNavMap";
 import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
+import ArmControls from "./Arm/ArmControls";
 
 const Home = ()=>{
 
@@ -47,24 +48,26 @@ const Home = ()=>{
             }
           }
 
-          document.getElementById('navbar-payload').onclick = ()=>{
-            if(windowActive.payload===false){
-              changeWindowArray([...windowArray,'payload'])
-              changeWindowActive({...windowActive,payload:true})
-            }
-            else{
-              document.getElementById("window-payload").scrollIntoView()
-            }
-          }
+          // document.getElementById('navbar-payload').onclick = ()=>{
+          //   if(windowActive.payload===false){
+          //     changeWindowArray([...windowArray,'payload'])
+          //     changeWindowActive({...windowActive,payload:true})
+          //   }
+          //   else{
+          //     document.getElementById("window-payload").scrollIntoView()
+          //   }
+          // }
 
           document.getElementById('navbar-arm').onclick = ()=>{
-            if(windowActive.arm===false){
-              changeWindowArray([...windowArray,'arm'])
-              changeWindowActive({...windowActive,arm:true})
-            }
-            else{
-              document.getElementById("window-arm").scrollIntoView()
-            }
+            // if(windowActive.arm===false){
+            //   changeWindowArray([...windowArray,'arm'])
+            //   changeWindowActive({...windowActive,arm:true})
+            // }
+            // else{
+            //   document.getElementById("window-arm").scrollIntoView()
+            // }
+            const windowSettings = 'width=750, height=400';
+            window.open('/#/arm','',windowSettings)
           }
 
           document.getElementById('navbar-system').onclick = ()=>{
@@ -132,24 +135,10 @@ const Home = ()=>{
             handleClose(input)
 
             const windowSettings = 'width=750, height=400';
-            const openLink = '/#/' + input 
+            const openLink = '/#/' +input
 
-            switch(input){
-
-              case "payload":
-                window.open(openLink,'',windowSettings)
-              case "arm" :
-                window.open(openLink,'',windowSettings)
-              case"system":
-                window.open(openLink,'',windowSettings)
-              
-              case "autonavqueue":
-                window.open(openLink,'',windowSettings)
-
-            }
-            // window.open(openLink,'',windowSettings)
+            window.open(openLink,'',windowSettings)
             
-
           }
 
           

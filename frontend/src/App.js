@@ -14,6 +14,9 @@ import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
 import RoverDataControl from './Pages/RoverData/RoverDataControl';
 import ArmControls from "./Pages/Arm/ArmControls";
+import { AutoNavQueue } from './Components/AutoNav/AutoNavQueue';
+import { AutoNavMap } from './Components/AutoNav/AutoNavMap';
+import { AutoNavWaypoints } from './Components/AutoNav/AutoNavWaypoints';
 
 
 function App() {
@@ -23,6 +26,9 @@ function App() {
 
       <div>
           <Routes>
+            <Route path="/autonavwaypoints" element={<AutoNavWaypoints/>} />
+            <Route path="/autonavmap" element={<AutoNavMap/>} />
+            <Route path="/autonavqueue" element={<AutoNavQueue/>} />
             <Route path="/autonav" element={<AutoNav />} />
             <Route path="/payload" element={<Payload />} />
             <Route path="/arm" element={<Arm />} />
