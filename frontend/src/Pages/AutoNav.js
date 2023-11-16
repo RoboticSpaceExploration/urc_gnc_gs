@@ -49,16 +49,17 @@ function AutoNav() {
   }, []);
 
   return (
+    
     <div id="autonav-page">
-      <SideNav />
-    <Container style={{marginTop: "-80px"}}>
+     
+    <Container >
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
         </Col>
 
         <Col style={{ alignSelf: "center" }} xs={2}>
-          <Connection />
+        
         </Col>
       </Row>
 
@@ -94,6 +95,7 @@ function AutoNav() {
       </Card>
     </Container>
     </div>
+  
   );
 }
 

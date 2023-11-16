@@ -221,9 +221,10 @@ function Payload() {
     require('../Images/payload/test-image-3.jpeg')];
 
   return (
+    
     <div id="payload-page">
-      <SideNav/>
-      <Container style={{marginTop: "-80px"}}>
+     
+      <Container >
         <h1 className = 'text-center mt-3'> Payload</h1>
         {/* Camera Feeds */}
         <Row style={rowStyle}>
@@ -298,6 +299,7 @@ function Payload() {
         </Row>
       </Container>
     </div>
+   
   );
 }
 
