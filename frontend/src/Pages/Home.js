@@ -25,6 +25,8 @@ class Home extends React.Component {
                   <h1 className = 'text-center mt-3'> Robot Control Page</h1>
 
                     <Connection />
+
+
                
                   <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
                     <Card >
