@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import { Button, Form, Container, Row, Col,Card } from "react-bootstrap";
 import DataCard from '../Components/DataCard';
 import SideNav from '../Components/SideNav';
 
@@ -29,9 +29,10 @@ function System(props){
   console.log(Object.entries(sampleData)[0][1]);
 
     return (
+      
       <div id="system-page">
-        <SideNav/>
-        <Container style={{marginTop: "-80px"}}>
+       
+        <Container >
           <h1 className = 'text-center mt-3'> System </h1>
           {/* Comms */}
         <Row style={rowStyle}>
@@ -69,6 +70,7 @@ function System(props){
         </Row>
     </Container>
       </div>
+     
     );
 
 }

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Container, Card, Carousel } from "react-bootstrap";
 import axios from "axios";
-import { Rnd } from "react-rnd";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import Camera from "../Components/Camera";
-import SideNav from '../Components/SideNav';
-import { init_ros_connection } from '../ROSConnection';
 
 
 function Payload() {
@@ -221,66 +217,9 @@ function Payload() {
     require('../Images/payload/test-image-3.jpeg')];
 
   return (
+    
     <div id="payload-page">
-      <SideNav/>
-      <Container style={{marginTop: "-80px"}}>
-        <h1 className = 'text-center mt-3'> Payload</h1>
-        {/* Camera Feeds */}
-        <Row style={rowStyle}>
-          <Col>
-            <Card style={cardStyle}>Camera Feed 1</Card>
-            {/*<Camera style={cardStyle} topic={Config.CMD_CAM_TOPIC}/>*/}
-          </Col>
-          <Col>
-            <Card style={cardStyle}>Camera Feed 2</Card>
-            {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam2}/>*/}
-          </Col>
-        </Row>
-        <Row style={rowStyle}>
-          <Col>
-            <Card style={cardStyle}>Camera Feed 3</Card>
-            {/*<Camera style={cardStyle} host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>*/}
-          </Col>
-          <Col>
-            {/* Photo Gallery */}
-            <Container style={cardStyle}>
-              <Carousel activeIndex={index} onSelect={handleSelect}>
-
-                <Carousel.Item>
-                  <img
-                    style={cardStyle}
-                    className="d-block w-100"
-                    src={images[0]}
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    style={cardStyle}
-                    className="d-block w-100"
-                    src={images[1]}
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    style={cardStyle}
-                    className="d-block w-100"
-                    src={images[2]}
-                  />
-                </Carousel.Item>
-
-
-              </Carousel>
-            </Container>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* Buttons to add/remove rows*/}
-      <Container style={rowStyle}>
-        <Button onClick={addRow} style={buttonStyle}>Add Entry</Button>
-        <Button onClick={removeLatestRow} style={buttonStyle}>Remove Previous Entry</Button>
-      </Container>
-
+      <h3 className = 'text-center mt-3'> Payload </h3>
       {/* Display table */}
       <Container>
         <Row style={rowStyle}>
@@ -297,7 +236,17 @@ function Payload() {
           </div>
         </Row>
       </Container>
+
+      <br></br>
+
+      {/* Buttons to add/remove rows*/}
+      <Container style={rowStyle}>
+        <Button onClick={addRow} style={buttonStyle}>Add Entry</Button>
+        <Button onClick={removeLatestRow} style={buttonStyle}>Remove Previous Entry</Button>
+      </Container>
+
     </div>
+   
   );
 }
 

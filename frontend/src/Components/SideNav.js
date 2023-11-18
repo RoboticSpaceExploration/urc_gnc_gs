@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
-import { Button, Navbar, Offcanvas, Image, Nav, ButtonGroup, ToggleButton, OverlayTrigger, Popover, ListGroup } from "react-bootstrap";
+import { Button, Navbar, Offcanvas, Image, Nav, ButtonGroup, ToggleButton, OverlayTrigger, Popover, ListGroup, NavItem } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import RoseLogo from "../Images/rose-logo.png";
 
@@ -25,6 +25,8 @@ const SideNav = ({ mode }) => {
     { name: 'Dark', value: '2' },
   ];
 
+
+
   const popover = (
       <Popover id="popover-basic">
         <Popover.Body>
@@ -48,34 +50,27 @@ const SideNav = ({ mode }) => {
 
   return (
       <>
-        <Navbar bg={mode} style={{ display: 'flex' }}>
-            <Button variant="link" onClick={handleShow} style={logoStyle}>
-              <Image src={RoseLogo} style={imageStyle}/>
-            </Button>
-
-            <Offcanvas show={show} onHide={handleClose}>
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>
-                  <div style={{ justifyContent: 'flex-end' }}>
-                    <ButtonGroup>
-                      {radios.map((radio, idx) => (
-                          <ToggleButton
-                              key={idx}
-                              id={`radio-${idx}`}
-                              type="radio"
-                              variant={idx % 2 ? 'outline-secondary' : 'outline-dark'}
-                              value={radio.value}
-                              checked={radioVal === radio.value}
-                              onChange={(e) => toggleDarkMode(e)}
-                          >
-                            {radio.name}
-                          </ToggleButton>
-                      ))}
-                    </ButtonGroup>
-                  </div>
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
+        <Navbar bg={mode} style={{ display: 'flex',position: '-webkit-sticky',position: 'sticky',top:15}}>
+          <div >
+           
+          
+            <ButtonGroup>
+              {radios.map((radio, idx) => (
+                <ToggleButton
+                    key={idx}
+                    id={`radio-${idx}`}
+                    type="radio"
+                    variant={idx % 2 ? 'outline-secondary' : 'outline-dark'}
+                    value={radio.value}
+                    checked={radioVal === radio.value}
+                    onChange={(e) => toggleDarkMode(e)}
+                >
+                  {radio.name}
+                </ToggleButton>
+                ))}
+              </ButtonGroup>
+              
+              <div style={{paddingTop:10}}>
                 <Nav variant="pills" className="flex-column" >
                   <Nav.Item
                       key="first"
@@ -99,36 +94,72 @@ const SideNav = ({ mode }) => {
                     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                       <h3><i className="fa-solid fa-database" /> Rover Data</h3>
                     </OverlayTrigger>
+
                   </Nav.Item>
-                  <Nav.Item
-                      key="third"
-                      id="navbar-autonav"
-                      as={NavLink}
-                      className="active"
-                      exact="true"
-                      to="/autonav"
-                      style={navbarStyle}
-                  >
+                  
+
+                  <div style={navbarStyle}>
                     <h3><i className="fa-solid fa-route" /> AutoNav</h3>
-                  </Nav.Item>
-                  <Nav.Item
+                    <NavItem
+                    key="blah"
+                    id="navbar-autonav-queue"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    style={navbarStyle}
+                    >
+                      <h4 style={{marginLeft:'35px'}}>Queue List</h4>
+                    </NavItem>
+
+                    <NavItem
+                    key="blahh"
+                    id="navbar-autonav-map"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    style={navbarStyle}
+                    >
+                      <h4 style={{marginLeft:'35px'}}>Map</h4>
+                    </NavItem>
+
+                    <NavItem
+                    key="blahhh"
+                    id="navbar-autonav-waypoints"
+                    as={NavLink}
+                    className="active"
+                    exact="true"
+                    style={navbarStyle}
+                    >
+                      <h4 style={{marginLeft:'35px'}}>Waypoints</h4>
+                    </NavItem>
+
+                  </div>
+
+               
+            
+
+
+                    
+                  
+                  {/* <Nav.Item
                       key="fourth"
                       id="navbar-payload"
                       as={NavLink}
                       className="active"
                       exact="true"
-                      to="/payload"
+                      // to="/payload"
                       style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-seedling" /> Payload</h3>
-                  </Nav.Item>
+                  </Nav.Item> */}
+
                   <Nav.Item
                       key="fifth"
                       id="navbar-arm"
                       as={NavLink}
                       className="active"
                       exact="true"
-                      to="/arm"
+                      // to="/arm"
                       style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-robot" /> Arm</h3>
@@ -139,14 +170,14 @@ const SideNav = ({ mode }) => {
                     as={NavLink}
                     className="active"
                     exact="true"
-                    to="/system"
+                    // to="/system"
                     style={navbarStyle}
                   >
                     <h3><i className="fa-solid fa-wifi"></i> System</h3>
                   </Nav.Item>
                 </Nav>
-              </Offcanvas.Body>
-            </Offcanvas>
+              </div>
+            </div>
         </Navbar>
       </>
   );

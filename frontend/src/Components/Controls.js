@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
+import ROSConfig from '../scripts/ROSConfig';
 
 function Controls() {
   const [keyA, setKeyA] = useState(false);
@@ -16,9 +17,6 @@ function Controls() {
     name: init_ros_connection.cmd_vel_topic,
     messageType: "geometry_msgs/Twist",
   });
-  let message = {};
-  let linSpeed = 1;
-  let angSpeed = 0.5;
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
@@ -30,82 +28,82 @@ function Controls() {
   // Movement control
   /////////////////////////
   function forward() {
-    message = new window.ROSLIB.Message({
-        linear: { x: linSpeed, y: 0, z: 0, },
+    ROSConfig.message = new window.ROSLIB.Message({
+        linear: { x: ROSConfig.linSpeed, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
     console.log(cmd_vel);
-    console.log(message);
+    console.log(ROSConfig.message);
     //Call velocity topic from ROS connection
-    cmd_vel.publish(message);
+    cmd_vel.publish(ROSConfig.message);
   };
 
   function backward() {
-    message = new window.ROSLIB.Message({
-      linear: { x: -linSpeed, y: 0, z: 0, },
+    ROSConfig.message = new window.ROSLIB.Message({
+      linear: { x: -ROSConfig.linSpeed, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-      console.log(message);
+    console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function turnLeft() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: angSpeed, },
+      angular: { x: 0, y: 0, z: ROSConfig.angSpeed, },
   })
 
-      console.log(message);
+      console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function turnRight() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: -angSpeed, },
+      angular: { x: 0, y: 0, z: -ROSConfig.angSpeed, },
   })
 
-  console.log(message);
+  console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function stop() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-  console.log(message);
+  console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   ///////////////////////////
   // Speed control
   ///////////////////////////
   function incLinSpeed() {
-    linSpeed *= 1.1;
-    console.log(linSpeed);
+    ROSConfig.linSpeed *= 1.1;
+    console.log(ROSConfig.linSpeed);
   };
 
   function decLinSpeed() {
-    linSpeed *= 0.9;
-    console.log(linSpeed);
+    ROSConfig.linSpeed *= 0.9;
+    console.log(ROSConfig.linSpeed);
   };
 
   function incAngSpeed() {
-    angSpeed *= 1.1;
-    console.log(angSpeed);
+    ROSConfig.angSpeed *= 1.1;
+    console.log(ROSConfig.angSpeed);
   };
 
   function decAngSpeed() {
-    angSpeed *= 0.9;
-    console.log(angSpeed);
+    ROSConfig.angSpeed *= 0.9;
+    console.log(ROSConfig.angSpeed);
   };
 
   ///////////////////////////
@@ -206,7 +204,7 @@ function Controls() {
 
   return (
       <div>
-        <Container style={{ textAlign: 'center', marginTop: '20vh' }}>
+        <Container style={{ textAlign: 'center', marginTop: '5vh' }}>
           <Row>
             <Col style={{textAlign:'center'}}>
               <h3>Teleoperation Control</h3>
@@ -224,19 +222,19 @@ function Controls() {
                 <Col>
                   <h3>Linear Speed</h3>
                   <Row>
-                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0}}>U</Alert>
+                    <Alert variant={keyU ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto'}}>U</Alert>
                   </Row>
                   <Row>
-                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>J</Alert>
+                    <Alert variant={keyJ ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>J</Alert>
                   </Row>
                 </Col>
                 <Col>
                   <h3>Angular Speed</h3>
                   <Row>
-                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>I</Alert>
+                    <Alert variant={keyI ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>I</Alert>
                   </Row>
                   <Row>
-                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 0, marginRight: 0 }}>K</Alert>
+                    <Alert variant={keyK ? 'dark' : 'secondary'} style={{ width: '100px', marginLeft: 'auto', marginRight: 'auto' }}>K</Alert>
                   </Row>
                 </Col>
               </Row>

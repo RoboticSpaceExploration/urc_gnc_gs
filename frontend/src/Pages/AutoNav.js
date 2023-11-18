@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
-import Connection from "../Components/Connection";
 import QueueFeed from "../Components/QueueFeed";
-import SideNav from '../Components/SideNav';
 import Map from '../Components/Map';
 import QueueForm from '../Components/Forms/QueueForm';
 import WaypointForm from '../Components/Forms/WaypointForm';
@@ -49,23 +47,26 @@ function AutoNav() {
   }, []);
 
   return (
+    
     <div id="autonav-page">
-      <SideNav />
-    <Container style={{marginTop: "-80px"}}>
+     
+    <Container >
       <Row style={{ textAlign: "center", display: "flex", flexWrap: "wrap" }}>
         <Col style={{ alignSelf: "center" }} xs={10}>
           <h1>AutoNav</h1>
         </Col>
 
         <Col style={{ alignSelf: "center" }} xs={2}>
-          <Connection />
+        
         </Col>
       </Row>
 
       <Card style={cardStyle}>
         <div>
           <Row style={{ display: "flex" }}>
+
             <Col style={cardStyle} className="divider" xs={4}>
+
               <h3 style={{ textAlign: "center" }}>Queue List</h3>
               {queueData &&
                 queueData.map((queue) => {
@@ -79,21 +80,28 @@ function AutoNav() {
                   );
                 })}
               <QueueForm/>
+
+
             </Col>
 
             <Col style={cardStyle} className="divider" xs={4}>
               <h3 style={{ textAlign: "center" }}>Map</h3>
               <Map waypointData={waypointData}/>
             </Col>
+
+
             <Col style={{ height: "60vh" }}>
               <h3 style={{ textAlign: "center" }}>Insert Waypoint</h3>
               <WaypointForm/>
             </Col>
+
+            
           </Row>
         </div>
       </Card>
     </Container>
     </div>
+  
   );
 }
 
