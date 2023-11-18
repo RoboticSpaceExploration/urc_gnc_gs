@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
+import ROSConfig from '../scripts/ROSConfig';
 
 function Controls() {
   const [keyA, setKeyA] = useState(false);
@@ -16,9 +17,6 @@ function Controls() {
     name: init_ros_connection.cmd_vel_topic,
     messageType: "geometry_msgs/Twist",
   });
-  let message = {};
-  let linSpeed = 1;
-  let angSpeed = 0.5;
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
@@ -30,82 +28,82 @@ function Controls() {
   // Movement control
   /////////////////////////
   function forward() {
-    message = new window.ROSLIB.Message({
-        linear: { x: linSpeed, y: 0, z: 0, },
+    ROSConfig.message = new window.ROSLIB.Message({
+        linear: { x: ROSConfig.linSpeed, y: 0, z: 0, },
         angular: { x: 0, y: 0, z: 0, },
     })
 
     console.log(cmd_vel);
-    console.log(message);
+    console.log(ROSConfig.message);
     //Call velocity topic from ROS connection
-    cmd_vel.publish(message);
+    cmd_vel.publish(ROSConfig.message);
   };
 
   function backward() {
-    message = new window.ROSLIB.Message({
-      linear: { x: -linSpeed, y: 0, z: 0, },
+    ROSConfig.message = new window.ROSLIB.Message({
+      linear: { x: -ROSConfig.linSpeed, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-    console.log(message);
+    console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function turnLeft() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: angSpeed, },
+      angular: { x: 0, y: 0, z: ROSConfig.angSpeed, },
   })
 
-      console.log(message);
+      console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function turnRight() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0.0, y: 0, z: 0, },
-      angular: { x: 0, y: 0, z: -angSpeed, },
+      angular: { x: 0, y: 0, z: -ROSConfig.angSpeed, },
   })
 
-  console.log(message);
+  console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   function stop() {
-    message = new window.ROSLIB.Message({
+    ROSConfig.message = new window.ROSLIB.Message({
       linear: { x: 0, y: 0, z: 0, },
       angular: { x: 0, y: 0, z: 0, },
   })
 
-  console.log(message);
+  console.log(ROSConfig.message);
       //Call velocity topic from ROS connection
-      cmd_vel.publish(message);
+      cmd_vel.publish(ROSConfig.message);
   };
 
   ///////////////////////////
   // Speed control
   ///////////////////////////
   function incLinSpeed() {
-    linSpeed *= 1.1;
-    console.log(linSpeed);
+    ROSConfig.linSpeed *= 1.1;
+    console.log(ROSConfig.linSpeed);
   };
 
   function decLinSpeed() {
-    linSpeed *= 0.9;
-    console.log(linSpeed);
+    ROSConfig.linSpeed *= 0.9;
+    console.log(ROSConfig.linSpeed);
   };
 
   function incAngSpeed() {
-    angSpeed *= 1.1;
-    console.log(angSpeed);
+    ROSConfig.angSpeed *= 1.1;
+    console.log(ROSConfig.angSpeed);
   };
 
   function decAngSpeed() {
-    angSpeed *= 0.9;
-    console.log(angSpeed);
+    ROSConfig.angSpeed *= 0.9;
+    console.log(ROSConfig.angSpeed);
   };
 
   ///////////////////////////
