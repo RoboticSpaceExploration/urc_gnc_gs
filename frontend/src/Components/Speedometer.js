@@ -15,34 +15,6 @@ function Speedometer(props) {
 
   const [linSpeed, setLinSpeed] = useState(0);
 
-  const updateLinSpeed = (newSpeed) => {
-    setLinSpeed(newSpeed);
-
-    const message = new window.ROSLIB.Message({
-      linear: { x: newSpeed, y: 0, z: 0 },
-      angular: { x: 0, y: 0, z: 0 },
-    });
-
-    cmdVelTopic.publish(message);
-  };
-
-  useEffect(() => {
-    const linSpeedTopic = new window.ROSLIB.Topic({
-      ros: init_ros_connection.ros,
-      name: "/lin_speed", 
-      messageType: "std_msgs/Float32",
-    });
-
-    linSpeedTopic.subscribe((message) => {
-      setLinSpeed(message.data);
-    });
-
-    return () => {
-      linSpeedTopic.unsubscribe();
-    };
-  }, []);
-
-
   return(
         <div style={{ backgroundColor: '#282c34' }}>
           <GaugeChart
