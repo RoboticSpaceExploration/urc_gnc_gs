@@ -8,6 +8,10 @@ import System from "./System";
 import { AutoNavQueue } from "../Components/AutoNav/AutoNavQueue";
 import { AutoNavMap } from "../Components/AutoNav/AutoNavMap";
 import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
+import RoverDataGPS from "./RoverData/RoverDataGPS";
+import RoverDataSpeed from "./RoverData/RoverDataSpeed";
+import RoverDataControl from "./RoverData/RoverDataControl";
+
 
 
 const Home = ()=>{
@@ -17,17 +21,35 @@ const Home = ()=>{
             const windowSettings = 'width=750, height=400';
             window.open('/#/roverdata/chassiscam','',windowSettings)
           }
+
           document.getElementById('navbar-location').onclick = ()=>{
-            const windowSettings = 'width=750, height=400';
-            window.open('/#/roverdata/gps','',windowSettings)
+            if(windowActive.location===false){
+              changeWindowArray([...windowArray,'location'])
+              changeWindowActive({...windowActive,location:true})
+            }
+            else{
+              document.getElementById("location").scrollIntoView()
+            }
           }
+
           document.getElementById('navbar-speedometer').onclick = ()=>{
-            const windowSettings = 'width=750, height=400';
-            window.open('/#/roverdata/speedometer','',windowSettings)
+            if(windowActive.speedometer===false){
+              changeWindowArray([...windowArray,'speedometer'])
+              changeWindowActive({...windowActive,speedometer:true})
+            }
+            else{
+              document.getElementById("speedometer").scrollIntoView()
+            }
           }
+
           document.getElementById('navbar-teleopcontrols').onclick = ()=>{
-            const windowSettings = 'width=750, height=400';
-            window.open('/#/roverdata/controls','',windowSettings)
+            if(windowActive.teleopcontrols===false){
+              changeWindowArray([...windowArray,'teleopcontrols'])
+              changeWindowActive({...windowActive,teleopcontrols:true})
+            }
+            else{
+              document.getElementById("teleopcontrols").scrollIntoView()
+            }
           }
 
           document.getElementById('navbar-autonav-waypoints').onclick = ()=>{
@@ -140,6 +162,37 @@ const Home = ()=>{
             windowArray.forEach((window)=>{
 
               switch(window){
+
+                case "teleopcontrols":
+                  ret.push(
+                    <div id="teleopcontrols"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                      <Card style={{padding:10}}>
+                        {loadButtons('teleopcontrols')}
+                        <RoverDataControl/>
+                      </Card>
+                    </div>)
+                    break
+
+                case "speedometer":
+                  ret.push(
+                    <div id="speedometer"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                      <Card style={{padding:10}}>
+                        {loadButtons('speedometer')}
+                        <RoverDataSpeed/>
+                      </Card>
+                    </div>)
+                    break
+
+                case "location":
+                  ret.push(
+                    <div id="location"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
+                      <Card style={{padding:10}}>
+                        {loadButtons('location')}
+                        <RoverDataGPS/>
+                      </Card>
+                    </div>)
+                    break
+                  
 
                 case "autonavqueue":
                   ret.push(
