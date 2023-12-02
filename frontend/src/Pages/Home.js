@@ -13,6 +13,22 @@ import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
 const Home = ()=>{
 
         useEffect(()=>{
+          document.getElementById('navbar-camera').onclick = ()=>{
+            const windowSettings = 'width=750, height=400';
+            window.open('/#/roverdata/chassiscam','',windowSettings)
+          }
+          document.getElementById('navbar-location').onclick = ()=>{
+            const windowSettings = 'width=750, height=400';
+            window.open('/#/roverdata/gps','',windowSettings)
+          }
+          document.getElementById('navbar-speedometer').onclick = ()=>{
+            const windowSettings = 'width=750, height=400';
+            window.open('/#/roverdata/speedometer','',windowSettings)
+          }
+          document.getElementById('navbar-teleopcontrols').onclick = ()=>{
+            const windowSettings = 'width=750, height=400';
+            window.open('/#/roverdata/controls','',windowSettings)
+          }
 
           document.getElementById('navbar-autonav-waypoints').onclick = ()=>{
 
@@ -67,6 +83,10 @@ const Home = ()=>{
           const [windowArray,changeWindowArray] = useState([])
           const [windowActive,changeWindowActive] = useState({
 
+            camera:false,
+            location:false,
+            speedometer:false,
+            teleopcontrols:false,
             autonavqueue:false,
             autonavmap:false,
             autonavwaypoints:false,
