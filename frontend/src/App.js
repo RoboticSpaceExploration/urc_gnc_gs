@@ -18,6 +18,7 @@ import ArmControls from "./Pages/Arm/ArmControls";
 import ControllerTestControls from "./Components/ControllerTestControls";
 
 
+
 function App() {
 
   return (
@@ -39,6 +40,9 @@ function App() {
         </div>
         <div>
           <Routes>
+            <Route path="/speedometer" element={<RoverDataSpeed />} />
+            <Route path="/teleopcontrols" element={<RoverDataControl />} />
+            <Route path="/location" element={<RoverDataGPS />} />
             <Route path="/roverdata/chassiscam" element={<RoverDataChassisCam />} />
             <Route path="/roverdata/armcam" element={<RoverDataArmCam />} />
             <Route path="/roverdata/gps" element={<RoverDataGPS />} />
