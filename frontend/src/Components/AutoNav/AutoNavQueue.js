@@ -61,7 +61,7 @@ export const AutoNavQueue = ()=>{
             console.log(error.response.headers);
             }
         });
-    }, []);
+    }, [waypointData]);
   const setQueue = () => {
     if (queueData.length > 6) {
       //send the first 6 queue data to ros
@@ -86,7 +86,7 @@ export const AutoNavQueue = ()=>{
         .then((response) => {
           console.log(response.status);
           console.log(response.data.token);
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
       console.error('Error updating backend:', error);

@@ -56,7 +56,7 @@ function QueueForm() {
                 .then((response) => {
                     console.log(response.status);
                     console.log(response.data.token);
-                    window.location.reload();
+                    // window.location.reload();
                 });
         }
     };
