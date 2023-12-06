@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Toast } from 'react-bootstrap';
+import { Image, Toast, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import RoseLogo from "../Images/rose-logo.png";
 
@@ -17,7 +17,7 @@ function QueueFeed(props) {
 
   return (
     <div className="queue-feed">
-        <Toast show={show} onClose={handleClose} animation={false}>
+        <Toast show={show} onClose={handleClose} animation={false} style={{width: '100%'}}>
             <Toast.Header closeButton={true}>
                 {/*<Image*/}
                 {/*    src={RoseLogo}*/}
@@ -25,10 +25,10 @@ function QueueFeed(props) {
                 {/*    alt=""*/}
                 {/*    size="10px"*/}
                 {/*/>*/}
-                <strong className="me-auto">Insert Title</strong>
-                <small className="text-muted">{props.queue}</small>
+              <strong className="me-auto">{props.queue}</strong>
+              <strong className="me-auto">Latitude: {props.latitude}</strong>
+              <strong className="me-auto">Longitude: {props.longitude}</strong>
             </Toast.Header>
-            <Toast.Body>Latitude: {props.latitude} Longitude: {props.longitude}</Toast.Body>
         </Toast>
     </div>
   );

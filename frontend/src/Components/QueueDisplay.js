@@ -16,7 +16,7 @@ function QueueDisplay({ queueData }) {
                 />
             ))
         ) : (
-            <p style={{ textAlign: 'center' }}>No data available</p>
+            <p style={{ textAlign: 'center' }}>Queue List is Empty</p>
         )}
       </div>
   );

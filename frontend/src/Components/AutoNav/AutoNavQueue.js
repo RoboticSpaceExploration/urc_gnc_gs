@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import QueueForm from "../Forms/QueueForm";
 import { Button, Col, Row } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 import QueueDisplay from '../QueueDisplay';
 import { init_ros_connection } from '../../ROSConnection';
 
@@ -29,76 +30,83 @@ export const AutoNavQueue = ()=>{
 
   let message = {};
   const topic_name = "autonav";
-  useEffect(() => {
-    // Use useEffect to initialize or update queueData
-    setQueueData(tempData);
-  }, []);
-    // useEffect(() => {
-    //     axios({
-    //     method: "GET",
-    //     url: "http://localhost:9000/waypoints",
-    //     })
-    //     .then((response) => {
-    //         const res = response.data;
-    //         setWaypointData(res);
-    //     })
-    //     .catch((error) => {
-    //         if (error.response) {
-    //         console.log(error.response);
-    //         console.log(error.response.status);
-    //         console.log(error.response.headers);
-    //         }
-    //     });
-    //     axios({
-    //         method: "GET",
-    //         url: "http://localhost:9000/autonav",
-    //     })
-    //     .then((response) => {
-    //         const res = response.data;
-    //         setQueueData(res);
-    //     })
-    //     .catch((error) => {
-    //         if (error.response) {
-    //         console.log(error.response);
-    //         console.log(error.response.status);
-    //         console.log(error.response.headers);
-    //         }
-    //     });
-    // }, []);
-  const sendQueue = () => {
+    useEffect(() => {
+        axios({
+        method: "GET",
+        url: "http://localhost:9000/waypoints",
+        })
+        .then((response) => {
+            const res = response.data;
+            setWaypointData(res);
+        })
+        .catch((error) => {
+            if (error.response) {
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            }
+        });
+        axios({
+            method: "GET",
+            url: "http://localhost:9000/autonav",
+        })
+        .then((response) => {
+            const res = response.data;
+            setQueueData(res);
+        })
+        .catch((error) => {
+            if (error.response) {
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            }
+        });
+    }, []);
+  const setQueue = () => {
     if (queueData.length > 6) {
       //send the first 6 queue data to ros
       const newQueueData = queueData.slice(6);
-      // const queue = queueData.slice(0, 6);
-      // cmd_autonav.name = topic_name;
-      // message = new window.ROSLIB.Message({data: `${queue}`});
-      // cmd_autonav.publish(message);
+      const queue = queueData.slice(0, 6);
       setQueueData(newQueueData);
+      window.alert(`${queue.length} New locations was sent to ROS`);
+      updateQueueBackend(newQueueData);
+      // sendQueueRos(queue);
     } else {
-      //send all queue data
-      // const queue = queueData;
-      // cmd_autonav.name = topic_name;
-      // message = new window.ROSLIB.Message({data: `${queue}`});
-      // cmd_autonav.publish(message);
-      setQueueData([]);
+      const newQueueData = []
+      const queue = queueData.slice(0, queueData.length);
+      window.alert(`${queue.length} New locations was sent to ROS`);
+      setQueueData(newQueueData);
+      updateQueueBackend(newQueueData);
+      // sendQueueRos(queue);
     }
   };
+  const updateQueueBackend = (e) => {
+    axios
+        .put("http://localhost:9000/autonav", e)
+        .then((response) => {
+          console.log(response.status);
+          console.log(response.data.token);
+          window.location.reload();
+        })
+        .catch((error) => {
+      console.error('Error updating backend:', error);
+      // Handle the error appropriately (e.g., show a message to the user)
+    });
+    window.alert(`Backend received new list`);
+  }
+
+  // const sendQueueRos = (queue) => {
+  //   cmd_autonav.name = topic_name;
+  //   message = new window.ROSLIB.Message({data: `${queue}`});
+  //   cmd_autonav.publish(message)
+  // }
     return (
         <>
             <div>
                 <h3 style={{ textAlign: "center" }}>Queue List</h3>
-              <Row className="d-flex justify-content-center align-items-center">
-                <Col className="text-center">
-                  Longitude
-                </Col>
-                <Col className="text-center">
-                  Latitude
-                </Col>
-              </Row>
-
-              <QueueDisplay queueData={queueData} />
               <QueueForm/>
-              <Button variant={'success'} onClick={sendQueue}>Submit Queue</Button>
+              <QueueDisplay queueData={queueData} />
+              <Button variant={'success'} onClick={setQueue}>Submit Queue</Button>
             </div>
         </>
     )

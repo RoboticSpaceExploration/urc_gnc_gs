@@ -256,5 +256,15 @@ app.delete("/autonav/:queue", (req, res) => {
     res.send(queueList);
   }
 });
+app.put("/autonav/", (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
+  const newQueue = req.body;
+  console.log(newQueue);
+  queueList = newQueue;
+  res.json(payloadData);
+});
 app.listen(9000, () => console.log("app is listening to port 9000"));
