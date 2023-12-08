@@ -41,6 +41,8 @@ let queueList = [
     latitude: 14,
   },
 ];
+let linSpeed = 1;
+let angSpeed = 0.5;
 
 //sample temperature data
 let tempList = [];
@@ -67,6 +69,42 @@ let start = null;
 
 app.get("/", (req, res) => {
   res.send("successful response");
+});
+
+app.get("/linSpeed", (req, res) => {
+  res.send(''+linSpeed);
+});
+
+app.put("/linSpeed/increase", (req, res) => {
+  if (linSpeed < 100) { linSpeed += 1; }
+  console.log(linSpeed);
+
+  res.send(''+linSpeed);
+});
+
+app.put("/linSpeed/decrease", (req, res) => {
+  if (linSpeed > 1) { linSpeed -= 1; }
+  console.log(linSpeed);
+
+  res.send(''+linSpeed);
+});
+
+app.get("/angSpeed", (req, res) => {
+  res.send(''+angSpeed);
+});
+
+app.put("/angSpeed/increase", (req, res) => {
+  if (angSpeed < 100) { angSpeed += 0.5; }
+  console.log(angSpeed);
+
+  res.send(''+angSpeed);
+});
+
+app.put("/angSpeed/decrease", (req, res) => {
+  if (angSpeed > 0.5) { angSpeed -= 0.5; }
+  console.log(angSpeed);
+
+  res.send(''+angSpeed);
 });
 
 app.get("/waypoints", (req, res) => {
