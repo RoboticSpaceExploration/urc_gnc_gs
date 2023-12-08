@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Alert, Row, Container, Col } from 'react-bootstrap';
 import { init_ros_connection } from '../ROSConnection';
 
@@ -17,13 +18,46 @@ function Controls() {
     messageType: "geometry_msgs/Twist",
   });
   let message = {};
-  let linSpeed = 1;
-  let angSpeed = 0.5;
+  // let linSpeed = 1;
+  // let angSpeed = 0.5;
+  const [linSpeed, setLinSpeed ] = useState(0);
+  const [angSpeed, setAngSpeed ] = useState(0);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
     window.addEventListener("keyup", onKeyUp, {capture: true, passive: false});
-  })
+
+    axios({
+      method: "GET",
+      url: "http://localhost:9000/linSpeed",
+    })
+        .then((response) => {
+          const res = response.data;
+          setLinSpeed(res);
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });
+    axios({
+      method: "GET",
+      url: "http://localhost:9000/angSpeed",
+    })
+        .then((response) => {
+          const res = response.data;
+          setAngSpeed(res);
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });
+  }, [linSpeed]);
 
 
   /////////////////////////
@@ -89,23 +123,35 @@ function Controls() {
   // Speed control
   ///////////////////////////
   function incLinSpeed() {
-    linSpeed *= 1.1;
-    console.log(linSpeed);
-  };
+    axios.put(`http://localhost:9000/linSpeed/increase`).then((response) =>{
+    console.log(response.status);
+    console.log(response.data);
+    });
+    // console.log(linSpeed);
+  }
 
   function decLinSpeed() {
-    linSpeed *= 0.9;
-    console.log(linSpeed);
+    axios.put(`http://localhost:9000/linSpeed/decrease`).then((response) =>{
+      console.log(response.status);
+      console.log(response.data);
+    });
+    // console.log(linSpeed);
   };
 
   function incAngSpeed() {
-    angSpeed *= 1.1;
-    console.log(angSpeed);
+    axios.put(`http://localhost:9000/angSpeed/increase`).then((response) =>{
+      console.log(response.status);
+      console.log(response.data);
+    });
+    // console.log(linSpeed);
   };
 
   function decAngSpeed() {
-    angSpeed *= 0.9;
-    console.log(angSpeed);
+    axios.put(`http://localhost:9000/angSpeed/decrease`).then((response) =>{
+      console.log(response.status);
+      console.log(response.data);
+    });
+    // console.log(linSpeed);
   };
 
   ///////////////////////////
