@@ -90,6 +90,16 @@ const Home = ()=>{
             window.open('/#/arm','',windowSettings)
           }
 
+          document.getElementById('navbar-payload').onclick = ()=>{
+            if(windowActive.payload===false){
+              changeWindowArray([...windowArray,'payload'])
+              changeWindowActive({...windowActive,payload:true})
+            }
+            else{
+              document.getElementById("window-payload").scrollIntoView()
+            }
+          }
+
           document.getElementById('navbar-system').onclick = ()=>{
             if(windowActive.system===false){
               changeWindowArray([...windowArray,'system'])

@@ -94,7 +94,6 @@ export const AutoNavQueue = ()=>{
     });
     window.alert(`Backend received new list`);
   }
-
   // const sendQueueRos = (queue) => {
   //   cmd_autonav.name = topic_name;
   //   message = new window.ROSLIB.Message({data: `${queue}`});
