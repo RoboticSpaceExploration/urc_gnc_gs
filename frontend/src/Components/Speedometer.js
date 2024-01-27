@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import GaugeChart from 'react-gauge-chart';
+import GaugeComponent from 'react-gauge-component'
 import axios from "axios";
 
 function Speedometer(props) {
@@ -32,11 +33,15 @@ function Speedometer(props) {
     });
   return(
         <div style={{ backgroundColor: '#282c34' }}>
-          <GaugeChart
+          <GaugeComponent
               id="speedometer-gauge"
-              nrOfLevels={20}
-              percent={linSpeed / 100}
-              animDelay={0.5}
+              arc={{
+                nbSubArcs: 150,
+                colorArray: ['#5BE12C', '#F5CD19', '#EA4228'],
+                width: 0.05
+
+              }}
+              value={3}
           />
         </div>
   );
