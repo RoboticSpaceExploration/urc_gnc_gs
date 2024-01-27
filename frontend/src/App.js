@@ -16,6 +16,10 @@ import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
 import RoverDataControl from './Pages/RoverData/RoverDataControl';
 import ArmControls from "./Pages/Arm/ArmControls";
 import ControllerTestControls from "./Components/ControllerTestControls";
+import { AutoNavMap } from './Components/AutoNav/AutoNavMap';
+import { AutoNavWaypoints } from './Components/AutoNav/AutoNavWaypoints';
+import { AutoNavQueue } from './Components/AutoNav/AutoNavQueue';
+
 
 
 function App() {
@@ -39,6 +43,9 @@ function App() {
         </div>
         <div>
           <Routes>
+            <Route path="/speedometer" element={<RoverDataSpeed />} />
+            <Route path="/teleopcontrols" element={<RoverDataControl />} />
+            <Route path="/location" element={<RoverDataGPS />} />
             <Route path="/roverdata/chassiscam" element={<RoverDataChassisCam />} />
             <Route path="/roverdata/armcam" element={<RoverDataArmCam />} />
             <Route path="/roverdata/gps" element={<RoverDataGPS />} />
@@ -47,6 +54,9 @@ function App() {
             <Route path="/roverdata/controls" element={<RoverDataControl />} />
             <Route path="/roverdata/controllertestcontrols" element={<ControllerTestControls />} />
             <Route path="/arm/controls" element={<ArmControls />} />
+            <Route path="/autonavqueue" element={<AutoNavQueue />} />
+            <Route path="/autonavmap" element={<AutoNavMap />} />
+            <Route path="/autonavwaypoints" element={<AutoNavWaypoints />} />
           </Routes>
         </div>
       </Router>

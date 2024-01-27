@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 function QueueForm() {
@@ -7,6 +7,7 @@ function QueueForm() {
         latitude: null,
         longitude: null,
     });
+    const [newQueue, setQueue] = useState([]);
     const [queueValidated, setValidated] = useState(false);
 
     const handleChange = (e) => {
@@ -17,7 +18,7 @@ function QueueForm() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         const form = e.currentTarget;
         e.preventDefault();
         if (form.checkValidity() === false) {
@@ -28,6 +29,25 @@ function QueueForm() {
             longitude: Number(newCoord.longitude),
             latitude: Number(newCoord.latitude),
         };
+        try {
+          const response = await fetch('/autonav', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCoord),
+            });
+
+          const data = await response.json();
+          console.log(data);
+          setCoord({
+            longitude: null,
+            latitude: null,
+          });
+          } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+
         if (!coordData.longitude || !coordData.latitude) {
             console.log("xd");
         } else {
@@ -36,10 +56,11 @@ function QueueForm() {
                 .then((response) => {
                     console.log(response.status);
                     console.log(response.data.token);
-                    window.location.reload();
+                    // window.location.reload();
                 });
         }
     };
+
 
     return (
         <div>

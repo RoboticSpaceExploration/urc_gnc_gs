@@ -118,6 +118,7 @@ function Map(props) {
                 <Polyline positions={lineLocation} color="red" />
             </MapContainer>
             <Button onClick={() => {updateLocation(state.traceLine[3]); console.log(props.waypointData)}}>Next Destination</Button>
+
         </div>
     );
 }
