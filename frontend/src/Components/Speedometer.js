@@ -36,41 +36,39 @@ function Speedometer(props) {
           <GaugeComponent
               id="speedometer-gauge"
               arc={{
-                nbSubArcs: 150,
-                colorArray: ['#5BE12C', '#F5CD19', '#EA4228'],
-                width: 0.025,
-                padding: 0.003
+                width: 0.15,
+                padding: 0,
+                subArcs: [
+                  { limit: 1, color: "#FFFFFF"},
+                  { limit: 2, color: "#FFFFFF"},
+                  { limit: 3, color: "#FFFFFF"},
+                  { limit: 4, color: "#FFFFFF"},
+                  { limit: 5, color: "#FF0000"},
+                ]
               }}
               labels={{
                 valueLabel: {
                   fontSize: 40,
-                  formatTextValue: value => value + 'm/s'
+                  formatTextValue: value => value + " m/s"
                 },
                 tickLabels: {
                   type: "outer",
                   ticks: [
-                    { value: 100 },
-                    { value: 200 },
-                    { value: 300 },
-                    { value: 400 },
-                    { value: 500 },
-                    { value: 600 },
-                    { value: 700 },
-                    { value: 800 },
-                    { value: 900 },
-                    { value: 1000 },
-                    { value: 1500 },
-                    { value: 2000 },
-                    { value: 2500 },
-                    { value: 3000 },
+                    { value: 0.5 },
+                    { value: 1 },
+                    { value: 1.5 },
+                    { value: 2 },
+                    { value: 2.5 },
+                    { value: 3 },
+                    { value: 3.5 },
+                    { value: 4 },
+                    { value: 4.5 },
+                    { value: 5 }
                   ],
-                  valueConfig: {
-                    formatTextValue: value => value + 'm/s'
-                  }
                 }
               }}
-              value={linSpeed}
-              maxValue={3000}
+              value={linSpeed.toFixed(2)}
+              maxValue={5}
           />
         </div>
   );
