@@ -67,7 +67,7 @@ function Speedometer(props) {
                   ],
                 }
               }}
-              value={linSpeed.toFixed(2)}
+              value={linSpeed}
               maxValue={5}
           />
         </div>
