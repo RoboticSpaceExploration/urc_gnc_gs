@@ -37,13 +37,13 @@ function Speedometer(props) {
               id="speedometer-gauge"
               arc={{
                 width: 0.15,
-                padding: 0,
+                padding: 0.02,
                 subArcs: [
                   { limit: 1, color: "#FFFFFF"},
                   { limit: 2, color: "#FFFFFF"},
                   { limit: 3, color: "#FFFFFF"},
                   { limit: 4, color: "#FFFFFF"},
-                  { limit: 5, color: "#FF0000"},
+                  { limit: 5, color: "#dc405c"},
                 ]
               }}
               labels={{
@@ -52,7 +52,7 @@ function Speedometer(props) {
                   formatTextValue: value => value + " m/s"
                 },
                 tickLabels: {
-                  type: "outer",
+                  type: "inner",
                   ticks: [
                     { value: 0.5 },
                     { value: 1 },
