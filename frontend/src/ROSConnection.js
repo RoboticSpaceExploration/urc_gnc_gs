@@ -3,6 +3,9 @@ class ROSConnection {
         this.ros = null;
         this.connected = false;
 
+        //RoSE Lab Computer IP
+        this.rosbridge_server_ip = "192.168.0.176";
+
         //Simulation ip
         // this.rosbridge_server_ip = "192.168.0.223";
         //this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
@@ -15,7 +18,7 @@ class ROSConnection {
 
         //Xavier IP
         //this.rosbridge_server_ip = "192.168.2.2"
-        this.rosbridge_server_ip = "192.168.0.184"
+        // this.rosbridge_server_ip = "192.168.0.184"
 
         //this.rosbridge_server_ip
 
@@ -46,7 +49,7 @@ class ROSConnection {
             cam3: "/camera/ired2/image_raw",
             cam4: "/camera_z/color/image_raw",
             cam5: "/camera_z/fisheye2/image_raw",
-            cam6: "/teleop_cam/image_raw", 
+            cam6: "/teleop_cam/image_raw",
 
             cam7: "/arm/camera/image_raw"
         };
