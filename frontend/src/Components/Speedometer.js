@@ -39,27 +39,27 @@ function Speedometer(props) {
           width: 0.15,
           padding: 0.02,
           subArcs: [
-            { limit: 1, color: "#FFFFFF" },
-            { limit: 2, color: "#FFFFFF" },
+            { limit: 0, color: "#FFFFFF" },
             { limit: 3, color: "#FFFFFF" },
-            { limit: 4, color: "#FFFFFF" },
-            { limit: 5, color: "#DC405C" },
+            { limit: 6, color: "#FFFFFF" },
+            { limit: 9, color: "#FFFFFF" },
+            { limit: 12, color: "#DC405C" },
           ],
         }}
         labels={{
           valueLabel: {
-            fontSize: 40,
-            formatTextValue: (value) => `${value} m/s`,
+            style: {fontSize: "30px"},
+            formatTextValue: (value) => `${value} mph`,
           },
           tickLabels: {
             type: "inner",
             ticks: [
-              0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5,
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
             ].map((value) => ({ value })),
           },
         }}
         value={linSpeed}
-        maxValue={5}
+        maxValue={12}
       />
     </div>
   
