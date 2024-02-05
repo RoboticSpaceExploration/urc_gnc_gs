@@ -23,10 +23,11 @@ export const AutoNavQueue = ()=>{
     // const cardStyle = { height: "100vh" };
     // const titleStyle = { textAlign: "center", marginBottom: "10px" };
 
-  const cmd_autonav = new window.ROSLIB.Topic({
-    ros: init_ros_connection.ros,
-    messageType: "std_msgs/Float64",
-  });
+    const autoNav = new window.ROSLIB.Topic({
+        ros: init_ros_connection.ros,
+        name: "/waypoint_list",
+        messageType: "/geographic_msgs/GeoPointStamped",
+    });
 
   let message = {};
   const topic_name = "autonav";
@@ -62,22 +63,36 @@ export const AutoNavQueue = ()=>{
             }
         });
     }, [waypointData]);
+
+    function sendQueueRos(queue) {
+        let navQueue = queue.map((q) => {
+            message = new window.ROSLIB.Message({
+                longitude: q.longitude,
+                latitude: q.latitude,
+            });
+            return message;
+        });
+        console.log(navQueue);
+        autoNav.publish(navQueue);
+
+    }
+
   const setQueue = () => {
     if (queueData.length > 6) {
       //send the first 6 queue data to ros
       const newQueueData = queueData.slice(6);
       const queue = queueData.slice(0, 6);
       setQueueData(newQueueData);
-      window.alert(`${queue.length} New locations was sent to ROS`);
+      // window.alert(`${queue.length} New locations was sent to ROS`);
       updateQueueBackend(newQueueData);
-      // sendQueueRos(queue);
+      sendQueueRos(queue);
     } else {
       const newQueueData = []
       const queue = queueData.slice(0, queueData.length);
-      window.alert(`${queue.length} New locations was sent to ROS`);
+      // window.alert(`${queue.length} New locations was sent to ROS`);
       setQueueData(newQueueData);
       updateQueueBackend(newQueueData);
-      // sendQueueRos(queue);
+      sendQueueRos(queue);
     }
   };
   const updateQueueBackend = (e) => {
@@ -92,13 +107,9 @@ export const AutoNavQueue = ()=>{
       console.error('Error updating backend:', error);
       // Handle the error appropriately (e.g., show a message to the user)
     });
-    window.alert(`Backend received new list`);
+    // window.alert(`Backend received new list`);
   }
-  // const sendQueueRos = (queue) => {
-  //   cmd_autonav.name = topic_name;
-  //   message = new window.ROSLIB.Message({data: `${queue}`});
-  //   cmd_autonav.publish(message)
-  // }
+
     return (
         <>
             <div>
