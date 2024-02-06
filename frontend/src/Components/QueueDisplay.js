@@ -7,11 +7,12 @@ function QueueDisplay({ queueData }) {
   return (
       <div>
         {queueData && queueData.length > 0 ? (
-            queueData.map((queue) => (
+            queueData.map((queue,index) => (
                 <QueueFeed
                     queue={queue.queue}
                     latitude={queue.latitude}
                     longitude={queue.longitude}
+                    index={index+1}
                     key={queue.queue}
                 />
             ))

@@ -31,37 +31,28 @@ export const AutoNavQueue = ()=>{
   let message = {};
   const topic_name = "autonav";
     useEffect(() => {
+      const fetch = () => {
         axios({
-        method: "GET",
-        url: "http://localhost:9000/waypoints",
+          method: "GET",
+          url: "http://localhost:9000/autonav",
         })
-        .then((response) => {
-            const res = response.data;
-            setWaypointData(res);
-        })
-        .catch((error) => {
-            if (error.response) {
-            console.log(error.response);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            }
-        });
-        axios({
-            method: "GET",
-            url: "http://localhost:9000/autonav",
-        })
-        .then((response) => {
-            const res = response.data;
-            setQueueData(res);
-        })
-        .catch((error) => {
-            if (error.response) {
-            console.log(error.response);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            }
-        });
-    }, [waypointData]);
+            .then((response) => {
+              const res = response.data;
+              setQueueData(res);
+            })
+            .catch((error) => {
+              if (error.response) {
+                console.log(error.response);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              }
+            });
+      }
+
+      fetch();
+      const intervalId = setInterval(fetch, 250);
+      return () => clearInterval(intervalId);
+    });
   const setQueue = () => {
     if (queueData.length > 6) {
       //send the first 6 queue data to ros

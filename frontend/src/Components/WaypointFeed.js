@@ -3,15 +3,15 @@ import { Image, Toast, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import RoseLogo from "../Images/rose-logo.png";
 
-function WaypointFeed(props) {
+function WaypointFeed({ type,position, visited, visible, index, id }) {
   const [show, setShow] = useState(true);
 
   function handleClose(){
     setShow(false);
-    axios.delete(`http://localhost:9000/waypoints/${props.id}`).then((response) => {
+    axios.delete(`http://localhost:9000/waypoints/${id}`).then((response) => {
       console.log(response.status);
       console.log(response.data.token);
-      window.location.reload();
+      //window.location.reload();
     });
   }
 
@@ -19,12 +19,12 @@ function WaypointFeed(props) {
       <div className="queue-feed">
         <Toast show={show} onClose={handleClose} animation={false} style={{width: '100%'}}>
           <Toast.Header closeButton={true}>
-            <strong className="me-auto">{props.id}</strong>
-            <strong className="me-auto">Type: {props.type}</strong>
-            <strong className="me-auto">Longitude: {props.position[0]}</strong>
-            <strong className="me-auto">Latitude: {props.position[1]}</strong>
-            <strong className="me-auto">Visited: {props.visited.toString()}</strong>
-            <strong className="me-auto">Visible: {props.visible.toString()}</strong>
+            <strong className="me-auto">{index}</strong>
+            <strong className="me-auto">Type: {type}</strong>
+            <strong className="me-auto">Longitude: {position[0]}</strong>
+            <strong className="me-auto">Latitude: {position[1]}</strong>
+            <strong className="me-auto">Visited: {visited.toString()}</strong>
+            <strong className="me-auto">Visible: {visible.toString()}</strong>
           </Toast.Header>
         </Toast>
       </div>

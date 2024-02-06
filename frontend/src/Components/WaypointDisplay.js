@@ -7,16 +7,17 @@ function WaypointDisplay({ waypointData }) {
   return (
       <div>
         {waypointData && waypointData.length > 0 ? (
-            waypointData.map((waypoint) => (
+            waypointData.map((waypoint, index) => (
                 <WaypointFeed
                     type={waypoint.type}
                     position={waypoint.position}
                     visited={waypoint.visited}
                     visible={waypoint.visible}
+                    index={index+1}
                     id={waypoint.id}/>
             ))
         ) : (
-            <p style={{ textAlign: 'center' }}>Waypoint Lis is Empty</p>
+            <p style={{ textAlign: 'center' }}>Waypoint List is Empty</p>
         )}
       </div>
   );
