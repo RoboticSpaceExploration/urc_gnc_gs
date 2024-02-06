@@ -27,7 +27,7 @@ export const AutoNavWaypoints = ()=>{
         });
     }, [waypointData]);
 
-    console.log(waypointData);
+    // console.log(waypointData);
     return(
 
         <>
@@ -36,7 +36,7 @@ export const AutoNavWaypoints = ()=>{
               <WaypointForm/>
               <WaypointDisplay waypointData={waypointData} />
             </div>
-        
+
         </>
     )
 

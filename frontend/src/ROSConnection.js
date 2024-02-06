@@ -74,7 +74,7 @@ class ROSConnection {
                         `ws://${this.rosbridge_server_ip}:${this.rosbridge_server_port}`
                     );
                 }
-                catch (error ){
+                catch (error){
                     console.log("connection problem");
                 }
             }, this.reconnection_timer);
@@ -86,7 +86,7 @@ class ROSConnection {
                 `ws://${this.rosbridge_server_ip}:${this.rosbridge_server_port}`
             );
         }
-        catch (error ) {
+        catch (error) {
             console.log("connection problem");
         }
     }

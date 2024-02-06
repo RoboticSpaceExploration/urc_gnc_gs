@@ -16,7 +16,7 @@ function WaypointDisplay({ waypointData }) {
                     id={waypoint.id}/>
             ))
         ) : (
-            <p style={{ textAlign: 'center' }}>Waypoint Lis is Empty</p>
+            <p style={{ textAlign: 'center' }}>Waypoint List is Empty</p>
         )}
       </div>
   );

@@ -12,15 +12,6 @@ function WaypointForm() {
     });
     const [queueValidated, setValidated] = useState(false);
 
-    const gps = new window.ROSLIB.Topic({
-        ros: init_ros_connection.ros,
-        name: "/gps_goal",
-        messageType: "/geographic_msgs/GeoPointStamped",
-    });
-    let message = {};
-    console.log(gps);
-
-
     const handleChange = (e) => {
         const value = e.target.value;
         setWaypoint({
@@ -31,11 +22,6 @@ function WaypointForm() {
     };
 
     const handleSubmit = (e) => {
-        message = new window.ROSLIB.Message({
-            position: {latitude: 6.0, longitude: 9.0 },
-        });
-        console.log(message);
-        gps.publish(message);
         const form = e.currentTarget;
         e.preventDefault();
         // if (form.checkValidity() === false) {

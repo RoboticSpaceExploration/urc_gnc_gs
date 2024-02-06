@@ -10,18 +10,6 @@ import { init_ros_connection } from '../../ROSConnection';
 export const AutoNavQueue = ()=>{
     const [waypointData, setWaypointData] = useState(null);
     const [queueData, setQueueData] = useState(null);
-  const tempData = [
-    { longitude: 12.3456, latitude: 34.5678 },
-    { longitude: -56.789, latitude: 78.9012 },
-    { longitude: 12.3456, latitude: 34.5678 },
-    { longitude: -56.789, latitude: 78.9012 },
-    { longitude: 12.3456, latitude: 34.5678 },
-    { longitude: -56.789, latitude: 78.9012 },
-    { longitude: 12.3456, latitude: 34.5678 },
-    { longitude: -56.789, latitude: 78.9012 },
-  ];
-    // const cardStyle = { height: "100vh" };
-    // const titleStyle = { textAlign: "center", marginBottom: "10px" };
 
     const autoNav = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
@@ -32,21 +20,6 @@ export const AutoNavQueue = ()=>{
   let message = {};
   const topic_name = "autonav";
     useEffect(() => {
-        axios({
-        method: "GET",
-        url: "http://localhost:9000/waypoints",
-        })
-        .then((response) => {
-            const res = response.data;
-            setWaypointData(res);
-        })
-        .catch((error) => {
-            if (error.response) {
-            console.log(error.response);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            }
-        });
         axios({
             method: "GET",
             url: "http://localhost:9000/autonav",
@@ -62,9 +35,10 @@ export const AutoNavQueue = ()=>{
             console.log(error.response.headers);
             }
         });
-    }, [waypointData]);
+    }, [queueData]);
 
     function sendQueueRos(queue) {
+        //maps the queue data to ros messages
         let navQueue = queue.map((q) => {
             message = new window.ROSLIB.Message({
                 longitude: q.longitude,
@@ -73,25 +47,39 @@ export const AutoNavQueue = ()=>{
             return message;
         });
         console.log(navQueue);
+
+        //publishes the navigation queue to waypoints ros topic
         autoNav.publish(navQueue);
 
     }
 
   const setQueue = () => {
+    let newQueueData = [];
+    let queue = [];
     if (queueData.length > 6) {
-      //send the first 6 queue data to ros
-      const newQueueData = queueData.slice(6);
-      const queue = queueData.slice(0, 6);
+      //separate the first 6 set of coordinates in queueData
+      newQueueData = queueData.slice(6);
+      queue = queueData.slice(0,6);
+
+      //update this components queueData
       setQueueData(newQueueData);
-      // window.alert(`${queue.length} New locations was sent to ROS`);
+
+      window.alert(`${queue.length} New locations was sent to ROS`);
+
+      //update the backend
       updateQueueBackend(newQueueData);
+
+      //send first 6 set of coordinates to rover through ROS
       sendQueueRos(queue);
     } else {
-      const newQueueData = []
-      const queue = queueData.slice(0, queueData.length);
-      // window.alert(`${queue.length} New locations was sent to ROS`);
-      setQueueData(newQueueData);
-      updateQueueBackend(newQueueData);
+      queue = queueData.slice(0, queueData.length);
+      window.alert(`${queue.length} New locations was sent to ROS`);
+
+      //update each queueData to be the empty list
+      setQueueData([]);
+      updateQueueBackend([]);
+
+      //send list of coordinates to rover through ROS
       sendQueueRos(queue);
     }
   };
@@ -111,14 +99,12 @@ export const AutoNavQueue = ()=>{
   }
 
     return (
-        <>
             <div>
-                <h3 style={{ textAlign: "center" }}>Queue List</h3>
+              <h3 style={{ textAlign: "center" }}>Queue List</h3>
               <QueueForm/>
               <QueueDisplay queueData={queueData} />
               <Button variant={'success'} onClick={setQueue}>Submit Queue</Button>
             </div>
-        </>
     )
 
 }
