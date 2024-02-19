@@ -3,8 +3,10 @@ class ROSConnection {
         this.ros = null;
         this.connected = false;
 
+        // Rover
+        this.rosbridge_server_ip = "192.168.0.207";
         //RoSE Lab Computer IP
-        this.rosbridge_server_ip = "192.168.0.176";
+        // this.rosbridge_server_ip = "192.168.0.176";
 
         //Simulation ip
         // this.rosbridge_server_ip = "192.168.0.223";
@@ -43,7 +45,7 @@ class ROSConnection {
         this.cmd_cam_topics = {
             //cam1: "/camera/ired1/image_raw",
             //cam1: "d435i/color/image_raw",
-
+            cam8: "/zedm/zed_node/rgb/image_rect_color",
             cam1: "/zedm/zed_node/right_raw/image_raw_color",
             cam2: "/zedm/zed_node/right_raw/image_raw_gray",
             cam3: "/camera/ired2/image_raw",

@@ -9,7 +9,9 @@ class RoverDataChassisCam extends React.Component {
     return (
         <div id="rover-data-chassis-cam">
           <RoverDataDropdown dataType="Chassis Camera"/>
-          <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam1}/>
+            {/*<h2>{init_ros_connection.rosbridge_server_ip}</h2>*/}
+            {/*<h2>{init_ros_connection.cmd_cam_topics.cam8}</h2>*/}
+          <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam8}/>
           {/* <Camera/> */}
         </div>
     );
