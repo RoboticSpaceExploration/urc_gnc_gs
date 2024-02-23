@@ -1,11 +1,11 @@
 import React from "react";
-import ControlsDisplay from "../../Components/ControlsDisplay";
+import Controls from "../../Components/Controls";
 
 class RoverDataControl extends React.Component {
   render() {
     return (
         <div id="rover-data-controls">
-          <ControlsDisplay/>
+          <Controls/>
         </div>
     );
   }
