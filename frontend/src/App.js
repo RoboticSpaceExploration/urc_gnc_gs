@@ -15,7 +15,7 @@ import RoverDataOrientation from './Pages/RoverData/RoverDataOrientation';
 import RoverDataSpeed from './Pages/RoverData/RoverDataSpeed';
 import RoverDataControl from './Pages/RoverData/RoverDataControl';
 import ArmControls from "./Pages/Arm/ArmControls";
-import ControllerTestControls from "./Components/ControllerTestControls";
+import Controls2 from "./Components/Controls2";
 import { AutoNavMap } from './Components/AutoNav/AutoNavMap';
 import { AutoNavWaypoints } from './Components/AutoNav/AutoNavWaypoints';
 import { AutoNavQueue } from './Components/AutoNav/AutoNavQueue';
@@ -52,7 +52,7 @@ function App() {
             <Route path="/roverdata/orientation" element={<RoverDataOrientation />} />
             <Route path="/roverdata/speedometer" element={<RoverDataSpeed />} />
             <Route path="/roverdata/controls" element={<RoverDataControl />} />
-            <Route path="/roverdata/controllertestcontrols" element={<ControllerTestControls />} />
+            <Route path="/roverdata/controllertestcontrols" element={<Controls2 />} />
             <Route path="/arm/controls" element={<ArmControls />} />
             <Route path="/autonavqueue" element={<AutoNavQueue />} />
             <Route path="/autonavmap" element={<AutoNavMap />} />
