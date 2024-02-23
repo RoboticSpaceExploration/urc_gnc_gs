@@ -20,7 +20,7 @@ class Camera extends React.Component {
                 host: this.props.host,
                 width: 945,
                 height: 460,
-                // topic: '/camera/rgb/image_raw',
+                type: 'ros_compressed',
                 topic: this.props.topic,
                 ssl: true,
             });
