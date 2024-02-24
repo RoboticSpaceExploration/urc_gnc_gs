@@ -65,31 +65,31 @@ class TeleopFunction {
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
     };
-    incspeed(speed) {
-        axios.put(`http://localhost:9000/speed/increase`).then((response) =>{
+    incLinSpeed() {
+        axios.put(`http://localhost:9000/linSpeed/increase`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
         });
         // console.log(speed);
     }
 
-    decSpeed(speed) {
-        axios.put(`http://localhost:9000/speed/decrease`).then((response) =>{
+    decLinSpeed() {
+        axios.put(`http://localhost:9000/linSpeed/decrease`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
         });
         // console.log(speed);
     };
 
-    incSpeed(speed) {
-        axios.put(`http://localhost:9000/speed/increase`).then((response) =>{
+    incAngSpeed() {
+        axios.put(`http://localhost:9000/angSpeed/increase`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
         });
         // console.log(speed);
     };
-    decspeed(speed) {
-        axios.put(`http://localhost:9000/speed/decrease`).then((response) =>{
+    decAngSpeed() {
+        axios.put(`http://localhost:9000/angSpeed/decrease`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
         });
