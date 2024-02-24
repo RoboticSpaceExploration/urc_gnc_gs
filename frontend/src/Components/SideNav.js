@@ -51,9 +51,9 @@ const SideNav = ({ mode }) => {
       <>
         <Navbar bg={mode} style={{ display: 'flex',position: '-webkit-sticky',position: 'sticky',top:15}}>
           <div >
-           
-          
-            <ButtonGroup>
+
+
+            {/*<ButtonGroup>
               {radios.map((radio, idx) => (
                 <ToggleButton
                     key={idx}
@@ -67,8 +67,8 @@ const SideNav = ({ mode }) => {
                   {radio.name}
                 </ToggleButton>
                 ))}
-              </ButtonGroup>
-              
+              </ButtonGroup>*/}
+
               <div style={{paddingTop:10}}>
                 <Nav variant="pills" className="flex-column" >
                   <Nav.Item

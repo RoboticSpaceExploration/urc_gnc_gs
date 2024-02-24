@@ -18,8 +18,8 @@ class Camera extends React.Component {
             this.camera = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
                 host: this.props.host,
-                width: 945,
-                height: 460,
+                width: 600,
+                height: 450,
                 type: 'ros_compressed',
                 topic: this.props.topic,
                 ssl: true,

@@ -11,6 +11,7 @@ import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
 import RoverDataGPS from "./RoverData/RoverDataGPS";
 import RoverDataSpeed from "./RoverData/RoverDataSpeed";
 import RoverDataControl from "./RoverData/RoverDataControl";
+import RoverDataChassisCam from "./RoverData/RoverDataChassisCam";
 
 
 
@@ -18,8 +19,16 @@ const Home = ()=>{
 
         useEffect(()=>{
           document.getElementById('navbar-camera').onclick = ()=>{
-            const windowSettings = 'width=750, height=400';
-            window.open('/#/roverdata/chassiscam','',windowSettings)
+            // const windowSettings = 'width=750, height=400';
+            // window.open('/#/roverdata/chassiscam','',windowSettings)
+            console.log(windowActive);
+            if(windowActive.chassis_cam === false){
+              changeWindowArray([...windowArray,'chassis_cam'])
+              changeWindowActive({...windowActive,chassis_cam:true})
+            }
+            else{
+              document.getElementById("chassis-cam").scrollIntoView()
+            }
           }
 
           document.getElementById('navbar-location').onclick = ()=>{
@@ -115,7 +124,7 @@ const Home = ()=>{
           const [windowArray,changeWindowArray] = useState([])
           const [windowActive,changeWindowActive] = useState({
 
-            camera:false,
+            chassis_cam:false,
             location:false,
             speedometer:false,
             teleopcontrols:false,
@@ -133,13 +142,13 @@ const Home = ()=>{
                   <Button style={{width:85,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
                     onClick={()=>{
                     handlePopout(input)
-                    
+
                   }}
                   > Popout </Button>
                   <Button style={{width:40,backgroundColor:'red',borderColor:'black'}}
                   onClick={()=>{
                     handleClose(input)
-                    
+
                   }}
                   > X </Button>
              </div>
@@ -172,6 +181,15 @@ const Home = ()=>{
             windowArray.forEach((window)=>{
 
               switch(window){
+                case "chassis_cam":
+                  ret.push(
+                      <div id="chassis_cam" style={{ paddingTop: '20px', paddingBottom: '20px',width:'100%',}}>
+                        <Card style={{padding:10}}>
+                          {loadButtons('chassis-cam')}
+                          <RoverDataChassisCam/>
+                        </Card>
+                      </div>)
+                  break
 
                 case "teleopcontrols":
                   ret.push(
@@ -202,7 +220,7 @@ const Home = ()=>{
                       </Card>
                     </div>)
                     break
-                  
+
 
                 case "autonavqueue":
                   ret.push(
@@ -233,7 +251,7 @@ const Home = ()=>{
                     </Card>
                   </div>)
                   break
-                
+
                 case "payload":
                   ret.push(
                   <div id="window-payload"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
@@ -265,7 +283,7 @@ const Home = ()=>{
                   break
 
                 default:
-                  
+
               }
 
             })
@@ -276,7 +294,7 @@ const Home = ()=>{
 
           return(
           <div id="home-page">
-            
+
             <Row style={{padding:20}}>
 
               <Col lg={2}>
@@ -294,7 +312,7 @@ const Home = ()=>{
             </Row>
           </div>
           )
-    
+
 }
 
 export default Home;

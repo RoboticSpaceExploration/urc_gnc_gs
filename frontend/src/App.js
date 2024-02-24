@@ -46,7 +46,7 @@ function App() {
             <Route path="/speedometer" element={<RoverDataSpeed />} />
             <Route path="/teleopcontrols" element={<RoverDataControl />} />
             <Route path="/location" element={<RoverDataGPS />} />
-            <Route path="/roverdata/chassiscam" element={<RoverDataChassisCam />} />
+            <Route path="/chassis-cam" element={<RoverDataChassisCam />} />
             <Route path="/roverdata/armcam" element={<RoverDataArmCam />} />
             <Route path="/roverdata/gps" element={<RoverDataGPS />} />
             <Route path="/roverdata/orientation" element={<RoverDataOrientation />} />
