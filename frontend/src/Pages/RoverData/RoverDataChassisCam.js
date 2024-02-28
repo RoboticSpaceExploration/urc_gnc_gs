@@ -8,8 +8,8 @@ class RoverDataChassisCam extends React.Component {
   render() {
     return (
         <div id="chassis-cam">
-          <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam8}/>
-          <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam8}/>
+          <Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam9}/>
+          {/*<Camera host={init_ros_connection.rosbridge_server_ip} topic={init_ros_connection.cmd_cam_topics.cam8}/>*/}
           {/* <Camera/> */}
         </div>
     );
