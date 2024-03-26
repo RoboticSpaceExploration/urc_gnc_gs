@@ -5,7 +5,7 @@ class ROSConnection {
 
         // Rover
         // this.rosbridge_server_ip = "192.168.0.207";
-        this.rosbridge_server_ip = "192.168.0.112";
+        this.rosbridge_server_ip = "192.168.1.2";
         //RoSE Lab Computer IP
         // this.rosbridge_server_ip = "192.168.0.176";
 
@@ -29,8 +29,6 @@ class ROSConnection {
         this.reconnection_timer = 3000;
         this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
 
-        //this.arm1_topic = "/arm/joint1_position_controller/command";
-
         //Arm Control topic
         this.arm_cmd_topics = {
            joint1: "/arm/joint1_position_controller/command",
@@ -42,20 +40,13 @@ class ROSConnection {
         };
 
         //Camera topics
-            // cmd_cam_topic: "/d435i/color/image_raw/compressed",
         this.cmd_cam_topics = {
-            //cam1: "/camera/ired1/image_raw",
-            //cam1: "d435i/color/image_raw",
-            cam8: "/zedm/zed_node/rgb/image_rect_color",
-            cam9: "/camera1/usb_cam1/image_raw",
-            cam1: "/zedm/zed_node/right_raw/image_raw_color",
-            cam2: "/zedm/zed_node/right_raw/image_raw_gray",
-            cam3: "/camera/ired2/image_raw",
-            cam4: "/camera_z/color/image_raw",
-            cam5: "/camera_z/fisheye2/image_raw",
-            cam6: "/teleop_cam/image_raw",
-
-            cam7: "/arm/camera/image_raw"
+            cam1: "/zed2/zed_node/imu/data",
+            cam2: "/zed2/zed_node/rgb/image_rect_color",
+            cam3: "/camera1/usb_cam1/image_raw",
+            cam4: "/camera2/usb_cam2/image_raw",
+            cam5: "/camera3/usb_cam3/image_raw",
+            cam6: "/camera4/usb_cam4/image_raw",
         };
 
         this.init_connection();
