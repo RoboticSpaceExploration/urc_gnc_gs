@@ -73,7 +73,7 @@ class ROSConnection {
         this.ros.on("close", ()=> {
             console.log("connection is closed");
             this.connected = false;
-            //try to reconnect every 3 seconds
+            // try to reconnect every 3 seconds
             setTimeout(()=> {
                 try {
                     this.ros.connect(
@@ -86,6 +86,10 @@ class ROSConnection {
             }, this.reconnection_timer);
 
         });
+
+        this.ros.on('error', (e) => {
+            console.log('Error connecting: ', e);
+        })
 
         try {
             this.ros.connect(
