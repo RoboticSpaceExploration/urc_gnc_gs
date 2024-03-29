@@ -5,7 +5,9 @@ class ROSConnection {
 
         // Rover
         // this.rosbridge_server_ip = "192.168.0.207";
-        this.rosbridge_server_ip = "192.168.1.2";
+        // this.rosbridge_server_ip = "192.168.1.2";
+        this.rosbridge_server_ip = "xavier";
+
         //RoSE Lab Computer IP
         // this.rosbridge_server_ip = "192.168.0.176";
 
@@ -27,7 +29,7 @@ class ROSConnection {
 
         this.rosbridge_server_port = "9090";
         this.reconnection_timer = 3000;
-        this.cmd_vel_topic = "/gnc_robot/gnc_wheel_velocity_controller/cmd_vel";
+        this.cmd_vel_topic = "/gnc_robot/gnc_drive_velocity_controller/cmd_vel";
 
         //Arm Control topic
         this.arm_cmd_topics = {
@@ -47,8 +49,17 @@ class ROSConnection {
             cam4: "/camera2/usb_cam2/image_raw",
             cam5: "/camera3/usb_cam3/image_raw",
             cam6: "/camera4/usb_cam4/image_raw",
+            cam7: "rpi",
         };
 
+        this.diagnostic_topics = {
+            cpuTemp: "/cpu/temps",
+            cpuUsage: "/cpu/utilization",
+            gpuTemp: "/gpu/temps",
+            gpuUsage: "/gpu/utilization",
+            latency: "/network/xavier/latency",
+
+        }
         this.init_connection();
     }
     init_connection(){
