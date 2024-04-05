@@ -8,23 +8,57 @@ class TeleopFunction {
                 name: init_ros_connection.cmd_vel_topic,
                 messageType: "geometry_msgs/Twist",
             });
-        }
+            this.linSpeed = 0;
+            this.angSpeed = 0;
 
-    forward(speed) {
+            this.setSpeeds();
+        };
+
+        setSpeeds() {
+            axios({
+                method: "GET",
+                url: "http://localhost:9000/linSpeed",
+            })
+                .then((response) => {
+                    this.linSpeed = response.data;
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    }
+                });
+            axios({
+                method: "GET",
+                url: "http://localhost:9000/angSpeed",
+            })
+                .then((response) => {
+                    this.angSpeed = response.data;
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    }
+                });
+        };
+
+    forward() {
         const message = new window.ROSLIB.Message({
-            linear: { x: speed, y: 0, z: 0, },
+            linear: { x: this.linSpeed, y: 0, z: 0, },
             angular: { x: 0, y: 0, z: 0, },
         })
 
-        console.log(this.topic);
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
     };
 
-    backward(speed) {
+    backward() {
         const message = new window.ROSLIB.Message({
-            linear: { x: -speed, y: 0, z: 0, },
+            linear: { x: -this.linSpeed, y: 0, z: 0, },
             angular: { x: 0, y: 0, z: 0, },
         })
 
@@ -33,10 +67,10 @@ class TeleopFunction {
         this.topic.publish(message);
     };
 
-    turnLeft(speed) {
+    turnLeft() {
         const message = new window.ROSLIB.Message({
             linear: { x: 0.0, y: 0, z: 0, },
-            angular: { x: 0, y: 0, z: speed, },
+            angular: { x: 0, y: 0, z: this.angSpeed, },
         })
 
         console.log(message);
@@ -44,10 +78,10 @@ class TeleopFunction {
         this.topic.publish(message);
     };
 
-    turnRight(speed) {
+    turnRight() {
         const message = new window.ROSLIB.Message({
             linear: { x: 0.0, y: 0, z: 0, },
-            angular: { x: 0, y: 0, z: -speed, },
+            angular: { x: 0, y: 0, z: -this.angSpeed, },
         })
 
         console.log(message);
@@ -55,7 +89,7 @@ class TeleopFunction {
         this.topic.publish(message);
     };
 
-    stop(speed) {
+    stop() {
         const message = new window.ROSLIB.Message({
             linear: { x: 0, y: 0, z: 0, },
             angular: { x: 0, y: 0, z: 0, },
@@ -69,6 +103,7 @@ class TeleopFunction {
         axios.put(`http://localhost:9000/linSpeed/increase`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
+            this.linSpeed = response.data;
         });
         // console.log(speed);
     }
@@ -77,6 +112,7 @@ class TeleopFunction {
         axios.put(`http://localhost:9000/linSpeed/decrease`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
+            this.linSpeed = response.data;
         });
         // console.log(speed);
     };
@@ -85,6 +121,7 @@ class TeleopFunction {
         axios.put(`http://localhost:9000/angSpeed/increase`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
+            this.angSpeed = response.data;
         });
         // console.log(speed);
     };
@@ -92,6 +129,7 @@ class TeleopFunction {
         axios.put(`http://localhost:9000/angSpeed/decrease`).then((response) =>{
             console.log(response.status);
             console.log(response.data);
+            this.angSpeed = response.data;
         });
         // console.log(speed);
     };
