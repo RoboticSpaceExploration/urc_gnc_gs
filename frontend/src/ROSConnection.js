@@ -2,63 +2,29 @@ class ROSConnection {
     constructor() {
         this.ros = null;
         this.connected = false;
+        this.rosbridgeServerIP = "xavier";
+        this.cameraHostName = "rosecamera";
 
-        // Rover
-        // this.rosbridge_server_ip = "192.168.0.207";
-        // this.rosbridge_server_ip = "192.168.1.2";
-        this.rosbridge_server_ip = "xavier";
-
-        //RoSE Lab Computer IP
-        // this.rosbridge_server_ip = "192.168.0.176";
-
-        //Simulation ip
-        // this.rosbridge_server_ip = "192.168.0.223";
-        //this.cmd_vel_topic = "/gnc_robot/gnc_robot_velocity_controller/cmd_vel";
-
-        //Thinkpad laptop ip
-        // this.rosbridge_server_ip = "192.168.3.2";
-
-        //TX2 IP
-        //this.rosbridge_server_ip = "192.168.0.156";
-
-        //Xavier IP
-        //this.rosbridge_server_ip = "192.168.2.2"
-        // this.rosbridge_server_ip = "192.168.0.184"
-
-        //this.rosbridge_server_ip
-
-        this.rosbridge_server_port = "9090";
-        this.reconnection_timer = 3000;
-        this.cmd_vel_topic = "/gnc_robot/gnc_drive_velocity_controller/cmd_vel";
-
-        //Arm Control topic
-        this.arm_cmd_topics = {
-           joint1: "/arm/joint1_position_controller/command",
-           joint2: "/arm/joint2_position_controller/command",
-           joint3: "/arm/joint3_position_controller/command",
-           joint4: "/arm/joint4_position_controller/command",
-           joint5: "/arm/joint5_position_controller/command",
-           joint6: "/arm/joint6_position_controller/command",
-        };
+        this.rosbridgeServerPort = "9090";
+        this.reconnectionTimer = 3000;
+        this.teleopTopic = "/gnc_robot/gnc_drive_velocity_controller/cmd_vel";
 
         //Camera topics
-        this.cmd_cam_topics = {
+        this.cameraTopics = {
             cam1: "/zed2/zed_node/imu/data",
             cam2: "/zed2/zed_node/rgb/image_rect_color",
             cam3: "/camera1/usb_cam1/image_raw",
             cam4: "/camera2/usb_cam2/image_raw",
             cam5: "/camera3/usb_cam3/image_raw",
             cam6: "/camera4/usb_cam4/image_raw",
-            cam7: "rpi",
         };
 
-        this.diagnostic_topics = {
+        this.diagnosticTopics = {
             cpuTemp: "/cpu/temps",
             cpuUsage: "/cpu/utilization",
             gpuTemp: "/gpu/temps",
             gpuUsage: "/gpu/utilization",
             latency: "/network/xavier/latency",
-
         }
         this.init_connection();
     }
@@ -77,13 +43,13 @@ class ROSConnection {
             setTimeout(()=> {
                 try {
                     this.ros.connect(
-                        `ws://${this.rosbridge_server_ip}:${this.rosbridge_server_port}`
+                        `ws://${this.rosbridgeServerIP}:${this.rosbridgeServerPort}`
                     );
                 }
                 catch (error){
                     console.log("connection problem");
                 }
-            }, this.reconnection_timer);
+            }, this.reconnectionTimer);
 
         });
 
@@ -93,7 +59,7 @@ class ROSConnection {
 
         try {
             this.ros.connect(
-                `ws://${this.rosbridge_server_ip}:${this.rosbridge_server_port}`
+                `ws://${this.rosbridgeServerIP}:${this.rosbridgeServerPort}`
             );
         }
         catch (error) {

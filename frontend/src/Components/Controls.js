@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import { Alert, Row, Container, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-// import { init_ros_connection } from '../ROSConnection';
 import { Teleoperation } from "../scripts/TeleopFunctions";
 import 'joypad.js';
 
@@ -51,37 +49,30 @@ function Controls() {
     var keyCode = event.keyCode;
     switch (keyCode) {
       case 68: //d turn right
-        Teleoperation.turnRight();
-        setKeyD(true)
+        setKeyD(Teleoperation.turnRight())
         break;
       case 83: //s move backward
-        setKeyS(true)
-        Teleoperation.backward();
+        setKeyS(Teleoperation.backward())
         break;
       case 65: //a turn left
-        setKeyA(true)
-        Teleoperation.turnLeft();
+        setKeyA(Teleoperation.turnLeft())
         break;
       case 87: //w move forward
-        setKeyW(true)
-        Teleoperation.forward();
+        setKeyW(Teleoperation.forward())
         break;
       case 85: //u fast lin speed
-        setKeyU(true)
-        Teleoperation.incLinSpeed();
+        setKeyU(Teleoperation.incLinSpeed())
         break;
       case 74: //j slow lin speed
-        setKeyJ(true)
-        Teleoperation.decLinSpeed();
+        setKeyJ(Teleoperation.decLinSpeed())
         break;
       case 73: //i fast ang speed
-        setKeyI(true)
-        Teleoperation.incAngSpeed();
+        setKeyI(Teleoperation.incAngSpeed())
+
         break;
       case 75: //k slow ang speed
-        setKeyK(true)
-        Teleoperation.decAngSpeed();
-        break;
+        setKeyK(Teleoperation.decAngSpeed())
+            break;
       default:
         setKeyW(false)
         setKeyA(false)

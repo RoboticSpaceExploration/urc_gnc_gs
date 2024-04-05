@@ -5,7 +5,7 @@ class TeleopFunction {
         constructor() {
             this.topic = new window.ROSLIB.Topic({
                 ros: init_ros_connection.ros,
-                name: init_ros_connection.cmd_vel_topic,
+                name: init_ros_connection.teleopTopic,
                 messageType: "geometry_msgs/Twist",
             });
             this.linSpeed = 0;
@@ -54,6 +54,8 @@ class TeleopFunction {
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
+
+        return true;
     };
 
     backward() {
@@ -65,6 +67,8 @@ class TeleopFunction {
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
+
+        return true;
     };
 
     turnLeft() {
@@ -76,6 +80,8 @@ class TeleopFunction {
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
+
+        return true;
     };
 
     turnRight() {
@@ -87,6 +93,8 @@ class TeleopFunction {
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
+
+        return true;
     };
 
     stop() {
@@ -98,6 +106,8 @@ class TeleopFunction {
         console.log(message);
         //Call velocity this.topic from ROS connection
         this.topic.publish(message);
+
+        return false;
     };
     incLinSpeed() {
         axios.put(`http://localhost:9000/linSpeed/increase`).then((response) =>{
@@ -106,6 +116,7 @@ class TeleopFunction {
             this.linSpeed = response.data;
         });
         // console.log(speed);
+        return true;
     }
 
     decLinSpeed() {
@@ -115,6 +126,7 @@ class TeleopFunction {
             this.linSpeed = response.data;
         });
         // console.log(speed);
+        return true;
     };
 
     incAngSpeed() {
@@ -124,6 +136,7 @@ class TeleopFunction {
             this.angSpeed = response.data;
         });
         // console.log(speed);
+        return true;
     };
     decAngSpeed() {
         axios.put(`http://localhost:9000/angSpeed/decrease`).then((response) =>{
@@ -132,6 +145,7 @@ class TeleopFunction {
             this.angSpeed = response.data;
         });
         // console.log(speed);
+        return true;
     };
 }
 
