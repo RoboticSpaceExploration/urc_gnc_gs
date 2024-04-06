@@ -10,17 +10,15 @@ import { AutoNavMap } from "../Components/AutoNav/AutoNavMap";
 import { AutoNavWaypoints } from "../Components/AutoNav/AutoNavWaypoints";
 import RoverDataGPS from "./RoverData/RoverDataGPS";
 import RoverDataSpeed from "./RoverData/RoverDataSpeed";
-import RoverDataControl from "./RoverData/RoverDataControl";
+import Controls from "../Components/Controls";
 import RoverDataChassisCam from "./RoverData/RoverDataChassisCam";
 
 
 
-const Home = ()=>{
+const Home = () => {
 
         useEffect(()=>{
           document.getElementById('navbar-camera').onclick = ()=>{
-            // const windowSettings = 'width=750, height=400';
-            // window.open('/#/roverdata/chassiscam','',windowSettings)
             console.log(windowActive);
             if(windowActive.chassis_cam === false){
               changeWindowArray([...windowArray,'chassis_cam'])
@@ -136,15 +134,15 @@ const Home = ()=>{
             system:false,
           })
 
-          const loadButtons = (input)=>{
+          const loadButtons = (input) => {
             return(
               <div style={{display:"flex",flexDirection:'row',justifyContent:"flex-end"}}>
-                  <Button style={{width:85,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
+                  <Button style={{width:40,marginRight:10,backgroundColor:'grey',borderColor:'black'}}
                     onClick={()=>{
                     handlePopout(input)
 
                   }}
-                  > Popout </Button>
+                  > <i className="fa-solid fa-up-right-from-square"/> </Button>
                   <Button style={{width:40,backgroundColor:'red',borderColor:'black'}}
                   onClick={()=>{
                     handleClose(input)
@@ -157,13 +155,13 @@ const Home = ()=>{
 
           const handleClose = (input) =>{
             const newArray = []
-           for(let i=0;i<windowArray.length;i++){
-            if(windowArray[i]!==input){
-              newArray.push(windowArray[i])
+            for(let i=0;i<windowArray.length;i++){
+              if(windowArray[i]!==input){
+                newArray.push(windowArray[i])
+              }
             }
-           }
-          changeWindowArray(newArray)
-          changeWindowActive({...windowActive,[input]:false})
+            changeWindowArray(newArray)
+            changeWindowActive({...windowActive,[input]:false})
           }
 
           const handlePopout = (input)=>{
@@ -175,10 +173,10 @@ const Home = ()=>{
             window.open(openLink,'',windowSettings)
           }
 
-          const renderWindows = () =>{
+          const renderWindows = () => {
             const ret = []
 
-            windowArray.forEach((window)=>{
+            windowArray.forEach((window)=> {
 
               switch(window){
                 case "chassis_cam":
@@ -196,7 +194,7 @@ const Home = ()=>{
                     <div id="teleopcontrols"style={{ paddingTop: '20px', paddingBottom: '20px',width:'49%',}}>
                       <Card style={{padding:10}}>
                         {loadButtons('teleopcontrols')}
-                        <RoverDataControl/>
+                        <Controls/>
                       </Card>
                     </div>)
                     break
