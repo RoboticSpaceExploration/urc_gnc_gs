@@ -25,9 +25,7 @@ function Controls() {
   const [usingGamepad, setUsingGamepad] = useState(false);
 
   useEffect(() => {
-    console.log('check');
     if (usingGamepad) {
-      console.log('controller')
       window.joypad.on('connect', (e) => {
         const {id} = e.gamepad;
 
@@ -36,7 +34,6 @@ function Controls() {
       window.addEventListener("button_press", e => onButtonPress(e), {capture: true, passive: false});
       window.addEventListener("button_release", e => onButtonRelease(e), {capture: true, passive: false});
       } else {
-      console.log('keyboard');
       window.addEventListener("keydown", onKeyDown, {capture: true, passive: false});
       window.addEventListener("keyup", onKeyUp, {capture: true, passive: false});
       }
@@ -46,88 +43,40 @@ function Controls() {
   // Keyboard listener
   ///////////////////////////
   const onKeyDown = useCallback((event) => {
-    var keyCode = event.keyCode;
-    switch (keyCode) {
-      case 68: //d turn right
-        setKeyD(Teleoperation.turnRight())
-        break;
-      case 83: //s move backward
-        setKeyS(Teleoperation.backward())
-        break;
-      case 65: //a turn left
-        setKeyA(Teleoperation.turnLeft())
-        break;
-      case 87: //w move forward
-        setKeyW(Teleoperation.forward())
-        break;
-      case 85: //u fast lin speed
-        setKeyU(Teleoperation.incLinSpeed())
-        break;
-      case 74: //j slow lin speed
-        setKeyJ(Teleoperation.decLinSpeed())
-        break;
-      case 73: //i fast ang speed
-        setKeyI(Teleoperation.incAngSpeed())
+    const key = event.key;
 
-        break;
-      case 75: //k slow ang speed
-        setKeyK(Teleoperation.decAngSpeed())
-            break;
-      default:
-        setKeyW(false)
-        setKeyA(false)
-        setKeyS(false)
-        setKeyD(false)
-        setKeyI(false)
-        setKeyU(false)
-        setKeyK(false)
-        setKeyJ(false)
-        break;
+    if (key === 'w') {
+      setKeyW(Teleoperation.forward())
+    } else if (key === 's') {
+      setKeyS(Teleoperation.backward())
+    } else if (key === 'a') {
+      setKeyA(Teleoperation.turnLeft())
+    } else if (key === 'd') {
+      setKeyD(Teleoperation.turnRight())
+    } else if (key === 'u') {
+      setKeyU(Teleoperation.incLinSpeed())
+    } else if (key === 'j') {
+      setKeyJ(Teleoperation.decLinSpeed())
+    } else if (key === 'i') {
+      setKeyI(Teleoperation.incAngSpeed())
+    } else if (key === 'k') {
+      setKeyK(Teleoperation.decAngSpeed())
     }
     event.stopImmediatePropagation();
   }, [])
 
   const onKeyUp = useCallback((event) => {
-    var keyCode = event.keyCode;
-
-    switch (keyCode) {
-      case 68: //d
-        setKeyD(false)
-        break;
-      case 83: //s
-        setKeyS(false)
-        break;
-      case 65: //a
-        setKeyA(false)
-        break;
-      case 87: //w
-        setKeyW(false)
-        break;
-      case 73:
-        setKeyI(false);
-        break;
-      case 74:
-        setKeyJ(false);
-        break;
-      case 75:
-        setKeyK(false);
-        break;
-      case 85:
-        setKeyU(false);
-        break;
-      default:
-        setKeyW(false)
-        setKeyA(false)
-        setKeyS(false)
-        setKeyD(false)
-        setKeyI(false)
-        setKeyU(false)
-        setKeyK(false)
-        setKeyJ(false)
-        break;
-    }
-
     Teleoperation.stop();
+
+    setKeyW(false)
+    setKeyA(false)
+    setKeyS(false)
+    setKeyD(false)
+    setKeyI(false)
+    setKeyU(false)
+    setKeyK(false)
+    setKeyJ(false)
+
     event.stopImmediatePropagation();
   }, [])
 
@@ -136,96 +85,41 @@ function Controls() {
   ///////////////////////////
   const onButtonPress = useCallback((e) => {
     const {buttonName} = e.detail;
+    console.log(buttonName)
 
-    switch (buttonName) {
-      case 'button_12': //dPadUp move forward
-        Teleoperation.forward();
-        setDPadUp(true);
-        break;
-      case 'button_13': //dPadDown move backward
-        Teleoperation.backward();
-        setDPadDown(true);
-        break;
-      case 'button_14': //dPadLeft turn left
-        Teleoperation.turnLeft();
-        setDPadLeft(true);
-        break;
-      case 'button_15': //dPadRight turn right
-        Teleoperation.turnRight();
-        setDPadRight(true);
-        break;
-      case 'button_0': //aButton inc lin speed
-        Teleoperation.incLinSpeed();
-        setButtonA(true);
-        break;
-      case 'button_1': //bButton dec lin speed
-        Teleoperation.decLinSpeed();
-        setButtonB(true);
-        break;
-      case 'button_2': //xButton inc ang speed
-        Teleoperation.incAngSpeed();
-        setButtonX(true);
-        break;
-      case 'button_3': //yButton dec ang speed
-        Teleoperation.decAngSpeed();
-        setButtonY(true);
-        break;
-      default:
-        setDPadUp(false)
-        setDPadDown(false)
-        setDPadLeft(false)
-        setDPadRight(false)
-        setButtonA(false)
-        setButtonB(false)
-        setButtonX(false)
-        setButtonY(false)
-        break;
+    if (buttonName === 'button_12') {
+      setDPadUp(Teleoperation.forward())
+    } else if (buttonName === 'button_13') {
+      setDPadDown(Teleoperation.backward())
+    } else if (buttonName === 'button_14') {
+      setDPadLeft(Teleoperation.turnLeft())
+    } else if (buttonName === 'button_15') {
+      setDPadRight(Teleoperation.turnRight())
+    } else if (buttonName === 'button_0') {
+      setButtonA(Teleoperation.incLinSpeed())
+    } else if (buttonName === 'button_1') {
+      setButtonB(Teleoperation.decLinSpeed())
+    } else if (buttonName === 'button_2') {
+      setButtonX(Teleoperation.incAngSpeed())
+    } else if (buttonName === 'button_3') {
+      setButtonY(Teleoperation.decAngSpeed())
     }
 
     e.stopImmediatePropagation();
   }, [])
 
   const onButtonRelease = useCallback((e) => {
-    const {buttonName} = e.detail;
-
-    switch (buttonName) {
-      case 'button_12': //dPadUp
-        setDPadUp(false);
-        break;
-      case 'button_13': //dPadDown
-        setDPadDown(false);
-        break;
-      case 'button_14': //dPadLeft
-        setDPadLeft(false);
-        break;
-      case 'button_15': //dPadRight
-        setDPadRight(false);
-        break;
-      case 'button_0': //aButton
-        setButtonA(false);
-        break;
-      case 'button_1': //bButton
-        setButtonB(false);
-        break;
-      case 'button_2': //xButton
-        setButtonX(false);
-        break;
-      case 'button_3': //yButton
-        setButtonY(false);
-        break;
-      default:
-        setDPadUp(false)
-        setDPadDown(false)
-        setDPadLeft(false)
-        setDPadRight(false)
-        setButtonA(false)
-        setButtonB(false)
-        setButtonX(false)
-        setButtonY(false)
-        break;
-    }
-
     Teleoperation.stop();
+
+    setDPadUp(false)
+    setDPadDown(false)
+    setDPadLeft(false)
+    setDPadRight(false)
+    setButtonA(false)
+    setButtonB(false)
+    setButtonX(false)
+    setButtonY(false)
+
     e.stopImmediatePropagation();
   }, [])
 
