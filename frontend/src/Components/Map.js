@@ -1,10 +1,8 @@
-import React, { useState, useCallback } from "react";
-import { Button, Form, Container } from "react-bootstrap";
-import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
-import axios from "axios";
+import React, {useEffect, useState} from "react";
+import {MapContainer, Marker, Polyline, TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { render } from "@testing-library/react";
+import {init_ros_connection} from "../ROSConnection";
 
 // needed to properly display the default marker on the map
 // delete L.Icon.Default.prototype._getIconUrl;
@@ -15,12 +13,32 @@ import { render } from "@testing-library/react";
 
 function Map(props) {
 
-    // dummy data for rover and waypoint location data
+    /* dummy data for rover and waypoint location data
     const state = {
         location: [21.2998, -157.8148],
         testLocation: [[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
         traceLine: [[21.2998, -157.8148],[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
     }
+    */
+
+    const [latitude, setLatitude] = useState(21.2998);
+    const [longitude, setLongitude] = useState(-157.8148);
+    const [location, setLocation] = useState([latitude, longitude]);
+
+    const listener = new window.ROSLIB.Topic({
+        ros: init_ros_connection.ros,
+        name: '/gps/fix',
+        messageType: 'sensor_msgs/NavSatFix',
+    })
+
+    useEffect(() => {
+        listener.subscribe(function (message) {
+            setLatitude(message.latitude);
+            setLongitude(message.longitude);
+            setLocation([message.latitude, message.longitude]);
+            listener.unsubscribe();
+        })
+    }, [location])
 
     const mapStyle = {
         height: "60vh",
@@ -46,21 +64,8 @@ function Map(props) {
         shadowAnchor: null
     });
 
-    const [roverLocation, setRoverLocation] = useState(state.location); //the current location of the rover
     const [objLocation, setObjLocation] = useState([]);
-    const [lineLocation, setLineLocation] = useState([state.location]); //traces the motion of the rover
-
-    // update locations of rover and trace line
-    const updateLocation = useCallback((newLocation) => {
-      //  setRoverLocation(newLocation);
-        if ((newLocation[0] !== lineLocation[lineLocation.length - 1][0]) && (newLocation[1] !== lineLocation[lineLocation.length - 1][1])){
-          setLineLocation([...lineLocation, newLocation]);
-          setRoverLocation(newLocation);
-        }
-        console.log(lineLocation[lineLocation.length - 1], newLocation);
-        console.log(lineLocation);
-    }, [roverLocation, objLocation]
-    );
+    const [lineLocation, setLineLocation] = useState([location]); //traces the motion of the rover
 
     // allow users to submit waypoints data
     const updateObjLocation = (newLocation) => {
@@ -73,7 +78,7 @@ function Map(props) {
         // updateLocation([21.2998, -157.8159]);
 
         return (
-            <Marker position={props.position} icon={props.icon} />
+            <Marker position={props.position} icon={props.icon}/>
 
         );
     }
@@ -81,7 +86,7 @@ function Map(props) {
     function ObjMarker(props) {
 
         return (
-            <Marker position={props.position} icon={props.icon} />
+            <Marker position={props.position} icon={props.icon}/>
 
         );
     }
@@ -89,36 +94,21 @@ function Map(props) {
 
     return (
         <div>
-          <Form>
-            <Form.Control
-              type="number"
-              step="0.01"
-              name="longitude"
-              placeholder="enter longitude"
-              required
-            />
-            <Form.Control
-              type="number"
-              step="0.01"
-              name="longitude"
-              placeholder="enter latitude"
-              required
-            />
-          </Form>
-            <MapContainer center={state.location} zoom={25} style={mapStyle}>
-                <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <RoverMarker position={roverLocation} icon={roverIcon} />
+            <MapContainer center={location} zoom={25} style={mapStyle}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                <RoverMarker position={location} icon={roverIcon}/>
                 {/*<ObjMarker position={state.testLocation[2]} icon={objIcon} />*/}
-              {props.waypointData && props.waypointData.map((waypoint, index) => {
-                 return (
-                   <ObjMarker position={waypoint.position} icon={objIcon} key={index} />
-                 );
-              })}
-                <Polyline positions={lineLocation} color="red" />
+                {props.waypointData && props.waypointData.map((waypoint, index) => {
+                    return (
+                        <ObjMarker position={waypoint.position} icon={objIcon} key={index}/>
+                    );
+                })}
+                if (location !== [0, 0]) {
+                <Polyline positions={lineLocation} color="red"/>
+                }
             </MapContainer>
-            <Button onClick={() => {updateLocation(state.traceLine[3]); console.log(props.waypointData)}}>Next Destination</Button>
-
         </div>
     );
 }
