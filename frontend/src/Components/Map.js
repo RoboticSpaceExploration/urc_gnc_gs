@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {MapContainer, Marker, Polyline, TileLayer} from 'react-leaflet';
+import React, {useState, useCallback, useEffect} from "react";
+import {Button, Form, Container} from "react-bootstrap";
+import {MapContainer, TileLayer, Marker, Polyline} from 'react-leaflet';
+import axios from "axios";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import {render} from "@testing-library/react";
 import {init_ros_connection} from "../ROSConnection";
 
 // needed to properly display the default marker on the map
@@ -17,7 +20,7 @@ function Map(props) {
     const state = {
         location: [21.2998, -157.8148],
         testLocation: [[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
-        traceLine: [[21.2998, -157.8148],[21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
+        traceLine: [[21.2998, -157.8148], [21.2992, -157.8148], [21.3000, -157.8155], [21.2995, -157.8159]],
     }
     */
 
@@ -72,28 +75,38 @@ function Map(props) {
         setObjLocation([...objLocation, newLocation]);
     }
 
-
     function RoverMarker(props) {
-
         // updateLocation([21.2998, -157.8159]);
-
         return (
             <Marker position={props.position} icon={props.icon}/>
-
         );
     }
 
     function ObjMarker(props) {
-
         return (
             <Marker position={props.position} icon={props.icon}/>
-
         );
     }
 
 
     return (
         <div>
+            <Form>
+                <Form.Control
+                    type="number"
+                    step="0.01"
+                    name="longitude"
+                    placeholder="enter longitude"
+                    required
+                />
+                <Form.Control
+                    type="number"
+                    step="0.01"
+                    name="longitude"
+                    placeholder="enter latitude"
+                    required
+                />
+            </Form>
             <MapContainer center={location} zoom={25} style={mapStyle}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -106,7 +119,7 @@ function Map(props) {
                     );
                 })}
                 if (location !== [0, 0]) {
-                <Polyline positions={lineLocation} color="red"/>
+                    <Polyline positions={lineLocation} color="red"/>
                 }
             </MapContainer>
         </div>
