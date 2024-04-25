@@ -24,9 +24,8 @@ function Map(props) {
     }
     */
 
-    const [latitude, setLatitude] = useState(21.2998);
-    const [longitude, setLongitude] = useState(-157.8148);
-    const [location, setLocation] = useState([latitude, longitude]);
+    const [roverPosition, setRoverPosition] = useState([21.2984, -157.8168]);
+    const [roverPath, setRoverPath] = useState([]);
 
     const listener = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
@@ -36,12 +35,12 @@ function Map(props) {
 
     useEffect(() => {
         listener.subscribe(function (message) {
-            setLatitude(message.latitude);
-            setLongitude(message.longitude);
-            setLocation([message.latitude, message.longitude]);
+            const newPosition = [message.latitude, message.longitude];
+            setRoverPosition(newPosition);
+            setRoverPath(prevPath => [...prevPath, newPosition]);
             listener.unsubscribe();
         })
-    }, [location])
+    }, [roverPosition]);
 
     const mapStyle = {
         height: "60vh",
@@ -68,7 +67,7 @@ function Map(props) {
     });
 
     const [objLocation, setObjLocation] = useState([]);
-    const [lineLocation, setLineLocation] = useState([location]); //traces the motion of the rover
+    const [lineLocation, setLineLocation] = useState([roverPosition]); //traces the motion of the rover
 
     // allow users to submit waypoints data
     const updateObjLocation = (newLocation) => {
@@ -107,20 +106,19 @@ function Map(props) {
                     required
                 />
             </Form>
-            <MapContainer center={location} zoom={25} style={mapStyle}>
+            <MapContainer center={roverPosition} zoom={25} style={mapStyle}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-                <RoverMarker position={location} icon={roverIcon}/>
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <RoverMarker position={roverPosition} icon={roverIcon} />
+                <Polyline positions={roverPath} color="red" />
                 {/*<ObjMarker position={state.testLocation[2]} icon={objIcon} />*/}
                 {props.waypointData && props.waypointData.map((waypoint, index) => {
                     return (
                         <ObjMarker position={waypoint.position} icon={objIcon} key={index}/>
                     );
                 })}
-                if (location !== [0, 0]) {
-                    <Polyline positions={lineLocation} color="red"/>
-                }
             </MapContainer>
         </div>
     );
