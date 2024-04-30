@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Form } from "react-bootstrap";
-import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import axios from "axios";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -25,7 +25,7 @@ function Map(props) {
 
 
     const [roverPosition, setRoverPosition] = useState([21.2984, -157.8168]);
-    const [roverPath, setRoverPath] = useState([roverPosition]);
+    const [roverPath, setRoverPath] = useState([]);
 
     const listener = new window.ROSLIB.Topic({
         ros: init_ros_connection.ros,
@@ -89,6 +89,16 @@ function Map(props) {
         );
     }
 
+    function FlyMapTo() {
+
+        const map = useMap()
+
+        useEffect(() => {
+            map.panTo(roverPosition);
+        }, [roverPosition])
+
+        return null
+    }
 
     return (
         <div>
@@ -114,6 +124,7 @@ function Map(props) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <RoverMarker position={roverPosition} icon={roverIcon} />
+                <FlyMapTo />
                 {/*<ObjMarker position={state.testLocation[2]} icon={objIcon} />*/}
                 {props.waypointData && props.waypointData.map((waypoint, index) => {
                     return (
